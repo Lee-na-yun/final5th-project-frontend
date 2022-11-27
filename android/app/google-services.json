@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "371047090151",
+    "project_id": "riverpod-firestore-strea-6926b",
+    "storage_bucket": "riverpod-firestore-strea-6926b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371047090151:android:26f106cee5a00db0119f42",
+        "android_client_info": {
+          "package_name": "shop.mtcoding.final_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371047090151-8icco23jlqriif3keofh833hbsdomt81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgad3DFQ4VXoxl90busqMV9-7QbWeTAbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371047090151-8icco23jlqriif3keofh833hbsdomt81.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "371047090151-0ni6apapjlo3aef82jirgvjunduhem04.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "shop.mtcoding.riverpodFirestoreSteam1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371047090151:android:7379c07e6330d60e119f42",
+        "android_client_info": {
+          "package_name": "shop.mtcoding.riverpod_firestore_steam1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371047090151-8icco23jlqriif3keofh833hbsdomt81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgad3DFQ4VXoxl90busqMV9-7QbWeTAbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371047090151-8icco23jlqriif3keofh833hbsdomt81.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "371047090151-0ni6apapjlo3aef82jirgvjunduhem04.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "shop.mtcoding.riverpodFirestoreSteam1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
