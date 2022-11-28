@@ -26,8 +26,10 @@ class CustomForm extends StatelessWidget {
               hintText: "${hintText}",
               contentPadding: const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
               border: OutlineInputBorder(
-                borderSide: BorderSide(width: 1, color: Color(0xffe2e2e2), style: BorderStyle.solid),
                 borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Color.fromRGBO(233, 233, 233, 100),
+                ),
               ),
               hintStyle: GoogleFonts.notoSans(
                 color: const Color(0xffe2e2e2),
