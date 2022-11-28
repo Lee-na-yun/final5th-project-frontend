@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/login": (context) => LoginPage(),
         "/join": (context) => JoinPage(),
+        //"/FindPassword":(context) => FindPasswordPage(),
         "/home": (context) => MyHomePage(),
       },
       home: LoginPage(),

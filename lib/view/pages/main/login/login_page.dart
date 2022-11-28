@@ -36,8 +36,20 @@ class LoginPage extends StatelessWidget {
               DefaultButton("로그인", "/home"),
               SizedBox(height: 14),
               LineButton("회원가입", "/join"),
-              SizedBox(height: 14),
-              Text("비밀번호 찾기", style: TextStyle(fontSize: 12, color: Color(0xff9999A3)), textAlign: TextAlign.center),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "/FindPasswordPage");
+                },
+                child: Text("비밀번호 찾기",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xff9999A3),
+                    ),
+                    textAlign: TextAlign.center),
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                ),
+              ),
             ],
           ),
         ),
