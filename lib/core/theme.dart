@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 TextTheme textTheme() {
   return TextTheme(
-    headline1: GoogleFonts.notoSans(fontSize: 18.0, color: const Color(0xff1C1C1C)),
+    headline1: GoogleFonts.notoSans(fontSize: 18.0, color: const Color(0xff1C1C1C), fontWeight: FontWeight.bold),
     headline2: GoogleFonts.openSans(fontSize: 16.0, color: const Color(0xff1C1C1C), fontWeight: FontWeight.bold),
     headline3: GoogleFonts.openSans(fontSize: 14.0, color: const Color(0xff1C1C1C)),
-    bodyText1: GoogleFonts.openSans(fontSize: 12.0, color: const Color(0xff1C1C1C)),
+    bodyText1: GoogleFonts.openSans(fontSize: 12.0),
     bodyText2: GoogleFonts.openSans(fontSize: 10.0, color: const Color(0xff1C1C1C)),
     subtitle1: GoogleFonts.openSans(fontSize: 15.0, color: const Color(0xff1C1C1C)),
   );
