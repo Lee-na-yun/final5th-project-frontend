@@ -8,7 +8,7 @@ TextTheme textTheme() {
     headline2: GoogleFonts.openSans(fontSize: 16.0, color: const Color(0xff1C1C1C), fontWeight: FontWeight.bold, letterSpacing: -0.05),
     headline3: GoogleFonts.openSans(fontSize: 14.0, color: const Color(0xff1C1C1C)),
     bodyText1: GoogleFonts.openSans(fontSize: 12.0),
-    bodyText2: GoogleFonts.openSans(fontSize: 10.0, color: const Color(0xff1C1C1C)),
+    bodyText2: GoogleFonts.openSans(fontSize: 10.0, color: const Color(0xff9999A3), height: 2),
     subtitle1: GoogleFonts.openSans(fontSize: 15.0, color: const Color(0xff1C1C1C)),
   );
 }

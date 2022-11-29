@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           "/login": (context) => LoginPage(),
           "/join": (context) => JoinPage(),
           "/FindPassword": (context) => FindPasswordPage(),
-          "/home": (context) => MyHomePage(),
+          "/home": (context) => MainPage(),
         },
         home: LoginPage(),
         title: "TODOFRIENDS",
