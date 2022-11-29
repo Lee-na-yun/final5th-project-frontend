@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/home/home_app_bar.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -6,17 +8,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Row(
-          children: [
-            Text("안녕, 그린컴퓨터님:)"),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.keyboard_arrow_down),
-            ),
-          ],
-        ),
-      ),
+      appBar: HomeAppBar(),
     );
   }
 }
