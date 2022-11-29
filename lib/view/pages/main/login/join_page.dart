@@ -11,27 +11,24 @@ class JoinPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(55),
-          child: LineAppBar(),
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              SizedBox(height: 30),
-              _buildEmailForm(),
-              SizedBox(height: 24),
-              CustomForm("닉네임", "닉네임을 입력해주세요"),
-              SizedBox(height: 18),
-              _buildPasswordForm(),
-              SizedBox(height: 40),
-              LineButton("회원가입", "/login"),
-            ],
-          ),
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(55),
+        child: LineAppBar("이메일 간편가입"),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: ListView(
+          children: [
+            SizedBox(height: 30),
+            _buildEmailForm(),
+            SizedBox(height: 24),
+            CustomForm("닉네임", "닉네임을 입력해주세요"),
+            SizedBox(height: 18),
+            _buildPasswordForm(),
+            SizedBox(height: 40),
+            LineButton("회원가입", "/login"),
+          ],
         ),
       ),
     );

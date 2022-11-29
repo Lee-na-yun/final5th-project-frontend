@@ -10,49 +10,50 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              SizedBox(height: 110),
-              Center(
-                child: Text(
-                  "TODOFRIENDS",
-                  style: GoogleFonts.notoSans(
-                    fontSize: 38,
-                    fontWeight: FontWeight.w900,
-                    color: theme().primaryColor,
-                  ),
-                ),
+    return Scaffold(
+      body: _buildLoginPage(context),
+    );
+  }
+
+  Padding _buildLoginPage(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: ListView(
+        children: [
+          SizedBox(height: 110),
+          Center(
+            child: Text(
+              "TODOFRIENDS",
+              style: GoogleFonts.notoSans(
+                fontSize: 38,
+                fontWeight: FontWeight.w900,
+                color: theme().primaryColor,
               ),
-              SizedBox(height: 70),
-              CustomForm("이메일", "이메일을 입력해주세요"),
-              SizedBox(height: 18),
-              CustomForm("비밀번호", "비밀번호를 입력해주세요"),
-              SizedBox(height: 40),
-              DefaultButton("로그인", "/home"),
-              SizedBox(height: 14),
-              LineButton("회원가입", "/join"),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "/FindPasswordPage");
-                },
-                child: Text("비밀번호 찾기",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xff9999A3),
-                    ),
-                    textAlign: TextAlign.center),
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          SizedBox(height: 70),
+          CustomForm("이메일", "이메일을 입력해주세요"),
+          SizedBox(height: 18),
+          CustomForm("비밀번호", "비밀번호를 입력해주세요"),
+          SizedBox(height: 40),
+          DefaultButton("로그인", "/home"),
+          SizedBox(height: 14),
+          LineButton("회원가입", "/join"),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, "/FindPassword");
+            },
+            child: Text("비밀번호 찾기",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Color(0xff9999A3),
+                ),
+                textAlign: TextAlign.center),
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+            ),
+          ),
+        ],
       ),
     );
   }

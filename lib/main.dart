@@ -8,6 +8,7 @@ import 'package:riverpod_firestore_steam1/view/pages/main/login/login_page.dart'
 import 'package:riverpod_firestore_steam1/view/pages/main/main_page.dart';
 
 import 'core/theme.dart';
+import 'view/pages/main/login/find_password_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,18 +25,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: theme(),
-      initialRoute: "/login",
-      routes: {
-        "/login": (context) => LoginPage(),
-        "/join": (context) => JoinPage(),
-        //"/FindPassword":(context) => FindPasswordPage(),
-        "/home": (context) => MyHomePage(),
-      },
-      home: LoginPage(),
-      title: "TODOFRIENDS",
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: theme(),
+        initialRoute: "/login",
+        routes: {
+          "/login": (context) => LoginPage(),
+          "/join": (context) => JoinPage(),
+          "/FindPassword": (context) => FindPasswordPage(),
+          "/home": (context) => MyHomePage(),
+        },
+        home: LoginPage(),
+        title: "TODOFRIENDS",
+      ),
     );
   }
 }

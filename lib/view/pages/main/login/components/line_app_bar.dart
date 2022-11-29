@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 
 class LineAppBar extends StatelessWidget {
-  const LineAppBar({
+  const LineAppBar(
+    this.title, {
     Key? key,
   }) : super(key: key);
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class LineAppBar extends StatelessWidget {
       ),
       titleSpacing: 0,
       title: Text(
-        "이메일 간편가입",
+        "${title}",
         style: textTheme().headline2,
       ),
       backgroundColor: Colors.white,
