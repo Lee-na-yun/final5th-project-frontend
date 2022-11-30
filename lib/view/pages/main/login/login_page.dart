@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_form.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_password_form.dart';
+
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/default_button.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/line_button.dart';
 
@@ -34,7 +36,8 @@ class LoginPage extends StatelessWidget {
           SizedBox(height: 70),
           CustomForm("이메일", "이메일을 입력해주세요"),
           SizedBox(height: 18),
-          CustomForm("비밀번호", "비밀번호를 입력해주세요"),
+          CustomPasswordForm("비밀번호", "비밀번호를 입력해주세요"),
+
           SizedBox(height: 40),
           DefaultButton("로그인", "/home"),
           SizedBox(height: 14),

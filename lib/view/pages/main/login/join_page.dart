@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_form.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_password_form.dart';
+
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/default_button.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/line_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/line_button.dart';
@@ -34,12 +36,72 @@ class JoinPage extends StatelessWidget {
     );
   }
 
-  Column _buildEmailForm() {
+
+  Widget _buildEmailForm() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomForm("이메일", "이메일을 입력해주세요"),
-        SizedBox(height: 6),
-        DefaultButton("인증하기", "/"),
+        Text(
+          "이메일",
+          style: GoogleFonts.notoSans(
+            fontWeight: FontWeight.w700,
+            color: Color(0xff9999A3),
+            textStyle: textTheme().bodyText1,
+          ),
+        ),
+        SizedBox(height: 2),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              flex: 7,
+              child: Container(
+                //width: 222,
+                //color: Colors.blue,
+                padding: EdgeInsets.only(top: 2),
+                child: TextFormField(
+                  decoration: new InputDecoration(
+                    hintText: "이메일을 입력해주세요",
+                    contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
+                    isDense: true,
+                    border: new OutlineInputBorder(
+                      borderSide: new BorderSide(
+                        color: Color(0xffe2e2e2),
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    hintStyle: GoogleFonts.notoSans(
+                      color: const Color(0xffe2e2e2),
+                      textStyle: textTheme().headline2,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                //color: Colors.green,
+                padding: EdgeInsets.only(left: 6),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(color: Colors.white),
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 14, bottom: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 0.0),
+                  child: Text(
+                    "인증하기",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        )
+
       ],
     );
   }
@@ -47,7 +109,9 @@ class JoinPage extends StatelessWidget {
   Column _buildPasswordForm() {
     return Column(
       children: [
-        CustomForm("비밀번호", "비밀번호를 입력해주세요"),
+
+        CustomPasswordForm("비밀번호", "비밀번호를 입력해주세요"),
+
         SizedBox(height: 6),
         TextFormField(
           decoration: InputDecoration(
@@ -63,6 +127,9 @@ class JoinPage extends StatelessWidget {
                 color: const Color(0xffe2e2e2),
                 textStyle: textTheme().headline2,
               )),
+
+          obscureText: true,
+
         )
       ],
     );

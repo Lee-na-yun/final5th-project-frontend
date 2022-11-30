@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 
-class CustomForm extends StatelessWidget {
-  const CustomForm(this.text, this.hintText, {Key? key}) : super(key: key);
+class CustomPasswordForm extends StatelessWidget {
+  const CustomPasswordForm(this.text, this.hintText, {Key? key}) : super(key: key);
   final String text;
   final String hintText;
 
@@ -24,8 +24,7 @@ class CustomForm extends StatelessWidget {
         TextFormField(
           decoration: InputDecoration(
               hintText: "${hintText}",
-              contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
-
+              contentPadding: const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
@@ -36,6 +35,7 @@ class CustomForm extends StatelessWidget {
                 color: const Color(0xffe2e2e2),
                 textStyle: textTheme().headline2,
               )),
+          obscureText: true,
         ),
       ],
     );
