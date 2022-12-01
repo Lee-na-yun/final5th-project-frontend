@@ -36,7 +36,6 @@ class JoinPage extends StatelessWidget {
     );
   }
 
-
   Widget _buildEmailForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +100,6 @@ class JoinPage extends StatelessWidget {
             ),
           ],
         )
-
       ],
     );
   }
@@ -109,9 +107,7 @@ class JoinPage extends StatelessWidget {
   Column _buildPasswordForm() {
     return Column(
       children: [
-
         CustomPasswordForm("비밀번호", "비밀번호를 입력해주세요"),
-
         SizedBox(height: 6),
         TextFormField(
           decoration: InputDecoration(
@@ -127,9 +123,7 @@ class JoinPage extends StatelessWidget {
                 color: const Color(0xffe2e2e2),
                 textStyle: textTheme().headline2,
               )),
-
           obscureText: true,
-
         )
       ],
     );

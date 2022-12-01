@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
@@ -53,6 +54,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       ),
     );
   }
+
 
   Container _buildSubmitContainer() {
     return Container(
