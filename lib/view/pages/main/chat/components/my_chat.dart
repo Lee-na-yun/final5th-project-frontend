@@ -18,7 +18,7 @@ class MyChat extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 2),
             child: Text(
               time,
-              style: textTheme().bodyText2,
+              style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).bodyText2,
             ),
           ),
           SizedBox(width: 6),
@@ -31,7 +31,7 @@ class MyChat extends StatelessWidget {
               ),
               child: Text(
                 text,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white, height: 1.6),
+                style: textTheme(color: Colors.white, weight: FontWeight.w500).bodyText1,
               ),
             ),
           ),

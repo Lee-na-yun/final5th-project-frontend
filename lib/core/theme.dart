@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+Color kPrimaryColor() {
+  return Color(0xff1c1c1c);
+}
+
 Color ksubPrimaryColor() {
   return Color(0xffB699EC);
 }
@@ -31,7 +35,7 @@ TextTheme textTheme({Color? color, FontWeight? weight}) {
     headline1: GoogleFonts.notoSans(fontSize: 18.0, color: color, fontWeight: weight),
     headline2: GoogleFonts.notoSans(fontSize: 16.0, color: color, fontWeight: weight, letterSpacing: -0.05),
     headline3: GoogleFonts.notoSans(fontSize: 14.0, color: color, fontWeight: weight, height: 1.6),
-    bodyText1: GoogleFonts.notoSans(fontSize: 12.0, color: color, fontWeight: weight, height: 1.6),
+    bodyText1: GoogleFonts.notoSans(fontSize: 12.0, color: color, fontWeight: weight, height: 1.4),
     bodyText2: GoogleFonts.notoSans(fontSize: 10.0, color: color, fontWeight: weight),
     subtitle1: GoogleFonts.notoSans(fontSize: 15.0, color: color, fontWeight: weight),
   );
@@ -92,4 +96,8 @@ MaterialColor createMaterialColor(Color color) {
     );
   });
   return MaterialColor(color.value, swatch);
+}
+
+Color kGreyColor() {
+  return Color(0xff9999A3);
 }

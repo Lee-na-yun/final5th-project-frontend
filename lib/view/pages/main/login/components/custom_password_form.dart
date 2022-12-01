@@ -14,11 +14,7 @@ class CustomPasswordForm extends StatelessWidget {
       children: [
         Text(
           "${text}",
-          style: GoogleFonts.notoSans(
-            fontWeight: FontWeight.w700,
-            color: Color(0xff9999A3),
-            textStyle: textTheme().bodyText1,
-          ),
+          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700).bodyText1,
         ),
         SizedBox(height: 2),
         TextFormField(
@@ -32,7 +28,7 @@ class CustomPasswordForm extends StatelessWidget {
                 ),
               ),
               hintStyle: GoogleFonts.notoSans(
-                color: const Color(0xffe2e2e2),
+                color: Color(0xffe2e2e2),
                 textStyle: textTheme().headline2,
               )),
           obscureText: true,

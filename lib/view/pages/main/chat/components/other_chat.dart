@@ -36,7 +36,7 @@ class OtherChat extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 24),
                   child: Text(
                     name,
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xff1c1c1c), height: 1.6),
+                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).bodyText1,
                   ),
                 ),
                 SizedBox(height: 4),
@@ -48,12 +48,7 @@ class OtherChat extends StatelessWidget {
                   ),
                   child: Text(
                     text,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff1c1c1c),
-                      height: 1.6,
-                    ),
+                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).bodyText1,
                   ),
                 ),
               ],

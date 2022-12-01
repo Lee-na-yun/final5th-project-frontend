@@ -111,12 +111,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 ),
                 child: Text(
                   "전송",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                    height: 1.6,
-                  ),
+                  style: textTheme(color: Colors.white, weight: FontWeight.w600).headline3,
                 ),
               ),
             ),

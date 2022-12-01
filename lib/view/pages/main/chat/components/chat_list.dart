@@ -40,21 +40,15 @@ class ChatList extends StatelessWidget {
                   ),
                 ),
                 title: Padding(
-                  padding: const EdgeInsets.only(top: 14),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Text(
                     user.sender,
-                    style: textTheme().headline3,
+                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
                   ),
                 ),
                 subtitle: Text(
                   user.message,
-                  style: TextStyle(
-                    height: 1.6,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w200,
-                    color: Color(0xff9999A3),
-                    letterSpacing: -0.5,
-                  ),
+                  style: textTheme(color: kchacholGreyColor()).bodyText1,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
@@ -64,10 +58,10 @@ class ChatList extends StatelessWidget {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 12),
+                  padding: const EdgeInsets.only(top: 14),
                   child: Text(
                     user.sendDate,
-                    style: textTheme().bodyText2,
+                    style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).bodyText2,
                   ),
                 )
               ],

@@ -31,7 +31,7 @@ class MypageProfile extends StatelessWidget {
                   width: 160,
                   child: Text(
                     "이나윤" + "님",
-                    style: textTheme().headline2,
+                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
                   ),
                 ),
                 subtitle: Container(
@@ -39,7 +39,7 @@ class MypageProfile extends StatelessWidget {
                   width: 160,
                   child: Text(
                     "반갑습니다. 함께 TODO해요!",
-                    style: textTheme().bodyText2,
+                    style: textTheme(color: kchacholGreyColor()).bodyText2,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
@@ -50,12 +50,7 @@ class MypageProfile extends StatelessWidget {
               padding: const EdgeInsets.only(right: 20),
               child: OutlinedButton(
                 onPressed: () {},
-                child: Text("프로필 수정",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xff9999A3),
-                    )),
+                child: Text("프로필 수정", style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).bodyText1),
                 style: OutlinedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   shape: RoundedRectangleBorder(
@@ -89,18 +84,12 @@ class MypageProfile extends StatelessWidget {
                         children: [
                           Text(
                             "팔로잉",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xff1c1c1c),
-                            ),
+                            style: textTheme(color: kPrimaryColor()).bodyText1,
                           ),
+                          SizedBox(height: 2),
                           Text(
                             "150",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff1c1c1c),
-                            ),
+                            style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
                           ),
                         ],
                       ),
@@ -113,18 +102,12 @@ class MypageProfile extends StatelessWidget {
                         children: [
                           Text(
                             "팔로워",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xff1c1c1c),
-                            ),
+                            style: textTheme(color: kPrimaryColor()).bodyText1,
                           ),
+                          SizedBox(height: 2),
                           Text(
                             "9999",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff1c1c1c),
-                            ),
+                            style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
                           ),
                         ],
                       ),

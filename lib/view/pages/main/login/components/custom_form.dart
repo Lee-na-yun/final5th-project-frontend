@@ -32,7 +32,7 @@ class CustomForm extends StatelessWidget {
                 ),
               ),
               hintStyle: GoogleFonts.notoSans(
-                color: const Color(0xffe2e2e2),
+                color: Color(0xffe2e2e2),
                 textStyle: textTheme().headline2,
               )),
         ),

@@ -21,7 +21,7 @@ class ChatLineAppBar extends StatelessWidget {
       titleSpacing: 0,
       title: Text(
         "${title}",
-        style: textTheme().headline2,
+        style: textTheme(color: kPrimaryColor()).headline2,
       ),
       backgroundColor: Colors.white,
       shape: Border(

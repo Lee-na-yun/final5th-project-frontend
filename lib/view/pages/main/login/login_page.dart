@@ -45,12 +45,11 @@ class LoginPage extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, "/findPassword");
             },
-            child: Text("비밀번호 찾기",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xff9999A3),
-                ),
-                textAlign: TextAlign.center),
+            child: Text(
+              "비밀번호 찾기",
+              style: textTheme(color: kchacholGreyColor()).bodyText1,
+              textAlign: TextAlign.center,
+            ),
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
             ),

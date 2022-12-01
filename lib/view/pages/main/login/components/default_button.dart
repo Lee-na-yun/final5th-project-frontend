@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_firestore_steam1/core/theme.dart';
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton(this.btnText, this.routes, {Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class DefaultButton extends StatelessWidget {
           minimumSize: Size(double.infinity, 52),
           elevation: 0.0,
         ),
-        child: Text("${btnText}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+        child: Text("${btnText}", style: textTheme(color: Colors.white, weight: FontWeight.w500).headline2),
       ),
     );
   }

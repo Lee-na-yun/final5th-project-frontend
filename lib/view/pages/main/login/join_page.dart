@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_form.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_password_form.dart';
-
-import 'package:riverpod_firestore_steam1/view/pages/main/login/components/default_button.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/line_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/line_button.dart';
 
@@ -42,11 +40,7 @@ class JoinPage extends StatelessWidget {
       children: [
         Text(
           "이메일",
-          style: GoogleFonts.notoSans(
-            fontWeight: FontWeight.w700,
-            color: Color(0xff9999A3),
-            textStyle: textTheme().bodyText1,
-          ),
+          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700).bodyText1,
         ),
         SizedBox(height: 2),
         Row(
@@ -69,10 +63,7 @@ class JoinPage extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    hintStyle: GoogleFonts.notoSans(
-                      color: const Color(0xffe2e2e2),
-                      textStyle: textTheme().headline2,
-                    ),
+                    hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2,
                   ),
                 ),
               ),
@@ -111,18 +102,16 @@ class JoinPage extends StatelessWidget {
         SizedBox(height: 6),
         TextFormField(
           decoration: InputDecoration(
-              hintText: "비밀번호를 입력해주세요",
-              contentPadding: const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Color.fromRGBO(233, 233, 233, 100),
-                ),
+            hintText: "비밀번호를 입력해주세요",
+            contentPadding: const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Color.fromRGBO(233, 233, 233, 100),
               ),
-              hintStyle: GoogleFonts.notoSans(
-                color: const Color(0xffe2e2e2),
-                textStyle: textTheme().headline2,
-              )),
+            ),
+            hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2,
+          ),
           obscureText: true,
         )
       ],
