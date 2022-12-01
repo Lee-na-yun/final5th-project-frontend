@@ -31,7 +31,7 @@ class KStackIcon extends StatelessWidget {
             ),
             if (notificationCount != '0')
               Positioned(
-                top: 0,
+                top: 4,
                 right: 0,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),

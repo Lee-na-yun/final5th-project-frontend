@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'mypage/mypage_main_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/my_home_page.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_main_page.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _MainPageState extends State<MainPage> {
         index: _selectedIndex,
         children: [
           MyHomePage(),
+          ChatRoomPage(),
           ChatPage(),
           Center(child: Text("WritePage")),
           Center(child: Text("SearchPage")),

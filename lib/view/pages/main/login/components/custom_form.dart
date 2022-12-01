@@ -16,7 +16,7 @@ class CustomForm extends StatelessWidget {
           "${text}",
           style: GoogleFonts.notoSans(
             fontWeight: FontWeight.w700,
-            color: kGreyColor(),
+            color: klightGreyColor(),
             textStyle: textTheme().bodyText1,
           ),
         ),
