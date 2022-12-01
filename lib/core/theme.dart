@@ -14,6 +14,10 @@ TextTheme textTheme() {
   );
 }
 
+TextStyle kProfileName(color) {
+  return TextStyle(fontSize: 15, color: color);
+}
+
 const MaterialColor primary = MaterialColor(0xff6E34DA, <int, Color>{
   900: Color(0xff6f36d9),
   800: Color(0xff7641d9),
@@ -46,6 +50,10 @@ MaterialColor createMaterialColor(Color color) {
     );
   });
   return MaterialColor(color.value, swatch);
+}
+
+Color kGreyColor() {
+  return Color(0xff9999A3);
 }
 
 ThemeData theme() {

@@ -16,7 +16,7 @@ class CustomForm extends StatelessWidget {
           "${text}",
           style: GoogleFonts.notoSans(
             fontWeight: FontWeight.w700,
-            color: Color(0xff9999A3),
+            color: kGreyColor(),
             textStyle: textTheme().bodyText1,
           ),
         ),
@@ -25,7 +25,6 @@ class CustomForm extends StatelessWidget {
           decoration: InputDecoration(
               hintText: "${hintText}",
               contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
-
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(

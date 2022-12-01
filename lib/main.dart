@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         routes: {
           "/login": (context) => LoginPage(),
           "/join": (context) => JoinPage(),
-          "/FindPassword": (context) => FindPasswordPage(),
+          "/findPassword": (context) => FindPasswordPage(),
           "/home": (context) => MainPage(),
         },
         title: "TODOFRIENDS",

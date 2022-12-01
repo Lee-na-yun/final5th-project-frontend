@@ -37,14 +37,13 @@ class LoginPage extends StatelessWidget {
           CustomForm("이메일", "이메일을 입력해주세요"),
           SizedBox(height: 18),
           CustomPasswordForm("비밀번호", "비밀번호를 입력해주세요"),
-
           SizedBox(height: 40),
           DefaultButton("로그인", "/home"),
           SizedBox(height: 14),
           LineButton("회원가입", "/join"),
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/FindPassword");
+              Navigator.pushNamed(context, "/findPassword");
             },
             child: Text("비밀번호 찾기",
                 style: TextStyle(

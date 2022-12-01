@@ -7,10 +7,6 @@ import 'package:riverpod_firestore_steam1/view/pages/main/components/chat_app_ba
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
-
-  //final User user;
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +14,6 @@ class ChatPage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.only(top: 12, left: 20, right: 20),
         children: List.generate(users.length, (index) => ChatList(user: users[index])),
-
       ),
     );
   }
