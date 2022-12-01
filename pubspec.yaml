@@ -36,6 +36,7 @@ dependencies:
   cloud_firestore: ^4.1.0
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.2.1
+  intl: ^0.17.0
   #keyboard_visibility: ^0.5.6
 
 
