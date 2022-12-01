@@ -2,15 +2,57 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-TextTheme textTheme() {
+Color ksubPrimaryColor() {
+  return Color(0xffB699EC);
+}
+
+Color kchacholGreyColor() {
+  return Color(0xff9999A3);
+}
+
+Color kmidGreyColor() {
+  return Color(0xffE9E9E9);
+}
+
+Color klightGreyColor() {
+  return Color(0xffF2F2F2);
+}
+
+Color kpointYellowColor() {
+  return Color(0xffFFD21D);
+}
+
+Color kpointMintColor() {
+  return Color(0xff71DCFC);
+}
+
+TextTheme textTheme({Color? color, FontWeight? weight}) {
   return TextTheme(
-    headline1: GoogleFonts.notoSans(fontSize: 18.0, color: const Color(0xff1C1C1C), fontWeight: FontWeight.bold),
-    headline2: GoogleFonts.notoSans(
-        fontSize: 16.0, color: const Color(0xff1C1C1C), fontWeight: FontWeight.bold, letterSpacing: -0.05),
-    headline3: GoogleFonts.notoSans(fontSize: 14.0, color: const Color(0xff1C1C1C)),
-    bodyText1: GoogleFonts.notoSans(fontSize: 12.0),
-    bodyText2: GoogleFonts.notoSans(fontSize: 10.0, color: const Color(0xff9999A3), height: 2),
-    subtitle1: GoogleFonts.notoSans(fontSize: 15.0, color: const Color(0xff1C1C1C)),
+    headline1: GoogleFonts.notoSans(fontSize: 18.0, color: color, fontWeight: weight),
+    headline2: GoogleFonts.notoSans(fontSize: 16.0, color: color, fontWeight: weight, letterSpacing: -0.05),
+    headline3: GoogleFonts.notoSans(fontSize: 14.0, color: color, fontWeight: weight, height: 1.6),
+    bodyText1: GoogleFonts.notoSans(fontSize: 12.0, color: color, fontWeight: weight, height: 1.6),
+    bodyText2: GoogleFonts.notoSans(fontSize: 10.0, color: color, fontWeight: weight),
+    subtitle1: GoogleFonts.notoSans(fontSize: 15.0, color: color, fontWeight: weight),
+  );
+}
+
+ThemeData theme() {
+  return ThemeData(
+    primarySwatch: createMaterialColor(Color(0xff6E34DA)),
+    scaffoldBackgroundColor: Colors.white,
+    backgroundColor: Colors.white,
+    textTheme: textTheme(),
+    appBarTheme: appTheme(),
+  );
+}
+
+AppBarTheme appTheme() {
+  return AppBarTheme(
+    centerTitle: false,
+    //color: Colors.white,
+    elevation: 0.0,
+    titleTextStyle: textTheme().headline2,
   );
 }
 
@@ -50,27 +92,4 @@ MaterialColor createMaterialColor(Color color) {
     );
   });
   return MaterialColor(color.value, swatch);
-}
-
-Color kGreyColor() {
-  return Color(0xff9999A3);
-}
-
-ThemeData theme() {
-  return ThemeData(
-    primarySwatch: createMaterialColor(Color(0xff6E34DA)),
-    scaffoldBackgroundColor: Colors.white,
-    backgroundColor: Colors.white,
-    textTheme: textTheme(),
-    appBarTheme: appTheme(),
-  );
-}
-
-AppBarTheme appTheme() {
-  return AppBarTheme(
-    centerTitle: false,
-    //color: Colors.white,
-    elevation: 0.0,
-    titleTextStyle: textTheme().headline2,
-  );
 }

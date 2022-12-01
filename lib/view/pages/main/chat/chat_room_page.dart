@@ -54,7 +54,6 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     );
   }
 
-
   Container _buildSubmitContainer() {
     return Container(
       height: 70,
