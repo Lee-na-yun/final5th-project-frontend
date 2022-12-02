@@ -6,6 +6,7 @@ import 'package:riverpod_firestore_steam1/view/pages/main/login/join_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/login_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/main_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_main_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/test/stack_test_page.dart';
 
 import 'core/theme.dart';
 import 'view/pages/main/login/find_password_page.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         theme: theme(),
         initialRoute: "/login",
         routes: {
+          "/stack_test": (context) => StackTestPage(),
           "/login": (context) => LoginPage(),
           "/join": (context) => JoinPage(),
           "/findPassword": (context) => FindPasswordPage(),

@@ -20,25 +20,13 @@ class HomePageTop extends StatelessWidget {
     );
   }
 
-  Widget _buildHorizontalListSample() {
-    return Container(
-      padding: EdgeInsets.only(left: 20),
-      margin: EdgeInsets.symmetric(vertical: 20.0),
-      height: 54.0,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[Container(width: 42.0, color: Colors.red)],
-      ),
-    );
-  }
-
   Widget _buildTopfirstline() {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         //아래 버튼은 추후에 DropDown 버튼 추가할지 고민
-        children: [_buildMonthDropdown(), KInkWellIconButton(icon: Icons.calendar_today_outlined)],
+        children: [_buildMonthDropdown(), KInkWellIconButton(icon: Icons.calendar_today_outlined, img: null)],
       ),
     );
   }
@@ -50,4 +38,16 @@ class HomePageTop extends StatelessWidget {
         },
         child: Text("11월", style: textTheme().headline1));
   }
+}
+
+Widget _buildHorizontalListSample() {
+  return Container(
+    padding: EdgeInsets.only(left: 20),
+    margin: EdgeInsets.symmetric(vertical: 20.0),
+    height: 54.0,
+    child: ListView(
+      scrollDirection: Axis.horizontal,
+      children: <Widget>[Container(width: 42.0, color: Colors.red)],
+    ),
+  );
 }

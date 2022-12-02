@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 
 class KStackIcon extends StatelessWidget {
-  final IconData iconData;
+  final iconData;
   final VoidCallback? onTap;
   final String notificationCount;
 
