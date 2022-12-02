@@ -75,7 +75,7 @@ const MaterialColor primary = MaterialColor(0xff6E34DA, <int, Color>{
   200: Color(0xffa082d9),
   150: Color(0xffa78dd9),
   100: Color(0xffae98d9),
-  50: Color(0xffb6a3d9),
+  50: Color(0x8cb6a3d9),
 });
 
 MaterialColor createMaterialColor(Color color) {

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/widgets/k_stack_icon.dart';
 
 class HomeAppBar extends AppBar implements PreferredSizeWidget {
-  HomeAppBar({super.key});
+  HomeAppBar(this.username, {super.key});
+
+  final String? username;
 
   @override
   bool get automaticallyImplyLeading => false;
@@ -13,18 +15,25 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
         children: [
           InkWell(
             onTap: () {},
-            child: Row(
-              children: [
-                Text("안녕, ", style: TextStyle(color: Colors.white)),
-                Text("Zne.vil ", style: TextStyle(color: Color(0xffFFD21D))),
-                Text("님", style: TextStyle(color: Colors.white)),
-                SizedBox(width: 4),
-                Icon(CupertinoIcons.chevron_down, size: 14)
-              ],
-            ),
+            child: _homePage(username),
           ),
         ],
       );
+
+  Widget _homePage(String? username) {
+    return Container(
+        child: username != null
+            ? Row(
+                children: [
+                  Text("안녕, ", style: TextStyle(color: Colors.white)),
+                  Text(username, style: TextStyle(color: Color(0xffFFD21D))),
+                  Text("님", style: TextStyle(color: Colors.white)),
+                  SizedBox(width: 4),
+                  Icon(CupertinoIcons.chevron_down, size: 14)
+                ],
+              )
+            : Text("마이페이지"));
+  }
 
   // @override
   // bool? get centerTitle => false;
