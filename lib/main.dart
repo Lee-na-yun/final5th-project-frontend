@@ -5,6 +5,7 @@ import 'package:riverpod_firestore_steam1/firebase_options.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/join_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/login_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/main_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_main_page.dart';
 
 import 'core/theme.dart';
 import 'view/pages/main/login/find_password_page.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           "/join": (context) => JoinPage(),
           "/findPassword": (context) => FindPasswordPage(),
           "/home": (context) => MainPage(),
+          "/mypage": (context) => MyPageMainPage(),
         },
         title: "TODOFRIENDS",
       ),

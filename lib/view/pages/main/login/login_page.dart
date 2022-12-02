@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_form.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_password_form.dart';
-
-import 'package:riverpod_firestore_steam1/view/pages/main/login/components/default_button.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/line_button.dart';
+
+import '../components/default_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
