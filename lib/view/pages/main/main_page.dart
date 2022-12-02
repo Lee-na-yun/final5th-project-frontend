@@ -21,7 +21,6 @@ class _MainPageState extends State<MainPage> {
         index: _selectedIndex,
         children: [
           MyHomePage(),
-          ChatRoomPage(),
           ChatPage(),
           Center(child: Text("WritePage")),
           Center(child: Text("SearchPage")),

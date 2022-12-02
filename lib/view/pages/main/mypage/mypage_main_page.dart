@@ -18,11 +18,7 @@ class MyPageMainPage extends StatelessWidget {
           SizedBox(height: 22),
           MypageProfile(),
           SizedBox(height: 24),
-          Expanded(
-            child: ListView(
-                children:
-                    List.generate(ToDoList.length, (index) => ProfileTabV2())),
-          ),
+          Expanded(child: ProfileTabV2()),
         ],
       ),
     );

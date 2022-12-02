@@ -14,10 +14,11 @@ class ProfileTabV2 extends StatefulWidget {
   State<ProfileTabV2> createState() => _ProfileTabState();
 }
 
-class _ProfileTabState extends State<ProfileTabV2>
-    with SingleTickerProviderStateMixin {
+class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStateMixin {
   TabController? _tabController;
   DateTime date = DateTime(2022, 12);
+
+  var today;
 
   @override
   void initState() {
@@ -35,10 +36,7 @@ class _ProfileTabState extends State<ProfileTabV2>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: Text("${date.year}년 ${date.month}월",
-                  style:
-                      textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
-                          .headline2),
+              child: Text("${date.year}년 ${date.month}월", style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2),
             ),
             Container(
               width: 30,
@@ -77,7 +75,7 @@ class _ProfileTabState extends State<ProfileTabV2>
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(width: 1, color: klightGreyColor()),
+          bottom: BorderSide(width: 1, color: kmidGreyColor()),
         ),
       ),
       child: TabBar(
@@ -122,16 +120,75 @@ class _ProfileTabState extends State<ProfileTabV2>
             },
           ),
         ),
-        Container(
-          child: Row(
-            children: [
-              Column(
-                children: [],
-              ),
-            ],
-          ),
+        ListView(
+          physics: BouncingScrollPhysics(),
+          dragStartBehavior: DragStartBehavior.down,
+          children: [
+            _TimelineList(),
+            _TimelineList(),
+            _TimelineList(),
+            _TimelineList(),
+            _TimelineList(),
+            _TimelineList(),
+            _TimelineList(),
+            _TimelineList(),
+            _TimelineList(),
+          ],
         ),
       ],
+    );
+  }
+
+  Container _TimelineList() {
+    return Container(
+      padding: EdgeInsets.only(left: 20, right: 20, bottom: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 10, top: 5),
+            child: Column(
+              children: [
+                Text(
+                  "02",
+                  style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
+                ),
+                Text(
+                  "월요일",
+                  style: textTheme(color: kchacholGreyColor()).bodyText2,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+              decoration: BoxDecoration(
+                color: klightGreyColor(),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 6,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                      color: kchacholGreyColor(),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "플러터 디자인 하기",
+                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).bodyText1,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

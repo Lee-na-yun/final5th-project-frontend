@@ -14,11 +14,7 @@ class CustomForm extends StatelessWidget {
       children: [
         Text(
           "${text}",
-          style: GoogleFonts.notoSans(
-            fontWeight: FontWeight.w700,
-            color: klightGreyColor(),
-            textStyle: textTheme().bodyText1,
-          ),
+          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700).bodyText1,
         ),
         SizedBox(height: 2),
         TextFormField(

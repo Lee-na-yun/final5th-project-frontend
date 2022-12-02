@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/models/mypage.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_follow_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_following_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_profile_page.dart';
 
 class MypageProfile extends StatelessWidget {
   const MypageProfile({Key? key}) : super(key: key);
@@ -49,7 +52,12 @@ class MypageProfile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyPageProfilePage()),
+                  );
+                },
                 child: Text("프로필 수정", style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).bodyText1),
                 style: OutlinedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
@@ -80,36 +88,52 @@ class MypageProfile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
-                        children: [
-                          Text(
-                            "팔로잉",
-                            style: textTheme(color: kPrimaryColor()).bodyText1,
-                          ),
-                          SizedBox(height: 2),
-                          Text(
-                            "150",
-                            style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
-                          ),
-                        ],
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MyPageFollowingPage()),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Text(
+                              "팔로잉",
+                              style: textTheme(color: kPrimaryColor()).bodyText1,
+                            ),
+                            SizedBox(height: 2),
+                            Text(
+                              "150",
+                              style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         width: 2,
                         height: 28,
                         color: Color(0xffe9e9e9),
                       ),
-                      Column(
-                        children: [
-                          Text(
-                            "팔로워",
-                            style: textTheme(color: kPrimaryColor()).bodyText1,
-                          ),
-                          SizedBox(height: 2),
-                          Text(
-                            "9999",
-                            style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
-                          ),
-                        ],
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MyPageFollowPage()),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Text(
+                              "팔로워",
+                              style: textTheme(color: kPrimaryColor()).bodyText1,
+                            ),
+                            SizedBox(height: 2),
+                            Text(
+                              "9999",
+                              style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
