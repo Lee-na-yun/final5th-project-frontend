@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/models/follow.dart';
 import 'package:riverpod_firestore_steam1/models/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/notice_page.dart';
@@ -28,12 +29,46 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
     return Container(
         child: username != null
             ? Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("안녕, ", style: TextStyle(color: Colors.white)),
-                  Text(username, style: TextStyle(color: Color(0xffFFD21D))),
-                  Text("님:)", style: TextStyle(color: Colors.white)),
+                  Text(
+                    "안녕, ",
+                    style: GoogleFonts.notoSans(
+                      textStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      username,
+                      style: GoogleFonts.notoSans(
+                        textStyle: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xffFFD21D),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "님:)",
+                    style: GoogleFonts.notoSans(
+                      textStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                   SizedBox(width: 4),
-                  Icon(CupertinoIcons.chevron_down, size: 14)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6),
+                    child: Icon(CupertinoIcons.chevron_down, size: 14),
+                  )
                 ],
               )
             : Text("마이페이지"));
@@ -58,7 +93,7 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
                 onTap: () {
                   Scaffold.of(context).openEndDrawer();
                 },
-                child: Image.asset("assets/icon_setting_w.png", width: 20),
+                child: Image.asset("assets/icon_setting_w2.png", width: 20),
               );
             }),
             SizedBox(width: 20),

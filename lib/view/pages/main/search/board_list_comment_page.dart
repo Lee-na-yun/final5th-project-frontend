@@ -23,7 +23,7 @@ class BoardListCommentPage extends StatelessWidget {
               children: [
                 ...List.generate(
                   CommentList.length,
-                  (index) => CommentBody(comments: CommentList[index]),
+                  (index) => CommentBody(comments: CommentList[index], text: ""),
                 ),
               ],
             ),

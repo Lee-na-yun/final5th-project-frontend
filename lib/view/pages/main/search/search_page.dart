@@ -4,7 +4,34 @@ import 'package:riverpod_firestore_steam1/view/pages/main/components/line_app_ba
 import 'package:riverpod_firestore_steam1/view/pages/main/search/board_list_page.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  SearchPage({Key? key}) : super(key: key);
+
+  final myImages = [
+    "assets/man1.png",
+    "assets/man2.png",
+    "assets/woman1.png",
+    "assets/pig.png",
+    "assets/dog.png",
+    "assets/aliens.png",
+    "assets/man1.png",
+    "assets/man2.png",
+    "assets/woman1.png",
+    "assets/pig.png",
+    "assets/dog.png",
+    "assets/aliens.png",
+    "assets/man1.png",
+    "assets/man2.png",
+    "assets/woman1.png",
+    "assets/pig.png",
+    "assets/dog.png",
+    "assets/aliens.png",
+    "assets/man1.png",
+    "assets/man2.png",
+    "assets/woman1.png",
+    "assets/pig.png",
+    "assets/dog.png",
+    "assets/aliens.png",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +51,7 @@ class SearchPage extends StatelessWidget {
             crossAxisSpacing: 4,
             mainAxisSpacing: 4,
           ),
+          itemCount: myImages.length,
           itemBuilder: (BuildContext context, int index) {
             return IconButton(
               onPressed: () {
@@ -35,7 +63,7 @@ class SearchPage extends StatelessWidget {
               icon: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 child: Image.asset(
-                  'assets/dog.png',
+                  "${myImages[index]}",
                   width: double.infinity,
                   height: double.infinity,
                   fit: BoxFit.cover,

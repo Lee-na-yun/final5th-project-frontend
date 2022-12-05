@@ -72,7 +72,9 @@ class _SubmitContainerState extends State<SubmitContainer> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _handleSubmitted(context);
+                },
                 style: ElevatedButton.styleFrom(
                   elevation: 0.0,
                 ),
@@ -91,7 +93,12 @@ class _SubmitContainerState extends State<SubmitContainer> {
   void _handleSubmitted(text) {
     _textController.clear();
     setState(() {
-      cb.add(CommentBody(comments: Comments(userImg: "assets/woman1.png", friendName: "friendName", comment: "comment")));
+      cb.add(
+        CommentBody(
+          text: text,
+          comments: Comments(userImg: "assets/woman1.png", friendName: "", comment: ""),
+        ),
+      );
     });
   }
 }

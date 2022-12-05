@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/models/mypage.dart';
 import 'package:riverpod_firestore_steam1/models/todo.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -17,6 +18,21 @@ class ProfileTabV2 extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStateMixin {
   TabController? _tabController;
   DateTime date = DateTime(2022, 12);
+
+  final myImages = [
+    "assets/man1.png",
+    "assets/man2.png",
+    "assets/woman1.png",
+    "assets/pig.png",
+    "assets/dog.png",
+    "assets/aliens.png",
+    "assets/man1.png",
+    "assets/man2.png",
+    "assets/woman1.png",
+    "assets/pig.png",
+    "assets/dog.png",
+    "assets/aliens.png",
+  ];
 
   var today;
 
@@ -102,16 +118,18 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
         Padding(
           padding: const EdgeInsets.only(top: 0, left: 20, right: 20),
           child: GridView.builder(
+            physics: BouncingScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               crossAxisSpacing: 4,
               mainAxisSpacing: 4,
             ),
+            itemCount: myImages.length,
             itemBuilder: (context, index) {
               return ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  "assets/woman1.png",
+                  "${myImages[index]}",
                   width: 104,
                   height: 104,
                   fit: BoxFit.cover,

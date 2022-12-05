@@ -71,78 +71,82 @@ class MypageProfile extends StatelessWidget {
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xfff2f2f2),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 14),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MyPageFollowingPage()),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Text(
-                              "팔로잉",
-                              style: textTheme(color: kPrimaryColor()).bodyText1,
-                            ),
-                            SizedBox(height: 2),
-                            Text(
-                              "150",
-                              style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: 2,
-                        height: 28,
-                        color: Color(0xffe9e9e9),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MyPageFollowPage()),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Text(
-                              "팔로워",
-                              style: textTheme(color: kPrimaryColor()).bodyText1,
-                            ),
-                            SizedBox(height: 2),
-                            Text(
-                              "9999",
-                              style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+        _buildFollowCount(context, 150, 999),
+      ],
+    );
+  }
+
+  Padding _buildFollowCount(BuildContext context, int count, int count2) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(0xfff2f2f2),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
                 ),
               ),
-            ],
+              padding: EdgeInsets.symmetric(vertical: 14),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyPageFollowingPage()),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Text(
+                          "팔로잉",
+                          style: textTheme(color: kPrimaryColor()).bodyText1,
+                        ),
+                        SizedBox(height: 2),
+                        Text(
+                          "$count",
+                          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: 2,
+                    height: 28,
+                    color: Color(0xffe9e9e9),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyPageFollowPage()),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Text(
+                          "팔로워",
+                          style: textTheme(color: kPrimaryColor()).bodyText1,
+                        ),
+                        SizedBox(height: 2),
+                        Text(
+                          "$count2",
+                          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
