@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/models/board.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/components/board_list_box.dart';
-
 import 'components/board_app_bar_v2.dart';
 
 class BoardListPage extends StatelessWidget {
