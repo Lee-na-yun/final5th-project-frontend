@@ -30,8 +30,7 @@ class _SlideImageState extends State<SlideImage> {
               viewportFraction: 1,
               enlargeCenterPage: true,
               //enlargeStrategy: CenterPageEnlargeStrategy.height,
-              onPageChanged: (index, reason) =>
-                  setState(() => activeIndex = index),
+              onPageChanged: (index, reason) => setState(() => activeIndex = index),
             ),
             itemCount: sImages.length,
             itemBuilder: (context, index, realIndex) {
@@ -49,7 +48,7 @@ class _SlideImageState extends State<SlideImage> {
 
   Widget buildImage(String sImage, int index) {
     return FractionallySizedBox(
-      widthFactor: 0.9,
+      widthFactor: 0.92,
       child: Container(
         //margin: EdgeInsets.symmetric(horizontal: 2),
         //color: Colors.grey,
