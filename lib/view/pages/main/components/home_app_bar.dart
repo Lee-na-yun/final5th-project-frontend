@@ -52,7 +52,16 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
               },
               child: KStackIcon(iconData: CupertinoIcons.bell, notificationCount: '9'),
             ),
-            KStackIcon(iconData: CupertinoIcons.gear_big, notificationCount: '0'),
+            SizedBox(width: 10),
+            Builder(builder: (context) {
+              return InkWell(
+                onTap: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+                child: Image.asset("assets/icon_setting_w.png", width: 20),
+              );
+            }),
+            SizedBox(width: 20),
           ],
         ),
       ];

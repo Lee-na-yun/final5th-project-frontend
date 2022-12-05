@@ -75,7 +75,6 @@ class BoardListBox extends StatelessWidget {
               Radius.circular(8),
             ),
             image: DecorationImage(image: AssetImage(board.userImg), fit: BoxFit.cover),
-
           ),
         ),
         SizedBox(width: 10),
@@ -101,25 +100,6 @@ class BoardListBox extends StatelessWidget {
           style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w200).bodyText1,
         )
       ],
-  Widget _buildText() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            board.title,
-            style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
-                .bodyText1,
-          ),
-          SizedBox(height: 2),
-          Text(
-            board.content,
-            style: textTheme(color: kPrimaryColor(), weight: FontWeight.w200)
-                .bodyText1,
-          )
-        ],
-      ),
     );
   }
 

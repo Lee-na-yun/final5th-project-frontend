@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class BoardListCommentPage extends StatelessWidget {
   const BoardListCommentPage({Key? key}) : super(key: key);
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/home_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/home_page_top.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/home/update_password_page.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -69,6 +70,110 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+        ],
+      ),
+      endDrawer: drawer(context),
+    );
+  }
+
+  Widget drawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          Container(
+              height: 55,
+              decoration: BoxDecoration(color: Colors.white),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, top: 2, right: 14),
+                    child: SizedBox(
+                      width: 12,
+                      height: 12,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        padding: EdgeInsets.zero,
+                        icon: Image.asset("assets/icon_close.png", width: 12, height: 12),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "설정",
+                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
+                  )
+                ],
+              )),
+          Container(
+            height: 62,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/img_banner.png'),
+              ),
+            ),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            title: Text("화면", style: textTheme(color: kPrimaryColor()).headline3),
+            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
+            onTap: () {},
+            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            title: Text("알림", style: textTheme(color: kPrimaryColor()).headline3),
+            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
+            onTap: () {},
+            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            title: Text("구독/결제", style: textTheme(color: kPrimaryColor()).headline3),
+            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
+            onTap: () {},
+            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            title: Text("친구초대", style: textTheme(color: kPrimaryColor()).headline3),
+            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
+            onTap: () {},
+            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            title: Text("비밀번호 변경", style: textTheme(color: kPrimaryColor()).headline3),
+            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatePasswordPage()));
+            },
+            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            title: Text("고객센터", style: textTheme(color: kPrimaryColor()).headline3),
+            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
+            onTap: () {},
+            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            title: Text("버전", style: textTheme(color: kPrimaryColor()).headline3),
+            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
+            onTap: () {},
+            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+            title: Text("로그아웃", style: textTheme(color: kchacholGreyColor(), weight: FontWeight.bold).headline3),
+            //trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
+            onTap: () {},
+            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
           ),
         ],
       ),
