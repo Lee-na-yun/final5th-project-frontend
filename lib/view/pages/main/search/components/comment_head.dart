@@ -9,7 +9,7 @@ class CommentHead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Color.fromRGBO(110, 52, 218, 0.05)),
+      decoration: BoxDecoration(color: Color.fromRGBO(110, 52, 218, 0.08)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Row(
@@ -42,16 +42,14 @@ class CommentHead extends StatelessWidget {
       children: [
         Text(
           commentTitle,
-          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
-              .bodyText1,
+          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).bodyText1,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         SizedBox(height: 6),
         Text(
           commentContent,
-          style: textTheme(color: kPrimaryColor(), weight: FontWeight.w200)
-              .bodyText1,
+          style: textTheme(color: kPrimaryColor(), weight: FontWeight.w200).bodyText1,
           maxLines: 5,
           overflow: TextOverflow.ellipsis,
         ),
