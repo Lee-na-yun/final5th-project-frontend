@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:riverpod_firestore_steam1/models/follow.dart';
+import 'package:riverpod_firestore_steam1/models/users.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/home/notice_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/widgets/k_stack_icon.dart';
 
 class HomeAppBar extends AppBar implements PreferredSizeWidget {
-  HomeAppBar(this.username, {super.key});
+  HomeAppBar(this.username, {super.key, required this.context});
+  final BuildContext context;
 
   final String? username;
 
@@ -27,7 +31,7 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
                 children: [
                   Text("안녕, ", style: TextStyle(color: Colors.white)),
                   Text(username, style: TextStyle(color: Color(0xffFFD21D))),
-                  Text("님", style: TextStyle(color: Colors.white)),
+                  Text("님:)", style: TextStyle(color: Colors.white)),
                   SizedBox(width: 4),
                   Icon(CupertinoIcons.chevron_down, size: 14)
                 ],
@@ -42,8 +46,22 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
   List<Widget>? get actions => [
         Row(
           children: [
-            KStackIcon(iconData: CupertinoIcons.bell, notificationCount: '9'),
-            KStackIcon(iconData: CupertinoIcons.gear_big, notificationCount: '0'),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, "/notice");
+              },
+              child: KStackIcon(iconData: CupertinoIcons.bell, notificationCount: '9'),
+            ),
+            SizedBox(width: 10),
+            Builder(builder: (context) {
+              return InkWell(
+                onTap: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+                child: Image.asset("assets/icon_setting_w.png", width: 20),
+              );
+            }),
+            SizedBox(width: 20),
           ],
         ),
       ];

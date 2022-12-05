@@ -1,11 +1,20 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/inkwell_icon_button_widget.dart';
-
 import '../../../../../core/theme.dart';
 import '../../../../../models/todo.dart';
+import '../../../../../models/users.dart';
+
+class UserLength {
+  int userLength = users.length;
+
+  int index() {
+    if (userLength > 3) {
+      return 4;
+    }
+    return userLength;
+  }
+}
 
 class DaySchedule extends StatelessWidget {
   DaySchedule({Key? key}) : super(key: key);
@@ -28,7 +37,7 @@ class DaySchedule extends StatelessWidget {
             child: Container(
               //padding: EdgeInsets.only(right: 12),
               alignment: Alignment.center,
-              width: 130,
+              width: 145,
               child: _buildScheduleItem(index),
               decoration: BoxDecoration(
                 color: primary[50],
@@ -45,7 +54,7 @@ class DaySchedule extends StatelessWidget {
     return Column(children: [
       _category(),
       SizedBox(height: 12),
-      _title(index),
+      _scheduletitle(index),
       SizedBox(height: 12),
       Column(
         children: [
@@ -53,8 +62,46 @@ class DaySchedule extends StatelessWidget {
           _rowIconAndText(CupertinoIcons.location_solid, "서면 링딩동"),
         ],
       ),
-      KInkWellIconButton(icon: CupertinoIcons.person)
+      SizedBox(height: 6),
+      Container(
+        padding: EdgeInsets.only(left: 14),
+        child: Row(
+          children: [
+            ClipRRect(
+              child: Stack(
+                children: List.generate(UserLength().index(), (index) => _buildStackProfileImage(index, users.length)),
+              ),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(height: 6),
     ]);
+  }
+
+  Widget _buildStackProfileImage(int index, int userslength) {
+    double _margin = (index * 17);
+
+    int num = userslength - index;
+
+    return index != 3
+        ? Container(
+            child: KInkWellIconButton(img: users[index].profileImg),
+            padding: EdgeInsets.symmetric(horizontal: _margin),
+          )
+        : Container(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: kmidGreyColor(),
+              ),
+              alignment: Alignment.center,
+              width: 24,
+              height: 24,
+              child: Text("+$num", style: textTheme(weight: FontWeight.bold).bodyText2),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: _margin),
+          );
   }
 
   Container _rowIconAndText(icon, text) {
@@ -72,17 +119,19 @@ class DaySchedule extends StatelessWidget {
     );
   }
 
-  Widget _title(int index) {
-    return Container(
-      height: 46,
-      width: double.infinity,
-      padding: EdgeInsets.only(left: 14, right: 14),
-      child: Text(
-        ToDoList[index].content,
-        style: textTheme(weight: FontWeight.bold).headline3,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        textAlign: TextAlign.left,
+  Widget _scheduletitle(int index) {
+    return Flexible(
+      child: Container(
+        //height: 46,
+        width: double.infinity,
+        padding: EdgeInsets.only(left: 14, right: 14),
+        child: Text(
+          "seiofjsoiejfasoiefjiosejfoisaejf;oasfjsefsefsef;osjf;osajfoasfj;ojsfoiseajfoiasejfsojaf",
+          style: textTheme(weight: FontWeight.bold).headline3,
+          maxLines: 4,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.left,
+        ),
       ),
     );
   }

@@ -33,4 +33,40 @@ List<User> users = [
     profileImg: 'assets/man2.png',
     sendDate: '오전 10:00',
   ),
+  User(
+    sender: '황지현',
+    message: '이메일 인증 완료했어요! 이제 백엔드 기능 테스트 진행 할게요~~',
+    profileImg: 'assets/dog.png',
+    sendDate: '오후 17:30',
+  ),
+  User(
+    sender: '박서현',
+    message: 'base64 어렵지만 잘 해결하는중..! 팀장님 DB 짜느라 고생하셨어요 ㅎㅎㅎ',
+    profileImg: 'assets/man2.png',
+    sendDate: '오전 10:00',
+  ),
+  User(
+    sender: '황지현',
+    message: '이메일 인증 완료했어요! 이제 백엔드 기능 테스트 진행 할게요~~',
+    profileImg: 'assets/dog.png',
+    sendDate: '오후 17:30',
+  ),
+  User(
+    sender: '박서현',
+    message: 'base64 어렵지만 잘 해결하는중..! 팀장님 DB 짜느라 고생하셨어요 ㅎㅎㅎ',
+    profileImg: 'assets/man2.png',
+    sendDate: '오전 10:00',
+  ),
+  User(
+    sender: '황지현',
+    message: '이메일 인증 완료했어요! 이제 백엔드 기능 테스트 진행 할게요~~',
+    profileImg: 'assets/dog.png',
+    sendDate: '오후 17:30',
+  ),
+  User(
+    sender: '박서현',
+    message: 'base64 어렵지만 잘 해결하는중..! 팀장님 DB 짜느라 고생하셨어요 ㅎㅎㅎ',
+    profileImg: 'assets/man2.png',
+    sendDate: '오전 10:00',
+  ),
 ];

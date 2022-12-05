@@ -23,14 +23,9 @@ class CustomPasswordForm extends StatelessWidget {
               contentPadding: const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Color.fromRGBO(233, 233, 233, 100),
-                ),
+                borderSide: BorderSide(color: kmidGreyColor(), width: 1.0),
               ),
-              hintStyle: GoogleFonts.notoSans(
-                color: Color(0xffe2e2e2),
-                textStyle: textTheme().headline2,
-              )),
+              hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2),
           obscureText: true,
         ),
       ],
