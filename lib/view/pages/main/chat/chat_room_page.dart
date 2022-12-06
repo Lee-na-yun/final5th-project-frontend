@@ -105,7 +105,11 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _handleSubmitted;
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   elevation: 0.0,
                 ),

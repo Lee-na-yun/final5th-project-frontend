@@ -45,24 +45,28 @@ class _DayDateState extends State<DayDate> {
       padding: EdgeInsets.only(right: 12),
       child: GestureDetector(
         onTap: () {},
-        child: Container(
-          //padding: EdgeInsets.only(right: 12),
-          alignment: Alignment.center,
-          width: 42,
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 3),
-                child: Text(ToDoList[index].day, style: textTheme(color: kchacholGreyColor()).bodyText1),
-              ),
-              Text("2" + "$index", style: textTheme().bodyText1),
-            ],
+        child: index != 1 ? _buildDay(index, Color(0xffFFFFFF), null) : _buildDay(index, primary, Colors.white),
+      ),
+    );
+  }
+
+  Container _buildDay(int index, Color? color, Color? textColor) {
+    return Container(
+      //padding: EdgeInsets.only(right: 12),
+      alignment: Alignment.center,
+      width: 42,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 10, bottom: 3),
+            child: Text(ToDoList[index].day, style: textTheme(color: textColor).bodyText1),
           ),
-          decoration: BoxDecoration(
-            color: Color(0xffFFFFFF),
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
+          Text("$index", style: textTheme(color: textColor, weight: FontWeight.bold).bodyText1),
+        ],
+      ),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(10),
       ),
     );
   }

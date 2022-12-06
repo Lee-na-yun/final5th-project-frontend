@@ -1,79 +1,62 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/home_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/home_page_top.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/update_password_page.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+import '../../../../models/todo.dart';
 
+final List<ToDo> items = List.of(ToDoList);
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  bool? _isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBar("Zne.vil", context: context),
-      body: Column(
-        children: [
-          Container(height: 320, child: HomePageTop()),
-          Expanded(
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              dragStartBehavior: DragStartBehavior.down,
-              children: [
-                _TimelineList(),
-                _TimelineList(),
-                _TimelineList(),
-                _TimelineList(),
-                _TimelineList(),
-                _TimelineList(),
-                _TimelineList(),
-                _TimelineList(),
-                _TimelineList(),
-              ],
-            ),
-          ),
-        ],
-      ),
+      body: _homeBody(),
       endDrawer: drawer(context),
     );
   }
 
-  Widget _TimelineList() {
-    return Container(
-      padding: EdgeInsets.only(left: 20, right: 20, bottom: 4),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 15),
-              decoration: BoxDecoration(
-                color: klightGreyColor(),
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+  Widget _homeBody() {
+    return Column(
+      children: [
+        //Container(height: 320, child: HomePageTop()),
+        Expanded(
+          child: CustomScrollView(
+            slivers: <Widget>[
+              const SliverAppBar(
+                automaticallyImplyLeading: false,
+                backgroundColor: Colors.white,
+                pinned: true,
+                expandedHeight: 380.0,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: HomePageTop(),
+                ),
               ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 6,
-                    height: 6,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                      color: kchacholGreyColor(),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    "플러터 디자인 하기",
-                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).bodyText1,
-                  ),
-                ],
+              SliverFixedExtentList(
+                itemExtent: 50.0,
+                delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+                  return Container(
+                    alignment: Alignment.center,
+                    child: _ToDoList(index),
+                  );
+                }, childCount: items.length),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -117,66 +100,99 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            title: Text("화면", style: textTheme(color: kPrimaryColor()).headline3),
-            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
-            onTap: () {},
-            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            title: Text("알림", style: textTheme(color: kPrimaryColor()).headline3),
-            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
-            onTap: () {},
-            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            title: Text("구독/결제", style: textTheme(color: kPrimaryColor()).headline3),
-            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
-            onTap: () {},
-            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            title: Text("친구초대", style: textTheme(color: kPrimaryColor()).headline3),
-            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
-            onTap: () {},
-            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            title: Text("비밀번호 변경", style: textTheme(color: kPrimaryColor()).headline3),
-            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatePasswordPage()));
-            },
-            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            title: Text("고객센터", style: textTheme(color: kPrimaryColor()).headline3),
-            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
-            onTap: () {},
-            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            title: Text("버전", style: textTheme(color: kPrimaryColor()).headline3),
-            trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
-            onTap: () {},
-            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20),
-            title: Text("로그아웃", style: textTheme(color: kchacholGreyColor(), weight: FontWeight.bold).headline3),
-            //trailing: Image.asset("assets/icon_arrow_next.png", width: 8),
-            onTap: () {},
-            shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
-          ),
+          _buildMenuList(text: "화면", fontColor: kPrimaryColor()),
+          _buildMenuList(text: "알림", fontColor: kPrimaryColor()),
+          _buildMenuList(text: "구독/결제", fontColor: kPrimaryColor()),
+          _buildMenuList(text: "친구초대", fontColor: kPrimaryColor()),
+          _buildMenuList(text: "비밀번호 변경", fontColor: kPrimaryColor()),
+          _buildMenuList(text: "고객센터", fontColor: kPrimaryColor()),
+          _buildMenuList(text: "버전", fontColor: kPrimaryColor()),
+          _buildMenuList(text: "로그아웃", fontColor: kchacholGreyColor(), fontWeight: FontWeight.bold),
         ],
       ),
     );
   }
+
+  ListTile _buildMenuList({required String text, Color? fontColor, FontWeight? fontWeight}) {
+    return ListTile(
+      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+      title: Text(text, style: textTheme(color: fontColor, weight: fontWeight).headline3),
+      trailing: text != "로그아웃" ? Image.asset("assets/icon_arrow_next.png", width: 8) : null,
+      onTap: () {},
+      shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
+    );
+  }
+
+  Widget _ToDoList(int index) {
+    return Slidable(
+      key: Key(items[index].content),
+      endActionPane: ActionPane(
+        extentRatio: 0.25,
+        motion: const ScrollMotion(),
+        dismissible: DismissiblePane(onDismissed: () {
+          setState(() {
+            items.remove(items[index]);
+          });
+        }),
+        children: [
+          SlidableAction(
+            onPressed: (context) {
+              setState(() {
+                printSome(context, index);
+              });
+            },
+            foregroundColor: primary,
+            icon: CupertinoIcons.trash,
+          ),
+        ],
+      ),
+      child: Container(
+        padding: EdgeInsets.only(left: 20, right: 20, bottom: 4),
+        child: Row(
+          //crossAxisAlignment: CrossAxisAlignment.start,
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Container(
+                height: 48,
+                padding: EdgeInsets.symmetric(horizontal: 18),
+                decoration: BoxDecoration(
+                  color: klightGreyColor(),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 10,
+                      child: Checkbox(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                        value: items[index].done,
+                        onChanged: (value) {
+                          setState(() {
+                            items[index].done = value;
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      items[index].content,
+                      style: items[index].done == true
+                          ? TextStyle(decoration: TextDecoration.lineThrough, fontSize: 14, color: kchacholGreyColor())
+                          : textTheme().headline3,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void printSome(BuildContext context, int index) {
+  print("클릭됨");
+  items.remove(items[index]);
 }

@@ -16,6 +16,15 @@ class HomePageTop extends StatelessWidget {
         DayDate(),
         SizedBox(height: 16),
         DaySchedule(),
+        SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //아래 버튼은 추후에 DropDown 버튼 추가할지 고민
+              children: [
+                Text("ToDo", style: textTheme(weight: FontWeight.bold).headline1),
+              ]),
+        )
       ],
     );
   }
