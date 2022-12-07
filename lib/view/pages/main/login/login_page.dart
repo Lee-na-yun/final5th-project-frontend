@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
           SizedBox(height: 18),
           CustomPasswordForm("비밀번호", "비밀번호를 입력해주세요"),
           SizedBox(height: 40),
-          DefaultButton("로그인", "/home"),
+          DefaultButton(routes: "/home", btnText: "로그인"),
           SizedBox(height: 14),
           LineButton("회원가입", "/join"),
           TextButton(

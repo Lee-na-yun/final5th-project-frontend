@@ -21,7 +21,7 @@ class UpdatePasswordPage extends StatelessWidget {
             SizedBox(height: 30),
             _buildPasswordForm(),
             SizedBox(height: 24),
-            DefaultButton("확인", "/home"),
+            DefaultButton(btnText: "확인", routes: "/home"),
           ],
         ),
       ),

@@ -60,7 +60,7 @@ class MyPageProfilePage extends StatelessWidget {
                 SizedBox(height: 24),
                 _buildColumnForm("자기소개", "자기소개를 입력해주세요"),
                 SizedBox(height: 32),
-                DefaultButton("확인", "/mypage")
+                DefaultButton(routes: "/mypage", btnText: "확인")
               ],
             ),
           ],
