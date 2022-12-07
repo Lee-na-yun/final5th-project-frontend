@@ -14,7 +14,7 @@ class NoticePage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(55),
-        child: LineAppBar("알림"),
+        child: LineAppBar("알림", null),
       ),
       body: _buildNoticeList(),
     );

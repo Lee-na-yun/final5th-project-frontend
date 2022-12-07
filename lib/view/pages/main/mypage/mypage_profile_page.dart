@@ -14,7 +14,7 @@ class MyPageProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(55),
-        child: LineAppBar("프로필 수정"),
+        child: LineAppBar("프로필 수정", null),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),

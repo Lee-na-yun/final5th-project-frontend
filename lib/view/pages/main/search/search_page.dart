@@ -84,13 +84,12 @@ class SearchPage extends StatelessWidget {
         padding: const EdgeInsets.only(top: 14),
         child: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new),
+            icon: Image.asset("assets/icon_arrow_back.png", width: 10),
             onPressed: () {
               Navigator.pop(context);
             },
             color: kPrimaryColor(),
           ),
-          leadingWidth: 20,
           title: Container(
             height: 40,
             child: TextFormField(

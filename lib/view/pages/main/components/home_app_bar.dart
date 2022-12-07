@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/models/follow.dart';
 import 'package:riverpod_firestore_steam1/models/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/notice_page.dart';
@@ -124,25 +123,32 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
 
   @override
   List<Widget>? get actions => [
-        Row(
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, "/notice");
-              },
-              child: KStackIcon(iconData: CupertinoIcons.bell, notificationCount: '9'),
-            ),
-            SizedBox(width: 10),
-            Builder(builder: (context) {
-              return InkWell(
+        Container(
+          child: Row(
+            children: [
+              InkWell(
                 onTap: () {
-                  Scaffold.of(context).openEndDrawer();
+                  Navigator.pushNamed(context, "/notice");
                 },
-                child: Image.asset("assets/icon_setting_w2.png", width: 20),
-              );
-            }),
-            SizedBox(width: 20),
-          ],
+                child: KStackIcon(iconData: CupertinoIcons.bell, notificationCount: '9'),
+              ),
+              SizedBox(width: 10),
+              Builder(builder: (context) {
+                return Container(
+                  width: 20,
+                  height: 20,
+                  child: IconButton(
+                    onPressed: () {
+                      Scaffold.of(context).openEndDrawer();
+                    },
+                    padding: EdgeInsets.zero,
+                    icon: Image.asset("assets/icon_setting_w2.png", width: 20),
+                  ),
+                );
+              }),
+              SizedBox(width: 20),
+            ],
+          ),
         ),
       ];
 
@@ -192,9 +198,7 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
                         TextSpan(
                           //text: 'Hello ',
                           children: <TextSpan>[
-                            TextSpan(
-                                text: '${userList[index].sender}',
-                                style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3),
+                            TextSpan(text: '${userList[index].sender}', style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3),
                             TextSpan(
                               text: '님이 회원님을 팔로우하기 시작했습니다.시작했습니다.시작했습니다.',
                               style: textTheme(color: kPrimaryColor()).headline3,

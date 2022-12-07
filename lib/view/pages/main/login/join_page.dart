@@ -15,7 +15,7 @@ class JoinPage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(55),
-        child: LineAppBar("이메일 간편가입"),
+        child: LineAppBar("이메일 간편가입", null),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),

@@ -12,7 +12,7 @@ class UpdatePasswordPage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(55),
-        child: LineAppBar("비밀번호 변경"),
+        child: LineAppBar("비밀번호 변경", null),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),

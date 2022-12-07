@@ -24,10 +24,10 @@ class BoardAppBarV2 extends AppBar implements PreferredSizeWidget {
           Navigator.pop(context);
         },
         child: Padding(
-          padding: const EdgeInsets.only(left: 12),
+          padding: const EdgeInsets.only(left: 20),
           child: Row(
             children: [
-              Icon(Icons.arrow_back_ios_new, color: kPrimaryColor()),
+              Image.asset("assets/icon_arrow_back.png", width: 10),
             ],
           ),
         ),

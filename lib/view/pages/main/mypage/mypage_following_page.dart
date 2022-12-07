@@ -27,7 +27,7 @@ class _MyPageFollowingPageState extends State<MyPageFollowingPage> with SingleTi
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(55),
-        child: LineAppBar("이나윤님"),
+        child: LineAppBar("이나윤님", null),
       ),
       body: Column(
         children: [

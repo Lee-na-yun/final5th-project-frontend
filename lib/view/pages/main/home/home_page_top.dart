@@ -33,9 +33,14 @@ class HomePageTop extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         //아래 버튼은 추후에 DropDown 버튼 추가할지 고민
-        children: [_buildMonthDropdown(), KInkWellIconButton(icon: Icons.calendar_today_outlined, img: null)],
+        children: [
+          _buildMonthDropdown(),
+          SizedBox(width: 4),
+          KInkWellIconButton(icon: Icons.calendar_today_outlined, img: null),
+        ],
       ),
     );
   }

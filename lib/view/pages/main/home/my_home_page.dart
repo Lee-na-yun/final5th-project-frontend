@@ -25,6 +25,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: HomeAppBar("Zne.vil", context: context),
       body: _homeBody(),
       endDrawer: drawer(context),
+      endDrawerEnableOpenDragGesture: false,
+      drawerEnableOpenDragGesture: false,
     );
   }
 
@@ -78,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 12,
                       child: IconButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.of(context).pop();
                         },
                         padding: EdgeInsets.zero,
                         icon: Image.asset("assets/icon_close.png", width: 12, height: 12),
@@ -107,7 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
           _buildMenuList(text: "비밀번호 변경", fontColor: kPrimaryColor()),
           _buildMenuList(text: "고객센터", fontColor: kPrimaryColor()),
           _buildMenuList(text: "버전", fontColor: kPrimaryColor()),
-          _buildMenuList(text: "로그아웃", fontColor: kchacholGreyColor(), fontWeight: FontWeight.bold),
+          _buildMenuList(
+            text: "로그아웃",
+            fontColor: kchacholGreyColor(),
+          ),
         ],
       ),
     );
@@ -118,7 +123,14 @@ class _MyHomePageState extends State<MyHomePage> {
       contentPadding: EdgeInsets.symmetric(horizontal: 20),
       title: Text(text, style: textTheme(color: fontColor, weight: fontWeight).headline3),
       trailing: text != "로그아웃" ? Image.asset("assets/icon_arrow_next.png", width: 8) : null,
-      onTap: () {},
+      onTap: () {
+        text == "비밀번호 변경"
+            ? Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UpdatePasswordPage()),
+              )
+            : null;
+      },
       shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
     );
   }

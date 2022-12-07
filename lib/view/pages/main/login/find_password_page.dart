@@ -11,7 +11,7 @@ class FindPasswordPage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(55),
-        child: LineAppBar("비밀번호 찾기"),
+        child: LineAppBar("비밀번호 찾기", null),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
