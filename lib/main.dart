@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         theme: theme(),
         initialRoute: "/login",
         routes: {
-          "/stack_test": (context) => StackTestPage(),
+          //"/stack_test": (context) => StackTestPage(),
           "/login": (context) => LoginPage(),
           "/join": (context) => JoinPage(),
           "/findPassword": (context) => FindPasswordPage(),

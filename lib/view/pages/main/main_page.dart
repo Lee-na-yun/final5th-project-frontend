@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import '../../../models/todo.dart';
 import 'mypage/mypage_main_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/my_home_page.dart';
@@ -14,6 +16,8 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  final TextEditingController _textController = TextEditingController();
+  final List<ToDo> todoList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class _MainPageState extends State<MainPage> {
         children: [
           MyHomePage(),
           ChatPage(),
-          Center(child: Text("WritePage")),
+          Center(child: Text("작성")),
           SearchPage(),
           MyPageMainPage(),
         ],
@@ -52,9 +56,11 @@ class _MainPageState extends State<MainPage> {
         selectedItemColor: theme().primaryColor,
         unselectedItemColor: Color(0xff9999A3),
         onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+          index == 2
+              ? _writeForm()
+              : setState(() {
+                  _selectedIndex = index;
+                });
         },
         items: [
           BottomNavigationBarItem(
@@ -85,5 +91,82 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
     );
+  }
+
+  Future<dynamic> _writeForm() {
+    return showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            //위 패딩은 모달창의 터치 가능한 영역 내부 패딩
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+              color: Colors.white,
+            ),
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 30, width: 50, child: Divider(height: 1, color: kchacholGreyColor(), thickness: 4)),
+                  Text(" "),
+                  Row(),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 27,
+                            padding: EdgeInsets.only(right: 14),
+                            child: TextField(
+                              controller: _textController,
+                              maxLines: 2,
+                              style: textTheme().bodyText1,
+                              decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusColor: Colors.black),
+                              onSubmitted: _handleSubmitted,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          color: kpointMintColor(),
+                          width: 48,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "입력",
+                              style: textTheme().headline3,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _handleSubmitted(text) {
+    _textController.clear();
+
+    setState(() {
+      todoList.add(ToDo(
+        content: text,
+        time: DateFormat("a K:m").format(new DateTime.now()),
+        date: 08,
+        day: "Mon",
+        done: false,
+      ));
+    });
   }
 }

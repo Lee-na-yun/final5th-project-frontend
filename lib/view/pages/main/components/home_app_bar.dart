@@ -52,7 +52,7 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
                             Container(
                               width: double.infinity,
                               child: SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.525,
+                                height: MediaQuery.of(context).size.height / 2,
                                 //어거지로 리스트뷰 높이 맞춤...
                                 child: ListView.builder(
                                   shrinkWrap: true,
