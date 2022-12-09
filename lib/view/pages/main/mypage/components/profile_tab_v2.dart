@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/mypage.dart';
-import 'package:riverpod_firestore_steam1/models/todo.dart';
+import 'package:riverpod_firestore_steam1/models/test/mypage.dart';
+import 'package:riverpod_firestore_steam1/models/test/todo.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class ProfileTabV2 extends StatefulWidget {
@@ -52,7 +52,8 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: Text("${date.year}년 ${date.month}월", style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2),
+              child: Text("${date.year}년 ${date.month}월",
+                  style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2),
             ),
             Container(
               width: 30,

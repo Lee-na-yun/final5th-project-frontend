@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/follow.dart';
-import 'package:riverpod_firestore_steam1/models/users.dart';
+import 'package:riverpod_firestore_steam1/models/test/follow.dart';
+import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/notice_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/widgets/k_stack_icon.dart';
 
@@ -198,7 +198,9 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
                         TextSpan(
                           //text: 'Hello ',
                           children: <TextSpan>[
-                            TextSpan(text: '${userList[index].sender}', style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3),
+                            TextSpan(
+                                text: '${userList[index].sender}',
+                                style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3),
                             TextSpan(
                               text: '님이 회원님을 팔로우하기 시작했습니다.시작했습니다.시작했습니다.',
                               style: textTheme(color: kPrimaryColor()).headline3,

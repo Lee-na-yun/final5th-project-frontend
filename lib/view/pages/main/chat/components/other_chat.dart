@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/users.dart';
+import 'package:riverpod_firestore_steam1/models/test/users.dart';
 
 class OtherChat extends StatelessWidget {
   const OtherChat({Key? key, required this.time, required this.name, required this.text}) : super(key: key);

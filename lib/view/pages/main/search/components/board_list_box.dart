@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/board.dart';
+import 'package:riverpod_firestore_steam1/models/test/board.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/board_list_comment_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/components/slide_image.dart';
 

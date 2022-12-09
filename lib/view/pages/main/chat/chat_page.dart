@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_firestore_steam1/models/users.dart';
+import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/chat_list.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/chat_app_bar.dart';
 

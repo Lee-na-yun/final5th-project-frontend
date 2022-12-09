@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod_firestore_steam1/models/comment.dart';
+import 'package:riverpod_firestore_steam1/models/test/comment.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/components/board_app_bar_v2.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/components/comment_body.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/components/comment_head.dart';

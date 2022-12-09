@@ -6,7 +6,7 @@ import 'package:riverpod_firestore_steam1/view/pages/main/components/home_app_ba
 import 'package:riverpod_firestore_steam1/view/pages/main/home/home_page_top.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/update_password_page.dart';
 
-import '../../../../models/todo.dart';
+import '../../../../models/test/todo.dart';
 
 List<ToDo> globalToDoItems = List.of(ToDoList);
 

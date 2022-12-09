@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/todo.dart';
+import 'package:riverpod_firestore_steam1/models/test/todo.dart';
 
 class TestSlidealbe extends StatelessWidget {
   TestSlidealbe({Key? key}) : super(key: key);

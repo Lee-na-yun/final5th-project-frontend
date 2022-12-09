@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/follow.dart';
+import 'package:riverpod_firestore_steam1/models/test/follow.dart';
 
 class FollowBox extends StatelessWidget {
   const FollowBox({Key? key, required this.follow}) : super(key: key);

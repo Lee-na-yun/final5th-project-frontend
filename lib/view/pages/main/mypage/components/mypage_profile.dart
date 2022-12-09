@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/mypage.dart';
+import 'package:riverpod_firestore_steam1/models/test/mypage.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_follow_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_following_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_profile_page.dart';
