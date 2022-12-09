@@ -13,25 +13,23 @@ class LineAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Padding(
-        padding: const EdgeInsets.only(bottom: 2),
-        child: IconButton(
-          icon: Image.asset("assets/icon_arrow_back.png", width: 10),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          color: Color(0xff1C1C1C),
-        ),
+      leading: IconButton(
+        icon: Image.asset("assets/icon_arrow_back.png", width: 10),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        color: Color(0xff1C1C1C),
       ),
       titleSpacing: 0,
       title: Text(
         "${title}",
         style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
       ),
-      backgroundColor: Colors.white,
-      shape: Border(
-        bottom: BorderSide(width: 1, style: BorderStyle.solid, color: Color(0xfff2f2f2)),
-      ),
+      backgroundColor: Colors.transparent,
+      // shape: Border(
+      //   bottom: BorderSide(
+      //       width: 1, style: BorderStyle.solid, color: Color(0xfff2f2f2)),
+      // ),
       actions: [
         actionImg != null
             ? Row(
