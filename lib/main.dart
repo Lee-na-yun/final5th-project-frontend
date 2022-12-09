@@ -7,7 +7,8 @@ import 'package:riverpod_firestore_steam1/view/pages/main/login/join_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/login_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/main_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_main_page.dart';
-
+import 'package:riverpod_firestore_steam1/view/pages/schedule/write_schedule_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/test/stack_test_page.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'core/theme.dart';

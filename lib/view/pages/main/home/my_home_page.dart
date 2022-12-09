@@ -37,28 +37,36 @@ class _MyHomePageState extends State<MyHomePage> {
         Expanded(
           child: CustomScrollView(
             slivers: <Widget>[
-              const SliverAppBar(
-                automaticallyImplyLeading: false,
-                backgroundColor: Colors.white,
-                pinned: true,
-                expandedHeight: 380.0,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: HomePageTop(),
-                ),
-              ),
-              SliverFixedExtentList(
-                itemExtent: 50.0,
-                delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                  return Container(
-                    alignment: Alignment.center,
-                    child: _ToDoList(index),
-                  );
-                }, childCount: globalToDoItems.length),
-              ),
+              _buildHomeTop(),
+              _buildToDoLists(),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  SliverFixedExtentList _buildToDoLists() {
+    return SliverFixedExtentList(
+      itemExtent: 50.0,
+      delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+        return Container(
+          alignment: Alignment.center,
+          child: _ToDoList(index),
+        );
+      }, childCount: globalToDoItems.length),
+    );
+  }
+
+  SliverAppBar _buildHomeTop() {
+    return const SliverAppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: Colors.white,
+      pinned: true,
+      expandedHeight: 380.0,
+      flexibleSpace: FlexibleSpaceBar(
+        background: HomePageTop(),
+      ),
     );
   }
 
@@ -141,16 +149,16 @@ class _MyHomePageState extends State<MyHomePage> {
       endActionPane: ActionPane(
         extentRatio: 0.25,
         motion: const ScrollMotion(),
-        dismissible: DismissiblePane(onDismissed: () {
-          setState(() {
-            globalToDoItems.remove(globalToDoItems[index]);
-          });
-        }),
+        // dismissible: DismissiblePane(onDismissed: () {
+        //   setState(() {
+        //     globalToDoItems.remove(globalToDoItems[index]);
+        //   });
+        // }),
         children: [
           SlidableAction(
             onPressed: (context) {
               setState(() {
-                printSome(context, index);
+                _removeToDoItem(context, index);
               });
             },
             foregroundColor: primary,
@@ -204,7 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-void printSome(BuildContext context, int index) {
+void _removeToDoItem(BuildContext context, int index) {
   print("클릭됨");
   globalToDoItems.remove(globalToDoItems[index]);
 }
