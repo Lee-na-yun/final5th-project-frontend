@@ -31,6 +31,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  validators: ^3.0.0
+  http: ^0.13.5
+  http_parser: ^4.0.1
+  logger: ^1.1.0
+  flutter_secure_storage: ^7.0.0
+  shared_preferences: ^2.0.15
   flutter_riverpod: ^2.1.1
   firebase_core: ^2.3.0
   cloud_firestore: ^4.1.0

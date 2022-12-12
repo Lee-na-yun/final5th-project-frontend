@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+
 Color kPrimaryColor() {
   return Color(0xff1c1c1c);
 }
@@ -97,7 +98,6 @@ MaterialColor createMaterialColor(Color color) {
   });
   return MaterialColor(color.value, swatch);
 }
-
 Color kGreyColor() {
   return Color(0xff9999A3);
 }

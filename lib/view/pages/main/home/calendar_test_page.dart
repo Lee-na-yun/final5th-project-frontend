@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/event.dart';
+import 'package:riverpod_firestore_steam1/models/test/event.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/line_app_bar.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/calendar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/calendar_list_box.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/calendar_v2.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/day_schedule_widget.dart';
 
 class reservationScreen extends StatefulWidget {
   const reservationScreen({Key? key}) : super(key: key);
@@ -56,7 +53,8 @@ class _reservationScreenState extends State<reservationScreen> {
                       children: <Widget>[
                         Expanded(
                           child: Container(
-                            height: MediaQuery.of(context).size.height / 2 + bottomInset,
+                            height: MediaQuery.of(context).size.height / 2 +
+                                bottomInset,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(30),
@@ -68,7 +66,8 @@ class _reservationScreenState extends State<reservationScreen> {
                                   color: Colors.grey.withOpacity(0.1),
                                   spreadRadius: 0,
                                   blurRadius: 10.0,
-                                  offset: Offset(0, 0), // changes position of shadow
+                                  offset: Offset(
+                                      0, 0), // changes position of shadow
                                 ),
                               ],
                             ),
@@ -86,7 +85,8 @@ class _reservationScreenState extends State<reservationScreen> {
                                 ),
                                 Expanded(
                                   child: ListView.separated(
-                                    padding: EdgeInsets.only(left: 20, right: 20),
+                                    padding:
+                                        EdgeInsets.only(left: 20, right: 20),
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemCount: eventList.length,

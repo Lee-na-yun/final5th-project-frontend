@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/event.dart';
+import 'package:riverpod_firestore_steam1/models/test/event.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarV2 extends StatefulWidget {
@@ -41,15 +41,19 @@ class _CalendarV2State extends State<CalendarV2> {
             border: Border.all(color: kchacholGreyColor()),
             borderRadius: BorderRadius.circular(8),
           ),
-          formatButtonTextStyle: TextStyle(color: kchacholGreyColor(), fontSize: 14),
+          formatButtonTextStyle:
+              TextStyle(color: kchacholGreyColor(), fontSize: 14),
           titleCentered: true,
           titleTextStyle: GoogleFonts.notoSans(
             fontWeight: FontWeight.w800,
             fontSize: 20.0,
           ),
-          leftChevronIcon: Image.asset("assets/icon_calendar_prev.png", width: 28),
-          rightChevronIcon: Image.asset("assets/icon_calendar_next.png", width: 28),
-          headerMargin: EdgeInsets.only(top: 8, bottom: 14, left: 20, right: 20),
+          leftChevronIcon:
+              Image.asset("assets/icon_calendar_prev.png", width: 28),
+          rightChevronIcon:
+              Image.asset("assets/icon_calendar_next.png", width: 28),
+          headerMargin:
+              EdgeInsets.only(top: 8, bottom: 14, left: 20, right: 20),
         ),
         daysOfWeekStyle: DaysOfWeekStyle(
           weekdayStyle: GoogleFonts.notoSans(

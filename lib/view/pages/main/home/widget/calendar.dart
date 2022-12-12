@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/event.dart';
+import 'package:riverpod_firestore_steam1/models/test/event.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 CalendarFormat _calendarFormat = CalendarFormat.month;
 
@@ -52,15 +50,19 @@ class Calendar extends StatelessWidget {
             border: Border.all(color: kchacholGreyColor()),
             borderRadius: BorderRadius.circular(8),
           ),
-          formatButtonTextStyle: TextStyle(color: kchacholGreyColor(), fontSize: 12),
+          formatButtonTextStyle:
+              TextStyle(color: kchacholGreyColor(), fontSize: 12),
           titleCentered: true,
           titleTextStyle: GoogleFonts.notoSans(
             fontWeight: FontWeight.w800,
             fontSize: 20.0,
           ),
-          leftChevronIcon: Image.asset("assets/icon_calendar_prev.png", width: 28),
-          rightChevronIcon: Image.asset("assets/icon_calendar_next.png", width: 28),
-          headerMargin: EdgeInsets.only(top: 8, bottom: 12, left: 20, right: 20),
+          leftChevronIcon:
+              Image.asset("assets/icon_calendar_prev.png", width: 28),
+          rightChevronIcon:
+              Image.asset("assets/icon_calendar_next.png", width: 28),
+          headerMargin:
+              EdgeInsets.only(top: 8, bottom: 12, left: 20, right: 20),
         ),
         daysOfWeekStyle: DaysOfWeekStyle(
           weekdayStyle: GoogleFonts.notoSans(
@@ -135,7 +137,9 @@ class Calendar extends StatelessWidget {
           if (selectedDay == null) {
             return false;
           }
-          return date.year == selectedDay!.year && date.month == selectedDay!.month && date.day == selectedDay!.day;
+          return date.year == selectedDay!.year &&
+              date.month == selectedDay!.month &&
+              date.day == selectedDay!.day;
         },
         formatAnimationCurve: Curves.bounceIn,
         availableCalendarFormats: {

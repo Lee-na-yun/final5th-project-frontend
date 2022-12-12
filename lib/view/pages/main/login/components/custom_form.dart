@@ -3,9 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 
 class CustomForm extends StatelessWidget {
-  const CustomForm(this.text, this.hintText, {Key? key}) : super(key: key);
+  const CustomForm(this.text, this.hintText, {required this.controllerInput, required this.funValidator, Key? key})
+      : super(key: key);
   final String text;
+  final funValidator;
   final String hintText;
+  final controllerInput;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +21,8 @@ class CustomForm extends StatelessWidget {
         ),
         SizedBox(height: 2),
         TextFormField(
+          controller: controllerInput,
+          validator: funValidator,
           decoration: InputDecoration(
               hintText: "${hintText}",
               contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),

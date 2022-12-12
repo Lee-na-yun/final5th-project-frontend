@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/event.dart';
+import 'package:riverpod_firestore_steam1/models/test/event.dart';
 
 class CalendarListBox extends StatelessWidget {
-  CalendarListBox({Key? key, required this.event, required this.eventIndex}) : super(key: key);
+  CalendarListBox({Key? key, required this.event, required this.eventIndex})
+      : super(key: key);
   final Event event;
   final int eventIndex;
   final List<Event> fuckList = eventList;
@@ -16,7 +17,8 @@ class CalendarListBox extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(event.startTime, style: textTheme(color: kPrimaryColor()).headline3),
+          Text(event.startTime,
+              style: textTheme(color: kPrimaryColor()).headline3),
           SizedBox(width: 10),
           Expanded(
             child: Container(
@@ -88,7 +90,8 @@ class CalendarListBox extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(FontAwesomeIcons.locationDot, size: 10, color: kchacholGreyColor()),
+          Icon(FontAwesomeIcons.locationDot,
+              size: 10, color: kchacholGreyColor()),
           SizedBox(width: 4),
           Text(
             event.location,
@@ -156,7 +159,8 @@ class CalendarListBox extends StatelessWidget {
                   color: Color(0xffFFE681),
                   borderRadius: BorderRadius.circular(8),
                 ),
-      child: Text(event.category, style: textTheme(color: Colors.white).bodyText1),
+      child:
+          Text(event.category, style: textTheme(color: Colors.white).bodyText1),
     );
   }
 }

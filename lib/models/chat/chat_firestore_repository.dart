@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_firestore_steam1/domain/chat/chat.dart';
 import 'package:riverpod_firestore_steam1/dto/chat/chat_req_dto.dart';
+import 'package:riverpod_firestore_steam1/models/chat/chat.dart';
 
 final chatStreamProvider = StreamProvider.autoDispose<List<Chat>>((ref) {
   // .autoDispose 가 걸렸을 떄,
@@ -9,8 +9,11 @@ final chatStreamProvider = StreamProvider.autoDispose<List<Chat>>((ref) {
   // 외 다양한 것들이 있음
 
   //목적은 'stream' 을 리턴해주기 위함 이지만 , Stream 의 타입인 것을 chat 으로 파싱 해주기도 할거임
-  Stream<QuerySnapshot<Map<String, dynamic>>> stream = FirebaseFirestore.instance.collection("chat").snapshots();
-  return stream.map((snapshot) => snapshot.docs.map((doc) => Chat.fromJson(doc.data(), id: doc.id)).toList());
+  Stream<QuerySnapshot<Map<String, dynamic>>> stream =
+      FirebaseFirestore.instance.collection("chat").snapshots();
+  return stream.map((snapshot) => snapshot.docs
+      .map((doc) => Chat.fromJson(doc.data(), id: doc.id))
+      .toList());
 });
 
 final chatFireStoreRespositoryProvider = Provider((ref) {

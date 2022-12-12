@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_firestore_steam1/domain/chat/chat_firestore_repository.dart';
 import 'package:riverpod_firestore_steam1/dto/chat/chat_req_dto.dart';
+
+import '../models/chat/chat_firestore_repository.dart';
 
 final chatControllerProvider = Provider((ref) {
   return ChatController(ref);
@@ -21,7 +21,8 @@ class ChatController {
     // }
     // print("디버그 : ${doc.snapshots()}"); // <--- 이게 Document 의 데이터
     // print("디버그 : ${doc.id}");
-    Future<DocumentReference> doc = _ref.read(chatFireStoreRespositoryProvider).insert(dto);
+    Future<DocumentReference> doc =
+        _ref.read(chatFireStoreRespositoryProvider).insert(dto);
     doc
         .then(
           // 잘 됐을 때
