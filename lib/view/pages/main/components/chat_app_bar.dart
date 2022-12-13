@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:riverpod_firestore_steam1/core/theme.dart';
 
 class ChatAppBar extends AppBar implements PreferredSizeWidget {
   ChatAppBar({super.key});
@@ -13,31 +15,28 @@ class ChatAppBar extends AppBar implements PreferredSizeWidget {
   @override
   Widget? get title => Text(
         "채팅",
-        style: GoogleFonts.notoSans(
-          textStyle: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Color(0xff1C1C1C),
-          ),
-        ),
+        style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+            .headline2,
       );
 
   @override
   List<Widget>? get actions => [
         IconButton(
           onPressed: () {},
-          icon: Image.asset("assets/notice_black.png", width: 20, height: 20),
+          icon:
+              SvgPicture.asset("assets/icon_notice.svg", width: 20, height: 20),
           padding: EdgeInsets.zero,
-          constraints: BoxConstraints(),
+          constraints: const BoxConstraints(),
         ),
-        SizedBox(width: 14),
+        const SizedBox(width: 14),
         IconButton(
           onPressed: () {},
-          icon: Image.asset("assets/setting_black.png", width: 20, height: 20),
+          icon: SvgPicture.asset("assets/icon_setting.svg",
+              width: 20, height: 20),
           padding: EdgeInsets.zero,
-          constraints: BoxConstraints(),
+          constraints: const BoxConstraints(),
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
       ];
 
   @override

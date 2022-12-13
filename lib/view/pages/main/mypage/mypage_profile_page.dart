@@ -14,7 +14,7 @@ class MyPageProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(55),
-        child: LineAppBar("프로필 수정"),
+        child: LineAppBar("프로필 수정", null),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
@@ -31,16 +31,17 @@ class MyPageProfilePage extends StatelessWidget {
                       height: 80,
                       decoration: BoxDecoration(
                         color: klightGreyColor(),
-                        border: Border.all(width: 1, color: kchacholGreyColor()),
+                        border:
+                            Border.all(width: 1, color: kchacholGreyColor()),
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                       ),
                     ),
                     Positioned(
-                      bottom: 6,
-                      right: -6,
+                      bottom: 8,
+                      right: -8,
                       child: Container(
-                        width: 20,
-                        height: 20,
+                        width: 24,
+                        height: 24,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("assets/photo_plus_icon.png"),
@@ -60,7 +61,7 @@ class MyPageProfilePage extends StatelessWidget {
                 SizedBox(height: 24),
                 _buildColumnForm("자기소개", "자기소개를 입력해주세요"),
                 SizedBox(height: 32),
-                DefaultButton("확인", "/mypage")
+                DefaultButton(routes: "/mypage", btnText: "확인")
               ],
             ),
           ],
@@ -84,7 +85,9 @@ class MyPageProfilePage extends StatelessWidget {
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: kmidGreyColor()),
             ),
-            hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline3,
+            hintStyle:
+                textTheme(color: kmidGreyColor(), weight: FontWeight.bold)
+                    .headline3,
           ),
         ),
       ],

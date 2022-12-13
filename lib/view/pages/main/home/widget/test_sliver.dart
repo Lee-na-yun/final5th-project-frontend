@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/home/home_page_top.dart';
 
 class TestSliver extends StatelessWidget {
   const TestSliver({super.key});
@@ -24,54 +26,78 @@ class _RowList extends State<RowList> {
   Widget build(BuildContext context) {
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Press on the plus to add items above and below'),
-        leading: IconButton(
-          icon: const Icon(Icons.add),
-          onPressed: () {
-            setState(() {
-              top.add(-top.length - 1);
-              bottom.add(bottom.length);
-            });
-          },
-        ),
-      ),
-      body: CustomScrollView(
-        center: centerKey,
-        slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      color: Colors.blue[200 + top[index] % 4 * 100],
-                      height: 100 + top[index] % 4 * 20.0,
-                      child: Text('Item: ${top[index]}'),
-                    ),
-                  ],
-                );
-              },
-              childCount: top.length,
-            ),
+        appBar: AppBar(
+          title: const Text('Press on the plus to add items above and below'),
+          leading: IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              setState(() {
+                top.add(-top.length - 1);
+                bottom.add(bottom.length);
+              });
+            },
           ),
-          SliverList(
-            key: centerKey,
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      color: Colors.blue[200 + bottom[index] % 4 * 100],
-                      height: 100 + bottom[index] % 4 * 20.0,
-                      child: Text('Item: ${bottom[index]}'),
-                    ),
-                  ],
+        ),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            const SliverAppBar(
+              backgroundColor: Colors.white,
+              pinned: true,
+              expandedHeight: 360.0,
+              flexibleSpace: FlexibleSpaceBar(
+                titlePadding: EdgeInsets.only(left: 20),
+                title: Text(
+                  textAlign: TextAlign.left,
+                  'ToDo',
+                  style: TextStyle(fontSize: 16, color: Color(0xFF1c1c1c)),
+                ),
+                background: HomePageTop(),
+              ),
+            ),
+            SliverFixedExtentList(
+              itemExtent: 50.0,
+              delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+                return Container(
+                  alignment: Alignment.center,
+                  child: _TimelineList(),
                 );
-              },
-              childCount: bottom.length,
+              }, childCount: 10),
+            ),
+          ],
+        ));
+  }
+
+  Widget _TimelineList() {
+    return Container(
+      padding: EdgeInsets.only(left: 20, right: 20, bottom: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+              decoration: BoxDecoration(
+                color: klightGreyColor(),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 6,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                      color: kchacholGreyColor(),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "플러터 디자인 하기",
+                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).headline3,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

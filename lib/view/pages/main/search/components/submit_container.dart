@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/comment.dart';
+import 'package:riverpod_firestore_steam1/models/test/comment.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/components/comment_body.dart';
 
 class SubmitContainer extends StatefulWidget {
@@ -36,9 +37,10 @@ class _SubmitContainerState extends State<SubmitContainer> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          SizedBox(width: 10),
           IconButton(
             onPressed: () {},
-            icon: Image.asset("assets/chat_flus.png", width: 18, height: 18),
+            icon: SvgPicture.asset("assets/icon_bottom_plus.svg", width: 24),
           ),
           Expanded(
             child: Container(
@@ -72,13 +74,16 @@ class _SubmitContainerState extends State<SubmitContainer> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _handleSubmitted(context);
+                },
                 style: ElevatedButton.styleFrom(
                   elevation: 0.0,
                 ),
                 child: Text(
                   "전송",
-                  style: textTheme(color: Colors.white, weight: FontWeight.w600).headline3,
+                  style: textTheme(color: Colors.white, weight: FontWeight.w600)
+                      .headline3,
                 ),
               ),
             ),
@@ -91,7 +96,13 @@ class _SubmitContainerState extends State<SubmitContainer> {
   void _handleSubmitted(text) {
     _textController.clear();
     setState(() {
-      cb.add(CommentBody(comments: Comments(userImg: "assets/woman1.png", friendName: "friendName", comment: "comment")));
+      cb.add(
+        CommentBody(
+          text: text,
+          comments: Comments(
+              userImg: "assets/woman1.png", friendName: "", comment: ""),
+        ),
+      );
     });
   }
 }

@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/todo.dart';
+import 'package:riverpod_firestore_steam1/models/test/mypage.dart';
+import 'package:riverpod_firestore_steam1/models/test/todo.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class ProfileTabV2 extends StatefulWidget {
@@ -14,9 +16,25 @@ class ProfileTabV2 extends StatefulWidget {
   State<ProfileTabV2> createState() => _ProfileTabState();
 }
 
-class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStateMixin {
+class _ProfileTabState extends State<ProfileTabV2>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
   DateTime date = DateTime(2022, 12);
+
+  final myImages = [
+    "assets/man1.png",
+    "assets/man2.png",
+    "assets/woman1.png",
+    "assets/pig.png",
+    "assets/dog.png",
+    "assets/aliens.png",
+    "assets/man1.png",
+    "assets/man2.png",
+    "assets/woman1.png",
+    "assets/pig.png",
+    "assets/dog.png",
+    "assets/aliens.png",
+  ];
 
   var today;
 
@@ -36,7 +54,10 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: Text("${date.year}년 ${date.month}월", style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2),
+              child: Text("${date.year}년 ${date.month}월",
+                  style:
+                      textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+                          .headline2),
             ),
             Container(
               width: 30,
@@ -60,9 +81,10 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
                     date = newDate;
                   });
                 },
-                child: Image.asset("assets/arrow_bottom_black.png"),
+                child:
+                    SvgPicture.asset("assets/icon_arrow_bottom.svg", width: 16),
               ),
-            )
+            ),
           ],
         ),
         SizedBox(height: 10),
@@ -102,16 +124,18 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
         Padding(
           padding: const EdgeInsets.only(top: 0, left: 20, right: 20),
           child: GridView.builder(
+            physics: BouncingScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               crossAxisSpacing: 4,
               mainAxisSpacing: 4,
             ),
+            itemCount: myImages.length,
             itemBuilder: (context, index) {
               return ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
-                  "assets/woman1.png",
+                  "${myImages[index]}",
                   width: 104,
                   height: 104,
                   fit: BoxFit.cover,
@@ -152,7 +176,9 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
               children: [
                 Text(
                   "02",
-                  style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
+                  style:
+                      textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+                          .headline2,
                 ),
                 Text(
                   "월요일",
@@ -181,7 +207,9 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
                   SizedBox(width: 10),
                   Text(
                     "플러터 디자인 하기",
-                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).bodyText1,
+                    style: textTheme(
+                            color: kPrimaryColor(), weight: FontWeight.w500)
+                        .bodyText1,
                   ),
                 ],
               ),

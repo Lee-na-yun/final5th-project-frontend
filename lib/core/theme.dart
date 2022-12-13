@@ -32,12 +32,13 @@ Color kpointMintColor() {
 
 TextTheme textTheme({Color? color, FontWeight? weight}) {
   return TextTheme(
-    headline1: GoogleFonts.notoSans(fontSize: 18.0, color: color, fontWeight: weight),
-    headline2: GoogleFonts.notoSans(fontSize: 16.0, color: color, fontWeight: weight, letterSpacing: -0.05),
-    headline3: GoogleFonts.notoSans(fontSize: 14.0, color: color, fontWeight: weight, height: 1.6),
-    bodyText1: GoogleFonts.notoSans(fontSize: 12.0, color: color, fontWeight: weight, height: 1.4),
-    bodyText2: GoogleFonts.notoSans(fontSize: 10.0, color: color, fontWeight: weight),
+    headline1: GoogleFonts.notoSans(fontSize: 20.0, color: color, fontWeight: weight),
+    headline2: GoogleFonts.notoSans(fontSize: 18.0, color: color, fontWeight: weight, letterSpacing: -0.05, height: 1.2),
+    headline3: GoogleFonts.notoSans(fontSize: 16.0, color: color, fontWeight: weight, height: 1.2),
+    bodyText1: GoogleFonts.notoSans(fontSize: 14.0, color: color, fontWeight: weight, height: 1.2),
+    bodyText2: GoogleFonts.notoSans(fontSize: 12.0, color: color, fontWeight: weight, height: 1.4),
     subtitle1: GoogleFonts.notoSans(fontSize: 15.0, color: color, fontWeight: weight),
+    caption: GoogleFonts.notoSans(fontSize: 10.0, color: color, fontWeight: weight, height: 1.4),
   );
 }
 

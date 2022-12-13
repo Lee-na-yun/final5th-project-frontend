@@ -14,7 +14,7 @@ class NoticePage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(55),
-        child: LineAppBar("알림"),
+        child: LineAppBar("알림", null),
       ),
       body: _buildNoticeList(),
     );
@@ -48,7 +48,8 @@ class NoticePage extends StatelessWidget {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(image: AssetImage("${friendImg}"), fit: BoxFit.cover),
+                    image: DecorationImage(
+                        image: AssetImage("${friendImg}"), fit: BoxFit.cover),
                   ),
                 ),
                 SizedBox(width: 10),
@@ -64,18 +65,28 @@ class NoticePage extends StatelessWidget {
                         TextSpan(
                           //text: 'Hello ',
                           children: <TextSpan>[
-                            TextSpan(text: '${friendName}', style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3),
+                            TextSpan(
+                                text: '${friendName}',
+                                style: textTheme(
+                                        color: kPrimaryColor(),
+                                        weight: FontWeight.bold)
+                                    .headline3),
                             TextSpan(
                               text: '님이 내 게시물에',
-                              style: textTheme(color: kPrimaryColor()).headline3,
+                              style:
+                                  textTheme(color: kPrimaryColor()).headline3,
                             ),
                             TextSpan(
                               text: '댓글',
-                              style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                              style: textTheme(
+                                      color: kPrimaryColor(),
+                                      weight: FontWeight.bold)
+                                  .headline3,
                             ),
                             TextSpan(
                               text: '을 남겼습니다.',
-                              style: textTheme(color: kPrimaryColor()).headline3,
+                              style:
+                                  textTheme(color: kPrimaryColor()).headline3,
                             ),
                           ],
                         ),
@@ -114,7 +125,8 @@ class NoticePage extends StatelessWidget {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(image: AssetImage("${friendImg}"), fit: BoxFit.cover),
+                    image: DecorationImage(
+                        image: AssetImage("${friendImg}"), fit: BoxFit.cover),
                   ),
                 ),
                 SizedBox(width: 10),
@@ -130,18 +142,28 @@ class NoticePage extends StatelessWidget {
                         TextSpan(
                           //text: 'Hello ',
                           children: <TextSpan>[
-                            TextSpan(text: '${friendName}', style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3),
+                            TextSpan(
+                                text: '${friendName}',
+                                style: textTheme(
+                                        color: kPrimaryColor(),
+                                        weight: FontWeight.bold)
+                                    .headline3),
                             TextSpan(
                               text: '님이',
-                              style: textTheme(color: kPrimaryColor()).headline3,
+                              style:
+                                  textTheme(color: kPrimaryColor()).headline3,
                             ),
                             TextSpan(
                               text: '${friendTodo}',
-                              style: textTheme(color: kPrimaryColor()).headline3,
+                              style:
+                                  textTheme(color: kPrimaryColor()).headline3,
                             ),
                             TextSpan(
                               text: ' 할 일을 완수했습니다.',
-                              style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                              style: textTheme(
+                                      color: kPrimaryColor(),
+                                      weight: FontWeight.bold)
+                                  .headline3,
                             ),
                           ],
                         ),
@@ -195,7 +217,8 @@ class NoticePage extends StatelessWidget {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(image: AssetImage("${friendImg}"), fit: BoxFit.cover),
+                    image: DecorationImage(
+                        image: AssetImage("${friendImg}"), fit: BoxFit.cover),
                   ),
                 ),
                 SizedBox(width: 10),
@@ -211,10 +234,16 @@ class NoticePage extends StatelessWidget {
                         TextSpan(
                           //text: 'Hello ',
                           children: <TextSpan>[
-                            TextSpan(text: '${friendName}', style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3),
+                            TextSpan(
+                                text: '${friendName}',
+                                style: textTheme(
+                                        color: kPrimaryColor(),
+                                        weight: FontWeight.bold)
+                                    .headline3),
                             TextSpan(
                               text: '님이 회원님을 팔로우하기 시작했습니다.시작했습니다.시작했습니다.',
-                              style: textTheme(color: kPrimaryColor()).headline3,
+                              style:
+                                  textTheme(color: kPrimaryColor()).headline3,
                             ),
                           ],
                         ),
@@ -244,7 +273,7 @@ class NoticePage extends StatelessWidget {
             ? ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 14),
+                  padding: EdgeInsets.only(left: 14, right: 14, bottom: 3),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(6)),
                   ),
@@ -259,7 +288,7 @@ class NoticePage extends StatelessWidget {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   primary: kchacholGreyColor(),
-                  padding: EdgeInsets.symmetric(horizontal: 14),
+                  padding: EdgeInsets.only(left: 14, right: 14, bottom: 3),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(6)),
                   ),

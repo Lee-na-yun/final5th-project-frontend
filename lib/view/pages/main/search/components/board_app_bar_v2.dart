@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 
 class BoardAppBarV2 extends AppBar implements PreferredSizeWidget {
@@ -24,10 +25,10 @@ class BoardAppBarV2 extends AppBar implements PreferredSizeWidget {
           Navigator.pop(context);
         },
         child: Padding(
-          padding: const EdgeInsets.only(left: 12),
+          padding: const EdgeInsets.only(left: 20),
           child: Row(
             children: [
-              Icon(Icons.arrow_back_ios_new, color: kPrimaryColor()),
+              SvgPicture.asset("assets/icon_arrow_back.svg", width: 10),
             ],
           ),
         ),
@@ -36,21 +37,24 @@ class BoardAppBarV2 extends AppBar implements PreferredSizeWidget {
   @override
   Widget? get title => Text(
         "${titlename}",
-        style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
+        style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+            .headline2,
       );
 
   @override
   List<Widget>? get actions => [
         IconButton(
           onPressed: () {},
-          icon: Image.asset("assets/notice_black.png", width: 20, height: 20),
+          icon:
+              SvgPicture.asset("assets/icon_notice.svg", width: 20, height: 20),
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(),
         ),
         const SizedBox(width: 14),
         IconButton(
           onPressed: () {},
-          icon: Image.asset("assets/setting_black.png", width: 20, height: 20),
+          icon: SvgPicture.asset("assets/icon_setting.svg",
+              width: 20, height: 20),
           padding: EdgeInsets.zero,
           constraints: const BoxConstraints(),
         ),
@@ -63,7 +67,8 @@ class BoardAppBarV2 extends AppBar implements PreferredSizeWidget {
   //     );
 
   @override
-  ShapeBorder? get shape => Border(bottom: BorderSide(width: 1, color: klightGreyColor()));
+  ShapeBorder? get shape =>
+      Border(bottom: BorderSide(width: 1, color: klightGreyColor()));
 
   @override
   //final Size preferredSize; // This didnot work for me.

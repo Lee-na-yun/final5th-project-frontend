@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/users.dart';
+import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/chat_line_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/chat_list.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/my_chat.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/other_chat.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/components/line_app_bar.dart';
 
 class ChatRoomPage extends StatefulWidget {
   const ChatRoomPage({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(55),
-        child: ChatLineAppBar("상대방이름"),
+        child: LineAppBar("상대방이름", null),
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.white),
@@ -37,7 +39,10 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                     padding: const EdgeInsets.symmetric(vertical: 2),
                     child: Column(
                       children: [
-                        OtherChat(time: "오전 10:25", name: "홍길동", text: "야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ이것봐바!"),
+                        OtherChat(
+                            time: "오전 10:25",
+                            name: "홍길동",
+                            text: "야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ이것봐바!"),
                         SizedBox(height: 6),
                         MyChat(text: "오 나 필요한건데 ㄳㄳ", time: "오후 17:38"),
                         ...List.generate(chats.length, (index) => chats[index]),
@@ -56,6 +61,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
 
   Container _buildSubmitContainer() {
     return Container(
+      //padding: EdgeInsets.symmetric(horizontal: 20),
       height: 70,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -69,9 +75,11 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          SizedBox(width: 10),
           IconButton(
             onPressed: () {},
-            icon: Image.asset("assets/chat_flus.png", width: 18, height: 18),
+            icon: SvgPicture.asset("assets/icon_bottom_plus.svg", width: 24),
+            padding: EdgeInsets.zero,
           ),
           Expanded(
             child: Container(
@@ -105,13 +113,18 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _handleSubmitted;
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   elevation: 0.0,
                 ),
                 child: Text(
                   "전송",
-                  style: textTheme(color: Colors.white, weight: FontWeight.w600).headline3,
+                  style: textTheme(color: Colors.white, weight: FontWeight.w600)
+                      .headline3,
                 ),
               ),
             ),
@@ -128,7 +141,10 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       chats.add(
         MyChat(
           text: text,
-          time: DateFormat("a K:m").format(new DateTime.now()).replaceAll("AM", "오전").replaceAll("PM", "오후"),
+          time: DateFormat("a K:m")
+              .format(new DateTime.now())
+              .replaceAll("AM", "오전")
+              .replaceAll("PM", "오후"),
         ),
       );
     });

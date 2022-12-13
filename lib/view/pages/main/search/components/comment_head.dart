@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/board.dart';
-import 'package:riverpod_firestore_steam1/models/comment.dart';
+import 'package:riverpod_firestore_steam1/models/test/board.dart';
+import 'package:riverpod_firestore_steam1/models/test/comment.dart';
 
 class CommentHead extends StatelessWidget {
   const CommentHead({Key? key}) : super(key: key);
