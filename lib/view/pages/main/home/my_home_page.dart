@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/home_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/home_page_top.dart';
@@ -60,12 +61,30 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   SliverAppBar _buildHomeTop() {
-    return const SliverAppBar(
+    return SliverAppBar(
+      stretch: false,
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
-      pinned: true,
-      expandedHeight: 450.0,
+      pinned: false,
+      expandedHeight: 440.0,
       flexibleSpace: FlexibleSpaceBar(
+        expandedTitleScale: 1,
+        titlePadding: EdgeInsets.only(left: 20),
+        title: Container(
+          alignment: Alignment.centerLeft,
+          width: double.infinity,
+          height: 60,
+          decoration: BoxDecoration(color: Colors.white),
+          child: Text(
+            "오늘 할 일",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.notoSans(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              fontSize: 20,
+            ),
+          ),
+        ),
         background: HomePageTop(),
       ),
     );

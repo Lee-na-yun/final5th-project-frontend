@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        initialRoute: Routers.loginForm,
+        initialRoute: Routers.home,
         routes: getRouters(),
         title: "TODOFRIENDS",
       ),

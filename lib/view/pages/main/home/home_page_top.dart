@@ -48,11 +48,6 @@ class HomePageTop extends StatelessWidget {
             ],
           ),
         ),
-        Container(
-          padding: EdgeInsets.only(top: 40, left: 20, bottom: 16),
-          alignment: Alignment.centerLeft,
-          child: Text("오늘 할 일", style: textTheme(weight: FontWeight.bold).headline1),
-        ),
       ],
     );
   }
