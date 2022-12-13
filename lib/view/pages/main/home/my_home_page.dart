@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/home_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/home_page_top.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/update_password_page.dart';
@@ -14,6 +15,7 @@ List<ToDo> globalToDoItems = List.of(ToDoList);
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
+  final List<User> userList = List.of(users);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -21,10 +23,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool? _isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar("Zne.vil", context: context),
+      appBar: HomeAppBar("홍길동", context: context),
       body: _homeBody(),
       endDrawer: _drawer(context),
       endDrawerEnableOpenDragGesture: false,

@@ -113,7 +113,6 @@ class JoinPage extends ConsumerWidget {
                       borderSide: BorderSide(
                         color: kmidGreyColor(),
                       ),
-
                     ),
                     hintStyle: textTheme(
                             color: kmidGreyColor(), weight: FontWeight.bold)
@@ -132,7 +131,6 @@ class JoinPage extends ConsumerWidget {
                   style: ElevatedButton.styleFrom(
                       textStyle: TextStyle(color: Colors.white),
                       padding: EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 17),
-
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
