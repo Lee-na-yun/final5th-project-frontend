@@ -53,8 +53,7 @@ class _reservationScreenState extends State<reservationScreen> {
                       children: <Widget>[
                         Expanded(
                           child: Container(
-                            height: MediaQuery.of(context).size.height / 2 +
-                                bottomInset,
+                            height: MediaQuery.of(context).size.height / 2 + bottomInset,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(30),
@@ -66,8 +65,7 @@ class _reservationScreenState extends State<reservationScreen> {
                                   color: Colors.grey.withOpacity(0.1),
                                   spreadRadius: 0,
                                   blurRadius: 10.0,
-                                  offset: Offset(
-                                      0, 0), // changes position of shadow
+                                  offset: Offset(0, 0), // changes position of shadow
                                 ),
                               ],
                             ),
@@ -85,8 +83,8 @@ class _reservationScreenState extends State<reservationScreen> {
                                 ),
                                 Expanded(
                                   child: ListView.separated(
-                                    padding:
-                                        EdgeInsets.only(left: 20, right: 20),
+                                    physics: BouncingScrollPhysics(),
+                                    padding: EdgeInsets.only(left: 20, right: 20),
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemCount: eventList.length,

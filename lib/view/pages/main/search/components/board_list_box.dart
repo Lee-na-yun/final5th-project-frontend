@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/models/test/board.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/board_list_comment_page.dart';
@@ -46,7 +47,9 @@ class BoardListBox extends StatelessWidget {
         margin: EdgeInsets.all(3),
         width: 10,
         height: 10,
-        decoration: BoxDecoration(color: currentIndex == index ? Colors.black : Colors.black26, shape: BoxShape.circle),
+        decoration: BoxDecoration(
+            color: currentIndex == index ? Colors.black : Colors.black26,
+            shape: BoxShape.circle),
       );
     });
   }
@@ -55,19 +58,21 @@ class BoardListBox extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: 30,
-          height: 30,
+          width: 32,
+          height: 32,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(
               Radius.circular(8),
             ),
-            image: DecorationImage(image: AssetImage(board.userImg), fit: BoxFit.cover),
+            image: DecorationImage(
+                image: AssetImage(board.userImg), fit: BoxFit.cover),
           ),
         ),
         SizedBox(width: 10),
         Text(
           board.name,
-          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+              .headline2,
         ),
       ],
     );
@@ -79,12 +84,14 @@ class BoardListBox extends StatelessWidget {
       children: [
         Text(
           board.title,
-          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).bodyText1,
+          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+              .headline3,
         ),
         SizedBox(height: 4),
         Text(
           board.content,
-          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w200).bodyText1,
+          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w200)
+              .bodyText1,
         )
       ],
     );
@@ -108,19 +115,20 @@ class BoardListBox extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 16, top: 8),
+            padding: const EdgeInsets.only(left: 16, top: 6),
             child: Container(
-              width: 15,
-              height: 15,
+              width: 16,
+              height: 16,
               child: IconButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BoardListCommentPage()),
+                    MaterialPageRoute(
+                        builder: (context) => BoardListCommentPage()),
                   );
                 },
                 padding: EdgeInsets.zero,
-                icon: Image.asset("assets/icon_comment.png"),
+                icon: SvgPicture.asset("assets/icon_comment.svg", width: 16),
               ),
             ),
           ),

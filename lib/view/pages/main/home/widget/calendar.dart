@@ -50,19 +50,15 @@ class Calendar extends StatelessWidget {
             border: Border.all(color: kchacholGreyColor()),
             borderRadius: BorderRadius.circular(8),
           ),
-          formatButtonTextStyle:
-              TextStyle(color: kchacholGreyColor(), fontSize: 12),
+          formatButtonTextStyle: TextStyle(color: kchacholGreyColor(), fontSize: 12),
           titleCentered: true,
           titleTextStyle: GoogleFonts.notoSans(
             fontWeight: FontWeight.w800,
             fontSize: 20.0,
           ),
-          leftChevronIcon:
-              Image.asset("assets/icon_calendar_prev.png", width: 28),
-          rightChevronIcon:
-              Image.asset("assets/icon_calendar_next.png", width: 28),
-          headerMargin:
-              EdgeInsets.only(top: 8, bottom: 12, left: 20, right: 20),
+          leftChevronIcon: Image.asset("assets/icon_calendar_prev.png", width: 28),
+          rightChevronIcon: Image.asset("assets/icon_calendar_next.png", width: 28),
+          headerMargin: EdgeInsets.only(top: 8, bottom: 12, left: 20, right: 20),
         ),
         daysOfWeekStyle: DaysOfWeekStyle(
           weekdayStyle: GoogleFonts.notoSans(
@@ -137,9 +133,7 @@ class Calendar extends StatelessWidget {
           if (selectedDay == null) {
             return false;
           }
-          return date.year == selectedDay!.year &&
-              date.month == selectedDay!.month &&
-              date.day == selectedDay!.day;
+          return date.year == selectedDay!.year && date.month == selectedDay!.month && date.day == selectedDay!.day;
         },
         formatAnimationCurve: Curves.bounceIn,
         availableCalendarFormats: {

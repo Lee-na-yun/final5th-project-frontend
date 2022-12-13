@@ -31,16 +31,17 @@ class MyPageProfilePage extends StatelessWidget {
                       height: 80,
                       decoration: BoxDecoration(
                         color: klightGreyColor(),
-                        border: Border.all(width: 1, color: kchacholGreyColor()),
+                        border:
+                            Border.all(width: 1, color: kchacholGreyColor()),
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                       ),
                     ),
                     Positioned(
-                      bottom: 6,
-                      right: -6,
+                      bottom: 8,
+                      right: -8,
                       child: Container(
-                        width: 20,
-                        height: 20,
+                        width: 24,
+                        height: 24,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("assets/photo_plus_icon.png"),
@@ -84,7 +85,9 @@ class MyPageProfilePage extends StatelessWidget {
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: kmidGreyColor()),
             ),
-            hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline3,
+            hintStyle:
+                textTheme(color: kmidGreyColor(), weight: FontWeight.bold)
+                    .headline3,
           ),
         ),
       ],

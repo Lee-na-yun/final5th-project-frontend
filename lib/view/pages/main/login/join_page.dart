@@ -87,7 +87,8 @@ class JoinPage extends ConsumerWidget {
       children: [
         Text(
           "이메일",
-          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700).bodyText1,
+          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700)
+              .bodyText1,
         ),
         SizedBox(height: 2),
         Row(
@@ -104,15 +105,21 @@ class JoinPage extends ConsumerWidget {
                   validator: emailValidate,
                   decoration: InputDecoration(
                     hintText: "이메일을 입력해주세요",
-                    contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
+                    contentPadding:
+                        EdgeInsets.only(top: 12, bottom: 12, left: 10),
                     isDense: true,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Color(0xffe2e2e2),
                       ),
                       borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: kmidGreyColor(),
+                      ),
                     ),
-                    hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2,
+                    hintStyle: textTheme(
+                            color: kmidGreyColor(), weight: FontWeight.bold)
+                        .headline2,
                   ),
                 ),
               ),
@@ -121,12 +128,13 @@ class JoinPage extends ConsumerWidget {
               flex: 3,
               child: Container(
                 //color: Colors.green,
-                padding: EdgeInsets.only(left: 6),
+                padding: EdgeInsets.only(left: 6, top: 1),
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                       textStyle: TextStyle(color: Colors.white),
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 14, bottom: 14),
+                      padding: EdgeInsets.only(
+                          left: 20, right: 20, top: 16, bottom: 17),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -179,14 +187,17 @@ class JoinPage extends ConsumerWidget {
           },
           decoration: InputDecoration(
             hintText: "비밀번호를 입력해주세요",
-            contentPadding: const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
-            border: OutlineInputBorder(
+            contentPadding:
+                const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
+            enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
-                color: Color.fromRGBO(233, 233, 233, 100),
+                color: kmidGreyColor(),
               ),
             ),
-            hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2,
+            hintStyle:
+                textTheme(color: kmidGreyColor(), weight: FontWeight.bold)
+                    .headline2,
           ),
           obscureText: true,
         )

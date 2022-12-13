@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyPageAppBar extends AppBar implements PreferredSizeWidget {
@@ -26,14 +27,16 @@ class MyPageAppBar extends AppBar implements PreferredSizeWidget {
   List<Widget>? get actions => [
         IconButton(
           onPressed: () {},
-          icon: Image.asset("assets/notice.png", width: 20, height: 20),
+          icon: SvgPicture.asset("assets/icon_notice_w.svg",
+              width: 20, height: 20),
           padding: EdgeInsets.zero,
           constraints: BoxConstraints(),
         ),
         SizedBox(width: 14),
         IconButton(
           onPressed: () {},
-          icon: Image.asset("assets/setting.png", width: 20, height: 20),
+          icon: SvgPicture.asset("assets/icon_setting.svg",
+              width: 20, height: 20),
           padding: EdgeInsets.zero,
           constraints: BoxConstraints(),
         ),

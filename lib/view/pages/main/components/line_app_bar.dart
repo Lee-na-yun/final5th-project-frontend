@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 
 class LineAppBar extends StatelessWidget {
@@ -14,7 +15,7 @@ class LineAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Image.asset("assets/icon_arrow_back.png", width: 10),
+        icon: SvgPicture.asset("assets/icon_arrow_back.svg", width: 10),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -23,7 +24,7 @@ class LineAppBar extends StatelessWidget {
       titleSpacing: 0,
       title: Text(
         "${title}",
-        style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
+        style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline1,
       ),
       backgroundColor: Colors.transparent,
       // shape: Border(
@@ -36,14 +37,18 @@ class LineAppBar extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {},
-                    icon: Image.asset("assets/icon_search.png", width: 18),
+                    icon: SvgPicture.asset("assets/icon_search.svg", width: 18),
                     padding: EdgeInsets.zero,
                     constraints: BoxConstraints(),
                   ),
                   SizedBox(width: 14),
                   IconButton(
                     onPressed: () {},
-                    icon: Image.asset("assets/icon_menu.png", width: 20),
+                    icon: SvgPicture.asset(
+                      "assets/icon_menu.svg",
+                      width: 20,
+                      color: kPrimaryColor(),
+                    ),
                     padding: EdgeInsets.zero,
                     constraints: BoxConstraints(),
                   ),

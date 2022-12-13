@@ -17,24 +17,25 @@ class CustomForm extends StatelessWidget {
       children: [
         Text(
           "${text}",
-          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700).bodyText1,
+          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700)
+              .bodyText1,
         ),
-        SizedBox(height: 2),
+        SizedBox(height: 4),
         TextFormField(
           controller: controllerInput,
           validator: funValidator,
           decoration: InputDecoration(
-              hintText: "${hintText}",
-              contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
-              border: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
-                  color: Color.fromRGBO(233, 233, 233, 100),
+                  color: kmidGreyColor(),
                 ),
               ),
+              hintText: "${hintText}",
+              contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 14),
               hintStyle: GoogleFonts.notoSans(
                 color: Color(0xffe2e2e2),
-                textStyle: textTheme().headline2,
+                textStyle: textTheme(weight: FontWeight.bold).headline3,
               )),
         ),
       ],

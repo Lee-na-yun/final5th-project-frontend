@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/models/test/mypage.dart';
@@ -15,7 +16,8 @@ class ProfileTabV2 extends StatefulWidget {
   State<ProfileTabV2> createState() => _ProfileTabState();
 }
 
-class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStateMixin {
+class _ProfileTabState extends State<ProfileTabV2>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
   DateTime date = DateTime(2022, 12);
 
@@ -53,7 +55,9 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
           children: [
             Center(
               child: Text("${date.year}년 ${date.month}월",
-                  style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2),
+                  style:
+                      textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+                          .headline2),
             ),
             Container(
               width: 30,
@@ -77,9 +81,10 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
                     date = newDate;
                   });
                 },
-                child: Image.asset("assets/arrow_bottom_black.png"),
+                child:
+                    SvgPicture.asset("assets/icon_arrow_bottom.svg", width: 16),
               ),
-            )
+            ),
           ],
         ),
         SizedBox(height: 10),
@@ -171,7 +176,9 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
               children: [
                 Text(
                   "02",
-                  style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
+                  style:
+                      textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+                          .headline2,
                 ),
                 Text(
                   "월요일",
@@ -200,7 +207,9 @@ class _ProfileTabState extends State<ProfileTabV2> with SingleTickerProviderStat
                   SizedBox(width: 10),
                   Text(
                     "플러터 디자인 하기",
-                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).bodyText1,
+                    style: textTheme(
+                            color: kPrimaryColor(), weight: FontWeight.w500)
+                        .bodyText1,
                   ),
                 ],
               ),

@@ -44,12 +44,17 @@ class UpdatePasswordPage extends StatelessWidget {
         TextFormField(
           decoration: InputDecoration(
               hintText: "비밀번호를 입력해주세요",
-              contentPadding: const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
-              border: OutlineInputBorder(
+              contentPadding:
+                  const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: kmidGreyColor(), width: 1.0),
+                borderSide: BorderSide(
+                  color: kmidGreyColor(),
+                ),
               ),
-              hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2),
+              hintStyle:
+                  textTheme(color: kmidGreyColor(), weight: FontWeight.bold)
+                      .headline3),
           obscureText: true,
         )
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 
@@ -50,23 +51,40 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
   }
 
   Widget _buildSetTime() {
-    String startT = DateFormat("a K:m").format(startTime).replaceAll("AM", "오전").replaceAll("PM", "오후");
-    String endT = DateFormat("a K:m").format(endTime).replaceAll("AM", "오전").replaceAll("PM", "오후");
+    String startT = DateFormat("a K:m")
+        .format(startTime)
+        .replaceAll("AM", "오전")
+        .replaceAll("PM", "오후");
+    String endT = DateFormat("a K:m")
+        .format(endTime)
+        .replaceAll("AM", "오전")
+        .replaceAll("PM", "오후");
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 10, left: 4),
       child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(border: Border(bottom: BorderSide(color: kchacholGreyColor()))),
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.zero,
+        margin: EdgeInsets.zero,
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: klightGreyColor(),
+            ),
+          ),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(flex: 1, child: const Icon(CupertinoIcons.time, color: Color(0xff9999A3))),
-            Flexible(
-              flex: 3,
+            SvgPicture.asset(
+              "assets/icon_time.svg",
+              width: 12,
+            ),
+            Expanded(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CupertinoButton(
+                    minSize: 0.0,
                     // Display a CupertinoDatePicker in time picker mode.
                     onPressed: () => _showDialog(
                       CupertinoDatePicker(
@@ -81,10 +99,19 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
                     ),
                     // In this example, the time value is formatted manually. You can use intl package to
                     // format the value based on the user's locale settings.
-                    child: Text(DateFormat("a K:m").format(startTime).replaceAll("AM", "오전").replaceAll("PM", "오후"),
-                        style: textTheme().headline2),
+                    child: Text(
+                        DateFormat("a K:m")
+                            .format(startTime)
+                            .replaceAll("AM", "오전")
+                            .replaceAll("PM", "오후"),
+                        style: textTheme(
+                                color: kPrimaryColor(), weight: FontWeight.w500)
+                            .headline3),
                   ),
-                  Text("~", style: textTheme(color: kchacholGreyColor()).headline1),
+                  Text("~",
+                      style: textTheme(
+                              color: kPrimaryColor(), weight: FontWeight.w500)
+                          .headline3),
                   CupertinoButton(
                     // Display a CupertinoDatePicker in time picker mode.
                     onPressed: () => _showDialog(
@@ -120,20 +147,25 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
     String startD = DateFormat.yMMMd().format(startDate);
     String endD = DateFormat.yMMMd().format(endDate);
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 12, left: 4),
       child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(border: Border(bottom: BorderSide(color: kchacholGreyColor()))),
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: klightGreyColor()))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Flexible(flex: 1, child: const Icon(CupertinoIcons.calendar, color: Color(0xff9999A3))),
-            Flexible(
-              flex: 4,
+            SvgPicture.asset(
+              "assets/icon_calendar.svg",
+              width: 12,
+            ),
+            Expanded(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                 children: [
                   CupertinoButton(
+                    minSize: 0.0,
                     // Display a CupertinoDatePicker in date picker mode.
                     onPressed: () => _showDialog(
                       CupertinoDatePicker(
@@ -148,9 +180,15 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
                     ),
                     // In this example, the date value is formatted manually. You can use intl package
                     // to format the value based on user's locale settings.
-                    child: Text(DateFormat.yMMMd().format(startDate), style: textTheme().headline2),
+                    child: Text(DateFormat.yMMMd().format(startDate),
+                        style: textTheme(
+                                color: kPrimaryColor(), weight: FontWeight.w500)
+                            .headline3),
                   ),
-                  Text("~", style: textTheme(color: kchacholGreyColor()).headline1),
+                  Text("~",
+                      style: textTheme(
+                              color: kPrimaryColor(), weight: FontWeight.w500)
+                          .headline3),
                   CupertinoButton(
                     // Display a CupertinoDatePicker in date picker mode.
                     onPressed: () => _showDialog(
@@ -178,7 +216,8 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
     );
   }
 
-  Widget _compareDateTime(String endString, String startString, DateTime endDate, DateTime startDate) {
+  Widget _compareDateTime(String endString, String startString,
+      DateTime endDate, DateTime startDate) {
     // String startD = DateFormat.yMMMd().format(startDate);
     // String endD = DateFormat.yMMMd().format(endDate);
     // 사용하는 위젯 메서드 내에서 상위와 같이  DateTime 을 String으로 바꾸어서
@@ -187,10 +226,11 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
     return Text(endString,
         style: textTheme(
                 color: startString == endString
-                    ? kchacholGreyColor()
+                    ? kPrimaryColor()
                     : endDate.isAfter(startDate)
                         ? null
-                        : kchacholGreyColor())
-            .headline2);
+                        : kchacholGreyColor(),
+                weight: FontWeight.w500)
+            .headline3);
   }
 }

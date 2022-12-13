@@ -12,7 +12,8 @@ class ChatPage extends StatelessWidget {
       appBar: ChatAppBar(),
       body: ListView(
         padding: EdgeInsets.only(top: 12, left: 20, right: 20),
-        children: List.generate(users.length, (index) => ChatList(user: users[index])),
+        children: List.generate(
+            users.length, (index) => ChatList(user: users[index])),
       ),
     );
   }

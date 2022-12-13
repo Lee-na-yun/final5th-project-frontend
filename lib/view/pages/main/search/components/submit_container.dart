@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/models/test/comment.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/components/comment_body.dart';
@@ -36,9 +37,10 @@ class _SubmitContainerState extends State<SubmitContainer> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          SizedBox(width: 10),
           IconButton(
             onPressed: () {},
-            icon: Image.asset("assets/chat_flus.png", width: 18, height: 18),
+            icon: SvgPicture.asset("assets/icon_bottom_plus.svg", width: 24),
           ),
           Expanded(
             child: Container(
@@ -80,7 +82,8 @@ class _SubmitContainerState extends State<SubmitContainer> {
                 ),
                 child: Text(
                   "전송",
-                  style: textTheme(color: Colors.white, weight: FontWeight.w600).headline3,
+                  style: textTheme(color: Colors.white, weight: FontWeight.w600)
+                      .headline3,
                 ),
               ),
             ),
@@ -96,7 +99,8 @@ class _SubmitContainerState extends State<SubmitContainer> {
       cb.add(
         CommentBody(
           text: text,
-          comments: Comments(userImg: "assets/woman1.png", friendName: "", comment: ""),
+          comments: Comments(
+              userImg: "assets/woman1.png", friendName: "", comment: ""),
         ),
       );
     });
