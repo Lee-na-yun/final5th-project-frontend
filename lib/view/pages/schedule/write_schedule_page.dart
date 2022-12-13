@@ -26,6 +26,9 @@ class _WriteScheduleState extends State<WriteSchedule> {
   TextEditingController _AddressController = TextEditingController();
   final List<User> userList = List.of(users);
 
+  int selectedId = 0;
+  List<String> hintText = ["반복 안함", "매일", "매주", "매월", "매년"];
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -37,32 +40,36 @@ class _WriteScheduleState extends State<WriteSchedule> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: [
-              _buildScheduleTitle("제목"),
-              SizedBox(height: 14),
-              Row(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _buildCategory("카테고리"),
-                  _buildCategory("일반"),
-                  _buildCategory("업무"),
-                  _buildCategory("친구"),
+                  _buildScheduleTitle("제목"),
+                  SizedBox(height: 14),
+                  Row(
+                    children: [
+                      _buildCategory("카테고리"),
+                      _buildCategory("일반"),
+                      _buildCategory("업무"),
+                      _buildCategory("친구"),
+                    ],
+                  ),
+                  SizedBox(height: 14),
+                  DateAndDayPickerInRow(),
+                  _buildLocationSearch(context),
+                  //AddressComponentTest(),
+                  Row(
+                    children: [
+                      Expanded(child: _buildRepeatSetting(context)),
+                    ],
+                  ),
+                  _buildMemo(context),
+                  _buildInvitation(context),
+                  //SizedBox(height: 70),
+                  _buildInsertButton(),
                 ],
               ),
-              SizedBox(height: 14),
-              DateAndDayPickerInRow(),
-              _buildLocationSearch(context),
-              //AddressComponentTest(),
-              Row(
-                children: [
-                  _buildRepeatSetting(context),
-                ],
-              ),
-              _buildMemo(context),
-              _buildInvitation(context),
-              SizedBox(height: 50),
-              DefaultButton(btnText: "등록하기", routes: "/home"),
             ],
           ),
         ),
@@ -84,7 +91,10 @@ class _WriteScheduleState extends State<WriteSchedule> {
                   children: [
                     Text(category, style: textTheme(color: Colors.white).bodyText1),
                     SizedBox(width: 4),
-                    SvgPicture.asset("assets/icon_circle_plus2.svg", width: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: SvgPicture.asset("assets/icon_circle_plus2.svg", width: 10),
+                    ),
                   ],
                 ),
               )
@@ -135,25 +145,19 @@ class _WriteScheduleState extends State<WriteSchedule> {
                   height: 55,
                   padding: EdgeInsets.symmetric(vertical: 8),
                   child: GestureDetector(
-                    onTap: () {
-                      // 카카오 주소 API
-                    },
+                    onTap: () {},
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Expanded(
-                          child: SizedBox(
-                            width: 220,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: "반복 안함",
-                                  border: InputBorder.none,
-                                  isDense: false,
-                                  hintStyle: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).headline3),
-                              readOnly: true,
-                              controller: _AddressController,
-                              style: textTheme(color: primary).headline3,
-                            ),
+                          child: TextField(
+                            decoration: InputDecoration(
+                                hintText: "${hintText[selectedId]}",
+                                border: InputBorder.none,
+                                isDense: true,
+                                hintStyle: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).headline3),
+                            readOnly: true,
+                            style: textTheme(color: primary).headline3,
                           ),
                         ),
                       ],
@@ -165,17 +169,20 @@ class _WriteScheduleState extends State<WriteSchedule> {
           ),
           Row(
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    _buildRepeatButton("반복 안함"),
-                    _buildRepeatButton("매일"),
-                    _buildRepeatButton("매주"),
-                    _buildRepeatButton("매월"),
-                    _buildRepeatButton("매년"),
-                  ],
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildRepeatButton(0, "반복 안함"),
+                      _buildRepeatButton(1, "매일"),
+                      _buildRepeatButton(2, "매주"),
+                      _buildRepeatButton(3, "매월"),
+                      _buildRepeatButton(4, "매년"),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -185,19 +192,23 @@ class _WriteScheduleState extends State<WriteSchedule> {
     );
   }
 
-  Widget _buildRepeatButton(String text) {
+  Widget _buildRepeatButton(int id, String hintText) {
     return Padding(
-      padding: const EdgeInsets.only(top: 6),
+      padding: const EdgeInsets.only(top: 6, left: 0, right: 0),
       child: Row(
         children: [
-          text == "반복 안함"
+          hintText == "반복 안함"
               ? Container(
                   height: 35,
                   padding: EdgeInsets.only(right: 8),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        selectedId = id;
+                      });
+                    },
                     child: Text(
-                      text,
+                      hintText,
                       style: textTheme(color: Colors.white, weight: FontWeight.w500).bodyText1,
                     ),
                     style: ElevatedButton.styleFrom(
@@ -214,9 +225,13 @@ class _WriteScheduleState extends State<WriteSchedule> {
                   width: 68,
                   height: 35,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        selectedId = id;
+                      });
+                    },
                     child: Text(
-                      text,
+                      hintText,
                       style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w500).bodyText1,
                     ),
                     style: ElevatedButton.styleFrom(
@@ -403,7 +418,6 @@ class _WriteScheduleState extends State<WriteSchedule> {
               style: textTheme(color: kchacholGreyColor()).headline2,
               maxLines: null, //이걸 NULL 로 해주고
               maxLength: 80,
-
               decoration: const InputDecoration(
                 isDense: false,
                 hintText: "메모",
@@ -411,19 +425,19 @@ class _WriteScheduleState extends State<WriteSchedule> {
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff9999A3),
-                  //height: 3.0,
+                  height: 1.6,
                 ),
                 focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xffF2F2F2))),
                 enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xffF2F2F2))),
                 focusColor: Color(0xff9999A3),
-                contentPadding: EdgeInsets.only(left: 34, bottom: 20),
+                contentPadding: EdgeInsets.only(left: 34, bottom: 16),
               ),
               onSubmitted: _handleSubmitted,
             ),
-            Positioned(
-              right: 0,
-              child: SvgPicture.asset("assets/photo_plus_icon.svg", width: 26),
-            ),
+            // Positioned(
+            //   right: 0,
+            //   child: SvgPicture.asset("assets/photo_plus_icon.svg", width: 26),
+            // ),
           ],
         ),
       ),
@@ -496,6 +510,31 @@ class _WriteScheduleState extends State<WriteSchedule> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInsertButton() {
+    return Container(
+      height: MediaQuery.of(context).size.height / 3,
+      child: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.popAndPushNamed(context, "/home");
+          },
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            minimumSize: Size(double.infinity, 52),
+            elevation: 0.0,
+            primary: primary,
+          ),
+          child: Text(
+            "등록하기",
+            style: textTheme(color: Colors.white, weight: FontWeight.bold).headline2,
+          ),
         ),
       ),
     );

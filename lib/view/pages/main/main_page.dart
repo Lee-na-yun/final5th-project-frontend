@@ -72,32 +72,27 @@ class _MainPageState extends State<MainPage> {
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/icon_bottom_home.svg", width: 20),
-            activeIcon:
-                SvgPicture.asset("assets/icon_bottom_home_on.svg", width: 20),
+            activeIcon: SvgPicture.asset("assets/icon_bottom_home_on.svg", width: 20),
             label: "홈",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/icon_bottom_chat.svg", width: 20),
-            activeIcon:
-                SvgPicture.asset("assets/icon_bottom_chat_on.svg", width: 20),
+            activeIcon: SvgPicture.asset("assets/icon_bottom_chat_on.svg", width: 20),
             label: "채팅",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/icon_bottom_plus.svg", width: 22),
-            activeIcon:
-                SvgPicture.asset("assets/icon_bottom_plus_on.svg", width: 22),
+            activeIcon: SvgPicture.asset("assets/icon_bottom_plus_on.svg", width: 22),
             label: "글쓰기",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/icon_bottom_search.svg", width: 20),
-            activeIcon:
-                SvgPicture.asset("assets/icon_bottom_search_on.svg", width: 20),
+            activeIcon: SvgPicture.asset("assets/icon_bottom_search_on.svg", width: 20),
             label: "검색",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/icon_bottom_my.svg", width: 20),
-            activeIcon:
-                SvgPicture.asset("assets/icon_bottom_my_on.svg", width: 20),
+            activeIcon: SvgPicture.asset("assets/icon_bottom_my_on.svg", width: 20),
             label: "MY",
           ),
         ],
@@ -136,14 +131,6 @@ class _MainPageState extends State<MainPage> {
                   Text(" "),
                   Row(),
                   _buildMinToDoWrite(),
-                  SizedBox(
-                    width: 320,
-                    height: 40,
-                    child: LineButton("스케줄 만들기", Move.writePage),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  )
                 ],
               ),
             ),
@@ -155,7 +142,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget _buildMinToDoWrite() {
     return Container(
-      height: MediaQuery.of(context).size.height / 3.8,
+      height: MediaQuery.of(context).size.height / 4.0,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       child: Column(
         children: [
@@ -167,8 +154,7 @@ class _MainPageState extends State<MainPage> {
                   padding: EdgeInsets.only(right: 8),
                   child: ConstrainedBox(
                     //입력 만큼 height 늘어나려면 얘로 감싸고 1
-                    constraints:
-                        const BoxConstraints(maxHeight: 300), //얘를 주면 됨 2
+                    constraints: const BoxConstraints(maxHeight: 300), //얘를 주면 됨 2
                     child: TextField(
                       controller: _textController,
                       style: textTheme().headline3,
@@ -176,14 +162,9 @@ class _MainPageState extends State<MainPage> {
                       maxLength: 50,
                       decoration: const InputDecoration(
                           hintText: "할 일 작성",
-                          hintStyle: TextStyle(
-                              color: Color(0xff9999A3),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff9999A3))),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff9999A3))),
+                          hintStyle: TextStyle(color: Color(0xff9999A3), fontSize: 16, fontWeight: FontWeight.w600),
+                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
+                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
                           focusColor: Color(0xff9999A3)),
                       onSubmitted: _handleSubmitted,
                     ),
@@ -217,7 +198,7 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
           SizedBox(height: 50),
-          LineButton("일정 작성하러 가기", "/write_form"),
+          LineButton("일정 작성하러 가기", "/write"),
         ],
       ),
     );
