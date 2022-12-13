@@ -1,12 +1,13 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
+import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/dto/response_dto.dart';
 import 'package:riverpod_firestore_steam1/dto/user/auth_req_dto.dart';
-import 'package:riverpod_firestore_steam1/models/user_session.dart';
+import 'package:riverpod_firestore_steam1/models/session_user.dart';
+import 'package:riverpod_firestore_steam1/provider/auth_provider.dart';
 import 'package:riverpod_firestore_steam1/service/user_service.dart';
-
+import 'package:riverpod_firestore_steam1/view/pages/main/components/my_alert_dialog.dart';
 import '../core/util/constant/move.dart';
 
 /**
@@ -37,13 +38,13 @@ class UserController {
 
   UserController(this._ref);
 
-  Future<void> moveLoginPage() async {
-    Navigator.popAndPushNamed(mContext!, Move.loginPage);
-  }
+  // Future<void> moveLoginPage() async {
+  //   Navigator.popAndPushNamed(mContext!, Move.loginPage);
+  // }
 
-  Future<void> moveJoinPage() async {
-    Navigator.popAndPushNamed(mContext!, Move.joinPage);
-  }
+  // Future<void> moveJoinPage() async {
+  //   Navigator.popAndPushNamed(mContext!, Move.joinPage);
+  // }
 
   Future<void> join({required String username, required String password, required String email}) async {
     // 1. DTO 변환
@@ -54,13 +55,18 @@ class UserController {
 
     // 3. 비지니스 로직 처리
     if (responseDto.code == 1) {
-      Logger().d("나 됨?");
+      showDialog(
+          context: mContext!,
+          builder: (context) => MyAlertDialog(msg: "축하합니다 가입이 정상적으로 처리 되었습니다${responseDto.data.toString()}"));
       Navigator.popAndPushNamed(mContext!, Move.loginPage);
       // 4. 응답된 데이터를 ViewModel에 반영해야 한다면 통신 성공시에 추가하기
     } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-        const SnackBar(content: Text("회원가입 실패")),
-      );
+      //젠장,, 아래의 cupertino다이얼로그는 안 뜸
+      //showCupertinoDialog(context: mContext!, builder: (context) => MyAlertDialog(msg: "tlqkf"));
+      showDialog(context: mContext!, builder: (context) => MyAlertDialog(msg: "닉네임을 확인해 주세요"));
+      // ScaffoldMessenger.of(mContext!).showSnackBar(
+      //   const SnackBar(content: Text("회원가입 실패")),
+      // );
     }
   }
 
@@ -70,18 +76,23 @@ class UserController {
 
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchLogin(loginReqDto);
+
     //3. 비지니스 로직 처리
     if (responseDto.code == 1) {
-      Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(Move.homePage, (route) => false);
+      String? jwtToken = await secureStorage.read(key: "jwtToken");
+      SessionUser sessionUser = SessionUser(responseDto.data, jwtToken, true);
+      _ref.read(authProvider.notifier).authentication(sessionUser);
+      Navigator.of(mContext!).pushNamedAndRemoveUntil(Move.homePage, (route) => false);
     } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-        const SnackBar(content: Text("로그인 실패")),
-      );
+      showDialog(context: mContext!, builder: (context) => MyAlertDialog(msg: "로그인 실패, 아이디 혹은 패스워드 확인해 주세요"));
+      // ScaffoldMessenger.of(mContext!).showSnackBar(
+      //   const SnackBar(content: Text("로그인 실패")),
+      // );
     }
   }
 
   Future<void> logout() async {
-    await UserSession.removeAuthentication();
+    _ref.read(authProvider.notifier).inValidate();
     await Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(Move.loginPage, (route) => false);
   }
 

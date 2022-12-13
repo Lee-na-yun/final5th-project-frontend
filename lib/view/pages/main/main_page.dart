@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/core/util/validator_util.dart';
 import '../../../core/util/constant/move.dart';
 import '../../../models/test/todo.dart';
 import 'components/default_button.dart';
@@ -24,6 +25,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _textController = TextEditingController();
 
   @override
@@ -107,12 +109,10 @@ class _MainPageState extends State<MainPage> {
       builder: (context) {
         return SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
             //위 패딩은 모달창의 터치 가능한 영역 내부 패딩
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
               color: Colors.white,
             ),
             child: Container(
@@ -130,7 +130,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                   Text(" "),
                   Row(),
-                  _buildMinToDoWrite(),
+                  _buildMinToDoWrite(validateContent()),
                 ],
               ),
             ),
@@ -140,74 +140,78 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Widget _buildMinToDoWrite() {
-    return Container(
-      height: MediaQuery.of(context).size.height / 4.0,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(right: 8),
-                  child: ConstrainedBox(
-                    //입력 만큼 height 늘어나려면 얘로 감싸고 1
-                    constraints: const BoxConstraints(maxHeight: 300), //얘를 주면 됨 2
-                    child: TextField(
-                      controller: _textController,
-                      style: textTheme().headline3,
-                      maxLines: null, //이걸 NULL 로 해주고 3
-                      maxLength: 50,
-                      decoration: const InputDecoration(
-                          hintText: "할 일 작성",
-                          hintStyle: TextStyle(color: Color(0xff9999A3), fontSize: 16, fontWeight: FontWeight.w600),
-                          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
-                          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
-                          focusColor: Color(0xff9999A3)),
-                      onSubmitted: _handleSubmitted,
+  Widget _buildMinToDoWrite(vali) {
+    return Form(
+      key: _formKey,
+      child: Container(
+        height: MediaQuery.of(context).size.height / 3.5,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(right: 8),
+                    child: ConstrainedBox(
+                      //입력 만큼 height 늘어나려면 얘로 감싸고 1
+                      constraints: const BoxConstraints(maxHeight: 350), //얘를 주면 됨 2
+                      child: TextFormField(
+                        validator: vali,
+                        controller: _textController,
+                        style: textTheme().headline3,
+                        maxLines: null, //이걸 NULL 로 해주고 3
+                        maxLength: 50,
+                        decoration: const InputDecoration(
+                            hintText: "할 일 작성",
+                            hintStyle: TextStyle(color: Color(0xff9999A3), fontSize: 16, fontWeight: FontWeight.w600),
+                            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
+                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
+                            focusColor: Color(0xff9999A3)),
+                        onTap: () => _handleSubmitted, //얘는 값을 비워주기 위해서
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                  padding: EdgeInsets.only(bottom: 8),
-                  //decoration: BoxDecoration(),
-                  //width: 48,
-                  //height: 27,
-                  alignment: Alignment.center,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _handleSubmitted(_textController.text);
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
-                      padding: EdgeInsets.only(bottom: 2),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                Container(
+                    padding: EdgeInsets.only(bottom: 8),
+                    //decoration: BoxDecoration(),
+                    //width: 48,
+                    //height: 27,
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          _handleSubmitted(_textController.text);
+                          Navigator.pop(context);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                        padding: EdgeInsets.only(bottom: 2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                        ),
+                        elevation: 0.0,
                       ),
-                      elevation: 0.0,
-                    ),
-                    child: Text(
-                      "입력",
-                      style: textTheme().headline3,
-                    ),
-                  ))
-            ],
-          ),
-          SizedBox(height: 50),
-          LineButton("일정 작성하러 가기", "/write"),
-        ],
+                      child: Text(
+                        "입력",
+                        style: textTheme().headline3,
+                      ),
+                    ))
+              ],
+            ),
+            SizedBox(height: 50),
+            LineButton("일정 작성하러 가기", "/write"),
+          ],
+        ),
       ),
     );
   }
 
   void _handleSubmitted(text) {
-    _textController.clear();
     print(text);
-
     setState(() {
       globalToDoItems.add(ToDo(
         content: text,

@@ -1,35 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:riverpod_firestore_steam1/contoller/user_controller.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/home_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/home_page_top.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/update_password_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/model/main_page_view_model.dart';
 
 import '../../../../models/test/todo.dart';
 
 List<ToDo> globalToDoItems = List.of(ToDoList);
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
   final List<User> userList = List.of(users);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ConsumerState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   bool? _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
+    final uContrl = ref.read(userController);
+    //User 와 더불어서 만들어지는 데이터가 수시로 변하기 때문에
+    MainPageModel? userInfo = ref.watch(mainPageViewModel);
+
     return Scaffold(
-      appBar: HomeAppBar("홍길동", context: context),
+      appBar: HomeAppBar("${userInfo!.user.username}", context: context),
       body: _homeBody(),
-      endDrawer: _drawer(context),
+      endDrawer: _drawer(context, uContrl),
       endDrawerEnableOpenDragGesture: false,
       drawerEnableOpenDragGesture: false,
     );
@@ -72,19 +79,22 @@ class _MyHomePageState extends State<MyHomePage> {
       expandedHeight: 440.0,
       flexibleSpace: FlexibleSpaceBar(
         expandedTitleScale: 1,
-        titlePadding: EdgeInsets.only(left: 20),
+        titlePadding: EdgeInsets.only(left: 0),
         title: Container(
           alignment: Alignment.centerLeft,
           width: double.infinity,
           height: 60,
           decoration: BoxDecoration(color: Colors.white),
-          child: Text(
-            "오늘 할 일",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.notoSans(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 20,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              "오늘 할 일",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.notoSans(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontSize: 20,
+              ),
             ),
           ),
         ),
@@ -93,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _drawer(BuildContext context) {
+  Widget _drawer(BuildContext context, uContrl) {
     return Drawer(
       child: ListView(
         children: [
@@ -139,30 +149,36 @@ class _MyHomePageState extends State<MyHomePage> {
           _buildMenuList(text: "비밀번호 변경", fontColor: kPrimaryColor()),
           _buildMenuList(text: "고객센터", fontColor: kPrimaryColor()),
           _buildMenuList(text: "버전", fontColor: kPrimaryColor()),
-          _buildMenuList(
-            text: "로그아웃",
-            fontColor: kchacholGreyColor(),
-          ),
+          _buildMenuList(text: "로그아웃", fontColor: kchacholGreyColor(), uContrl: uContrl),
         ],
       ),
     );
   }
 
-  ListTile _buildMenuList({required String text, Color? fontColor, FontWeight? fontWeight}) {
+  ListTile _buildMenuList({required String text, Color? fontColor, FontWeight? fontWeight, uContrl}) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 20),
       title: Text(text, style: textTheme(color: fontColor, weight: fontWeight).headline3),
       trailing: text != "로그아웃" ? SvgPicture.asset("assets/icon_arrow_next.svg", width: 8) : null,
       onTap: () {
-        text == "비밀번호 변경"
-            ? Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UpdatePasswordPage()),
-              )
-            : null;
+        _ifPasswordMenu(text);
+        _ifLogoutMenu(text, uContrl);
       },
       shape: Border(bottom: BorderSide(color: klightGreyColor(), width: 1.5)),
     );
+  }
+
+  void _ifPasswordMenu(String text) {
+    text == "비밀번호 변경"
+        ? Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => UpdatePasswordPage()),
+          )
+        : null;
+  }
+
+  void _ifLogoutMenu(String text, UserController uContrl) {
+    text == "로그아웃" ? uContrl.logout() : null;
   }
 
   Widget _ToDoList(int index) {
@@ -229,7 +245,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         globalToDoItems[index].content,
                         style: globalToDoItems[index].done == true
-                            ? TextStyle(decoration: TextDecoration.lineThrough, fontSize: 16, height: 1.2, color: kchacholGreyColor())
+                            ? TextStyle(
+                                decoration: TextDecoration.lineThrough,
+                                fontSize: 16,
+                                height: 1.2,
+                                color: kchacholGreyColor())
                             : textTheme().headline3,
                       ),
                     ],

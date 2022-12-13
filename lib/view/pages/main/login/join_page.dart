@@ -68,7 +68,7 @@ class JoinPage extends ConsumerWidget {
                 if (_formKey.currentState!.validate()) {
                   // 추가
                   uContrl.join(
-                    username: _email.text.trim(),
+                    username: _nickname.text.trim(),
                     password: _password1.text.trim(),
                     email: _email.text.trim(),
                   );
@@ -87,8 +87,7 @@ class JoinPage extends ConsumerWidget {
       children: [
         Text(
           "이메일",
-          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700)
-              .bodyText1,
+          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700).bodyText1,
         ),
         SizedBox(height: 2),
         Row(
@@ -105,8 +104,7 @@ class JoinPage extends ConsumerWidget {
                   validator: emailValidate,
                   decoration: InputDecoration(
                     hintText: "이메일을 입력해주세요",
-                    contentPadding:
-                        EdgeInsets.only(top: 12, bottom: 12, left: 10),
+                    contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
                     isDense: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -114,9 +112,7 @@ class JoinPage extends ConsumerWidget {
                         color: kmidGreyColor(),
                       ),
                     ),
-                    hintStyle: textTheme(
-                            color: kmidGreyColor(), weight: FontWeight.bold)
-                        .headline2,
+                    hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2,
                   ),
                 ),
               ),
@@ -130,7 +126,7 @@ class JoinPage extends ConsumerWidget {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                       textStyle: TextStyle(color: Colors.white),
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 17),
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 14, bottom: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -161,11 +157,14 @@ class JoinPage extends ConsumerWidget {
           controller: _controllerInput1,
           validator: pwValidate,
           decoration: InputDecoration(
-              hintText: "비밀번호를 입력해 주세요",
-              contentPadding: const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
+              hintText: "비밀번호를 입력해주세요",
+              contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
+              isDense: true,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: kmidGreyColor(), width: 1.0),
+                borderSide: BorderSide(
+                  color: kmidGreyColor(),
+                ),
               ),
               hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2),
           obscureText: true,
@@ -182,18 +181,16 @@ class JoinPage extends ConsumerWidget {
             return null;
           },
           decoration: InputDecoration(
-            hintText: "비밀번호를 입력해주세요",
-            contentPadding: const EdgeInsets.fromLTRB(10, 14, double.minPositive, 14),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: kmidGreyColor(),
+              hintText: "비밀번호를 입력해주세요",
+              contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
+              isDense: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: kmidGreyColor(),
+                ),
               ),
-            ),
-            hintStyle:
-                textTheme(color: kmidGreyColor(), weight: FontWeight.bold)
-                    .headline2,
-          ),
+              hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2),
           obscureText: true,
         )
       ],
