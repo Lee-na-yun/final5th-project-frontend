@@ -15,7 +15,7 @@ class LineButton extends StatelessWidget {
         onPressed: () {
           funPageRoute;
           Logger().d("회원가입 버튼이 눌러짐 $funPageRoute");
-          Navigator.pushNamed(context, "${routes}");
+          Navigator.popAndPushNamed(context, routes);
         },
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(

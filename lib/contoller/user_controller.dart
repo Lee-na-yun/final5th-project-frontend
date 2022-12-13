@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+import 'package:riverpod_firestore_steam1/dto/response_dto.dart';
+import 'package:riverpod_firestore_steam1/dto/user/auth_req_dto.dart';
+import 'package:riverpod_firestore_steam1/models/user_session.dart';
+import 'package:riverpod_firestore_steam1/service/user_service.dart';
 
 import '../core/util/constant/move.dart';
-import '../dto/response_dto.dart';
-import '../dto/user/auth_req_dto.dart';
-import '../models/user_session.dart';
-import '../service/user_service.dart';
 
 /**
  * View -> Controller 요청
@@ -44,19 +45,16 @@ class UserController {
     Navigator.popAndPushNamed(mContext!, Move.joinPage);
   }
 
-  Future<void> join(
-      {required String username,
-      required String password,
-      required String email}) async {
+  Future<void> join({required String username, required String password, required String email}) async {
     // 1. DTO 변환
-    JoinReqDto joinReqDto =
-        JoinReqDto(username: username, password: password, email: email);
+    JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email);
 
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchJoin(joinReqDto);
 
     // 3. 비지니스 로직 처리
     if (responseDto.code == 1) {
+      Logger().d("나 됨?");
       Navigator.popAndPushNamed(mContext!, Move.loginPage);
       // 4. 응답된 데이터를 ViewModel에 반영해야 한다면 통신 성공시에 추가하기
     } else {
@@ -66,18 +64,15 @@ class UserController {
     }
   }
 
-  Future<void> login(
-      {required String username, required String password}) async {
+  Future<void> login({required String username, required String password}) async {
     // 1. DTO 변환
-    LoginReqDto loginReqDto =
-        LoginReqDto(username: username, password: password);
+    LoginReqDto loginReqDto = LoginReqDto(username: username, password: password);
 
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchLogin(loginReqDto);
     //3. 비지니스 로직 처리
     if (responseDto.code == 1) {
-      Navigator.of(navigatorKey.currentContext!)
-          .pushNamedAndRemoveUntil(Move.homePage, (route) => false);
+      Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(Move.homePage, (route) => false);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         const SnackBar(content: Text("로그인 실패")),
@@ -87,8 +82,7 @@ class UserController {
 
   Future<void> logout() async {
     await UserSession.removeAuthentication();
-    await Navigator.of(navigatorKey.currentContext!)
-        .pushNamedAndRemoveUntil(Move.loginPage, (route) => false);
+    await Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(Move.loginPage, (route) => false);
   }
 
   void moveUserInfoPage() {

@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:riverpod_firestore_steam1/contoller/user_controller.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/core/util/validator_util.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_elevated_button.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_form.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/custom_password_form.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/login/components/line_button.dart';
 
+import '../../../../core/util/constant/move.dart';
 import '../components/default_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends ConsumerWidget {
   final _formkey = GlobalKey<FormState>();
-  final _username = TextEditingController(); // 추가
-  final _password = TextEditingController(); // 추가
   final _email = TextEditingController(); // 추가
-  final _nickname = TextEditingController(); // 추가
+  final _password = TextEditingController(); // 추가
 
   LoginPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef _ref) {
+    final uContrl = _ref.read(userController);
     return Scaffold(
-      body: _buildLoginPage(context),
+      body: _buildLoginPage(context, uContrl),
     );
   }
 
-  Padding _buildLoginPage(BuildContext context) {
+  Padding _buildLoginPage(BuildContext context, uContrl) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: ListView(
@@ -43,13 +46,13 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          _joinForm(context),
+          _joinForm(context, uContrl),
         ],
       ),
     );
   }
 
-  Widget _joinForm(BuildContext context) {
+  Widget _joinForm(BuildContext context, UserController uC) {
     return Column(
       children: [
         SizedBox(height: 70),
@@ -67,23 +70,19 @@ class LoginPage extends StatelessWidget {
           controllerInput: _password,
         ),
         SizedBox(height: 40),
-        DefaultButton(
-            routes: "/home",
-            btnText: "로그인",
+        CustomElevatedButton(
+            text: "로그인",
             funPageRoute: () async {
-              if (_formkey.currentState!.validate()) {}
+              if (_formkey.currentState!.validate()) {
+                // 추가
+                uC.login(username: _email.text.trim(), password: _password.text.trim());
+              }
             }),
         SizedBox(height: 14),
-        LineButton(
-          "회원가입",
-          "/join",
-          funPageRoute: () async {
-            if (_formkey.currentState!.validate()) {}
-          },
-        ),
+        LineButton("회원가입", Move.joinPage),
         TextButton(
           onPressed: () {
-            Navigator.pushNamed(context, "/findPassword");
+            Navigator.pushNamed(context, Move.findPassword);
           },
           child: Text(
             "비밀번호 찾기",

@@ -20,10 +20,7 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        onPressed: () {
-          funPageRoute;
-          Navigator.pushNamed(context, "${routes}");
-        },
+        onPressed: funPageRoute,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
