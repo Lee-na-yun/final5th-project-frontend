@@ -107,7 +107,7 @@ class User {
 }*/
 
 class User {
-  final dynamic userId;
+  final dynamic? userId;
   final String? userName;
 
   User(this.userId, this.userName);

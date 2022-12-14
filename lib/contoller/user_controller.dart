@@ -83,6 +83,7 @@ class UserController {
     // 2. 통신 요청
     ResponseDto responseDto = await (userService.fetchLogin(loginReqDto));
     Logger().d("로그인, 나 와?");
+
     //3. 비지니스 로직 처리
     if (responseDto.httpStatus == "CREATED") {
       String? jwtToken = await secureStorage.read(key: "jwtToken");

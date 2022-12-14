@@ -31,10 +31,11 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   Widget build(BuildContext context) {
     final uContrl = ref.read(userController);
     //User 와 더불어서 만들어지는 데이터가 수시로 변하기 때문에
-    MainPageModel? userInfo = ref.watch(mainPageViewModel);
+    final userInfo = ref.watch(mainPageViewModel);
 
     return Scaffold(
-      appBar: HomeAppBar("${userInfo!.user.userName}", context: context),
+      appBar: HomeAppBar("${userInfo.user.userName}", context: context),
+
       body: _homeBody(),
       endDrawer: _drawer(context, uContrl),
       endDrawerEnableOpenDragGesture: false,

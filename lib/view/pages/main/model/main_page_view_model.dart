@@ -13,11 +13,11 @@ class MainPageModel {
   MainPageModel(this.user);
 }
 
-final mainPageViewModel = StateNotifierProvider.autoDispose<MainPageViewModel, MainPageModel?>((ref) {
-  return MainPageViewModel(null, ref)..initViewModel();
+final mainPageViewModel = StateNotifierProvider.autoDispose<MainPageViewModel, MainPageModel>((ref) {
+  return MainPageViewModel(MainPageModel(User(1, "0")), ref)..initViewModel();
 });
 
-class MainPageViewModel extends StateNotifier<MainPageModel?> {
+class MainPageViewModel extends StateNotifier<MainPageModel> {
   final UserService userService = UserService();
   final mContext = navigatorKey.currentContext;
   final Ref _ref;
@@ -26,7 +26,7 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
   Future<void> initViewModel() async {
     SessionUser sessionUser = _ref.read(authProvider);
     ResponseDto responseDto = await userService.fetchUserInfo(sessionUser.user.userId, sessionUser.jwtToken);
-    if (responseDto.httpStatus == 1) {
+    if (responseDto.httpStatus == "OK") {
       state = MainPageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
