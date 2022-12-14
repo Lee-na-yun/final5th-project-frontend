@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 import '../core/http_connector.dart';
@@ -33,10 +34,13 @@ class UserService {
 
     // 3. 토큰 받기
     String jwtToken = response.headers["authorization"].toString();
+    // 4. 토큰을 디바이스에 저장
     await secureStorage.write(key: "jwtToken", value: jwtToken);
-    // 4. ResponseDto 만들기
+    // 5. ResponseDto 만들기
     ResponseDto responseDto = toResponseDto(response);
-    if (responseDto.code == 1) {
+    Logger().d("로그인 하면 뜨는 값 토큰${responseDto.data}");
+
+    if (responseDto.httpStatus == "CREATED") {
       User user = User.fromJson(responseDto.data);
       responseDto.data = user;
     }
@@ -44,9 +48,12 @@ class UserService {
   }
 
   Future<ResponseDto> fetchUserInfo(int id, String jwtToken) async {
-    Response response = await httpConnector.get("/user/$id", jwtToken: jwtToken);
+
+    Response response = await httpConnector.get("/s/api/user/$id/userrealname", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
-    if (responseDto.code == 1) {
+
+    Logger().d("토큰응답 user_service");
+    if (responseDto.httpStatus == "OK") {
       // 통신이 성공했을 때만 파싱을 해줘야 한다.
       responseDto.data = User.fromJson(responseDto.data);
     }

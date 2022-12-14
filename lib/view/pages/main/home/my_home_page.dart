@@ -34,7 +34,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     MainPageModel? userInfo = ref.watch(mainPageViewModel);
 
     return Scaffold(
-      appBar: HomeAppBar("${userInfo!.user.username}", context: context),
+      appBar: HomeAppBar("${userInfo!.user.userName}", context: context),
       body: _homeBody(),
       endDrawer: _drawer(context, uContrl),
       endDrawerEnableOpenDragGesture: false,

@@ -1,18 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod_firestore_steam1/core/util/constant/move.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_test_add_room_page.dart';
 
 class RoomListPageTest extends StatelessWidget {
   // 引数からユーザー情報を受け取れるようにする
+  // 사용자의 정보를 받아 온다ㅁ내ㅑ
+
   RoomListPageTest();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('チャット'),
-      ),
       body: Column(
         children: [
           Expanded(
@@ -48,9 +46,9 @@ class RoomListPageTest extends StatelessWidget {
                   }).toList(),
                 );
               }
-              // データが読込中の場合
+              // データが読込中の場合 / 데이터 읽을 때
               return Center(
-                child: Text('読込中……'),
+                child: Text('읽는 중……'), //読込中
               );
             },
           )),

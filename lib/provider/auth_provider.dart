@@ -28,10 +28,10 @@ class AuthProvider extends StateNotifier<SessionUser> {
       Response response = await HttpConnector().get("/jwtToken", jwtToken: jwtToken);
       ResponseDto responseDto = toResponseDto(response);
 
-      if (responseDto.code == 1) {
+      if (responseDto.httpStatus == "OK") {
         Logger().d("자동 로그인 성공!!");
         User user = User.fromJson(responseDto.data);
-        Logger().d("user : " + user.username);
+        Logger().d("user : " + user.userName!);
         state = SessionUser(user, jwtToken, true);
 
         Navigator.pushNamedAndRemoveUntil(mContext!, Move.homePage, (route) => false);

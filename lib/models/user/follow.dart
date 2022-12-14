@@ -1,25 +1,25 @@
 import 'dart:ffi';
 
 import 'package:intl/intl.dart';
+import 'package:riverpod_firestore_steam1/models/test/follow.dart';
 
 import 'user.dart';
 
 class Follow {
-  final Long? followId;
-  final Long? userId;
-  final Long? followingUserId;
-  final DateTime? createdAt;
-  final User? user;
+  final Long followId;
+  final Long userId;
+  final Long followingUserId;
+  final DateTime createdAt;
+  final User user;
 
-  Follow(this.followId, this.userId, this.followingUserId, this.createdAt,
-      this.user);
+  Follow(this.followId, this.userId, this.followingUserId, this.createdAt, this.user);
 
   Map<String, dynamic> toJson() => {
         "followId": followId,
         "userId": userId,
         "followingUserId": followingUserId,
         "createdAt": createdAt,
-        "user": user
+        "users": user
       };
 
   Follow.fromJson(Map<String, dynamic> json)
@@ -27,5 +27,5 @@ class Follow {
         userId = json["userId"],
         followingUserId = json["followingUserId"],
         createdAt = DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
-        user = User.fromJson(json["user"]);
+        user = User.fromJson(json["users"]);
 }

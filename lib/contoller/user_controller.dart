@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/dto/response_dto.dart';
 import 'package:riverpod_firestore_steam1/dto/user/auth_req_dto.dart';
@@ -48,13 +49,18 @@ class UserController {
 
   Future<void> join({required String username, required String password, required String email}) async {
     // 1. DTO 변환
-    JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email);
+    JoinReqDto joinReqDto = JoinReqDto(
+        userName: username,
+        userPassword: password,
+        userEmail: email,
+        userRealname: username,
+        userPhonenumber: password);
 
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchJoin(joinReqDto);
 
     // 3. 비지니스 로직 처리
-    if (responseDto.code == 1) {
+    if (responseDto.httpStatus == "CREATED") {
       showDialog(
           context: mContext!,
           builder: (context) => MyAlertDialog(msg: "축하합니다 가입이 정상적으로 처리 되었습니다${responseDto.data.toString()}"));
@@ -72,13 +78,13 @@ class UserController {
 
   Future<void> login({required String username, required String password}) async {
     // 1. DTO 변환
-    LoginReqDto loginReqDto = LoginReqDto(username: username, password: password);
+    LoginReqDto loginReqDto = LoginReqDto(userName: username, userPassword: password);
 
     // 2. 통신 요청
-    ResponseDto responseDto = await userService.fetchLogin(loginReqDto);
-
+    ResponseDto responseDto = await (userService.fetchLogin(loginReqDto));
+    Logger().d("로그인, 나 와?");
     //3. 비지니스 로직 처리
-    if (responseDto.code == 1) {
+    if (responseDto.httpStatus == "CREATED") {
       String? jwtToken = await secureStorage.read(key: "jwtToken");
       SessionUser sessionUser = SessionUser(responseDto.data, jwtToken, true);
       _ref.read(authProvider.notifier).authentication(sessionUser);

@@ -25,8 +25,8 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
 
   Future<void> initViewModel() async {
     SessionUser sessionUser = _ref.read(authProvider);
-    ResponseDto responseDto = await userService.fetchUserInfo(sessionUser.user.id, sessionUser.jwtToken);
-    if (responseDto.code == 1) {
+    ResponseDto responseDto = await userService.fetchUserInfo(sessionUser.user.userId, sessionUser.jwtToken);
+    if (responseDto.httpStatus == 1) {
       state = MainPageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
