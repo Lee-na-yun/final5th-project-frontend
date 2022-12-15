@@ -36,43 +36,46 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildSearchAppBar(context),
-      body: Padding(
-        padding: const EdgeInsets.only(
-          left: 20,
-          right: 20,
-          top: 20,
-        ),
-        child: GridView.builder(
-          physics: BouncingScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 4,
-            mainAxisSpacing: 4,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: _buildSearchAppBar(context),
+        body: Padding(
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 20,
           ),
-          itemCount: myImages.length,
-          itemBuilder: (BuildContext context, int index) {
-            return IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => BoardListPage()),
-                );
-              },
-              icon: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                child: Image.asset(
-                  "${myImages[index]}",
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
+          child: GridView.builder(
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
+            ),
+            itemCount: myImages.length,
+            itemBuilder: (BuildContext context, int index) {
+              return IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BoardListPage()),
+                  );
+                },
+                icon: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  child: Image.asset(
+                    "${myImages[index]}",
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              padding: EdgeInsets.zero,
-            );
-          },
+                padding: EdgeInsets.zero,
+              );
+            },
+          ),
         ),
       ),
     );
@@ -100,17 +103,13 @@ class SearchPage extends StatelessWidget {
                       filled: true,
                       fillColor: klightGreyColor(),
                       hintText: "닉네임,키워드로 검색하세요",
-                      contentPadding:
-                          EdgeInsets.only(top: 10, bottom: 10, left: 20),
+                      contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       isDense: true,
-                      hintStyle: textTheme(
-                              color: kchacholGreyColor(),
-                              weight: FontWeight.bold)
-                          .headline3,
+                      hintStyle: textTheme(color: kchacholGreyColor(), weight: FontWeight.bold).headline3,
                     ),
                     keyboardType: TextInputType.text),
               ),

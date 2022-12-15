@@ -107,7 +107,7 @@ class User {
 }*/
 
 class User {
-  final dynamic? userId;
+  final int? userId;
   final String? userName;
   final String? userPassword;
   final String? userEmail;

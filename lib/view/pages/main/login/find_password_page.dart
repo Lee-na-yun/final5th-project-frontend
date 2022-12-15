@@ -10,25 +10,28 @@ class FindPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(55),
-        child: LineAppBar("비밀번호 찾기", null),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView(
-          children: [
-            SizedBox(height: 30),
-            CustomForm(
-              "이메일",
-              "이메일을 입력해주세요",
-              funValidator: validateEmail(),
-              controllerInput: _password,
-            ),
-            SizedBox(height: 24),
-            DefaultButton(routes: "/login", btnText: "확인"),
-          ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(55),
+          child: LineAppBar("비밀번호 찾기", null),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ListView(
+            children: [
+              SizedBox(height: 30),
+              CustomForm(
+                "이메일",
+                "이메일을 입력해주세요",
+                funValidator: validateEmail(),
+                controllerInput: _password,
+              ),
+              SizedBox(height: 24),
+              DefaultButton(routes: "/login", btnText: "확인"),
+            ],
+          ),
         ),
       ),
     );

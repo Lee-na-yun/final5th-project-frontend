@@ -30,14 +30,17 @@ class JoinPage extends ConsumerWidget {
   @override
   Widget build(BuildContext contextm, WidgetRef _ref) {
     final uContrl = _ref.read(userController);
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(55),
-        child: LineAppBar("이메일 간편가입", null),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: _buildJoinForm(uContrl),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(55),
+          child: LineAppBar("회원가입", null),
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: _buildJoinForm(uContrl),
+        ),
       ),
     );
   }
@@ -86,7 +89,7 @@ class JoinPage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "이메일",
+          "아이디",
           style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700).bodyText1,
         ),
         SizedBox(height: 2),
@@ -103,7 +106,7 @@ class JoinPage extends ConsumerWidget {
                   controller: _controllerInput,
                   validator: emailValidate,
                   decoration: InputDecoration(
-                    hintText: "이메일을 입력해주세요",
+                    hintText: "아이디를 입력해주세요",
                     contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
                     isDense: true,
                     border: OutlineInputBorder(

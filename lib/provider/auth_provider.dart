@@ -9,6 +9,7 @@ import 'package:riverpod_firestore_steam1/core/util/response_util.dart';
 import 'package:riverpod_firestore_steam1/dto/response_dto.dart';
 import 'package:riverpod_firestore_steam1/models/session_user.dart';
 import 'package:riverpod_firestore_steam1/models/user/user.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/model/main_page_view_model.dart';
 
 const secureStorage = FlutterSecureStorage();
 
@@ -22,9 +23,12 @@ class AuthProvider extends StateNotifier<SessionUser> {
   AuthProvider(super.state, this._ref);
 
   Future<void> autoLogin() async {
+    final _model = _ref.read(mainPageViewModel);
+
     String? jwtToken = await secureStorage.read(key: "jwtToken");
     if (jwtToken != null) {
       Logger().d(jwtToken);
+
       Response response = await HttpConnector().get("/jwtToken", jwtToken: jwtToken);
       ResponseDto responseDto = toResponseDto(response);
       Logger().d(responseDto.data);
@@ -38,8 +42,8 @@ class AuthProvider extends StateNotifier<SessionUser> {
     }
   }
 
-  Future<void> authentication(SessionUser sessionUser) async {
-    state = sessionUser;
+  Future<void> authentication(SessionUser? sessionUser) async {
+    state = sessionUser!;
     await secureStorage.write(key: "jwtToken", value: sessionUser.jwtToken);
   }
 

@@ -31,7 +31,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
   return {
     Move.joinPage: (context) => JoinPage(),
     Move.loginPage: (context) => LoginPage(),
-    Move.homePage: (context) => MainPage(),
+    Move.homePage: (context) => const MainPage(),
     Move.writePage: (context) => WriteSchedule(context: context),
     Move.findPassword: (context) => FindPasswordPage(),
     Move.myPage: (context) => const MyPageMainPage(),

@@ -5,9 +5,11 @@ class SessionUser {
   final String? _jwtToken;
   final bool? _isLogin;
 
+
   SessionUser(this._user, this._jwtToken, this._isLogin);
 
-  User get user => _user!;
-  String get jwtToken => _jwtToken!;
-  bool get isLogin => _isLogin!;
+  get user => _user;
+  get jwtToken => _jwtToken!;
+  get isLogin => _isLogin!;
+
 }
