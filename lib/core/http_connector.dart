@@ -1,9 +1,14 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
+final httpConnector = Provider<HttpConnector>((ref) {
+  return HttpConnector();
+});
+
 class HttpConnector {
-  final host = "http://192.168.16.1:8080";
-  final headers = {"Content-Type": "application/json; charset=utf-8"};
+  final host = "http://192.168.0.76:8080";
+  late Map<String, String> headers = {"Content-Type": "application/json; charset=utf-8"};
 
   static final HttpConnector _instance = HttpConnector._single();
   factory HttpConnector() {

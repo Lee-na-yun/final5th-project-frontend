@@ -24,8 +24,11 @@ class LoginPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(authProvider.notifier).autoLogin();
     UserController uContrl = ref.read(userController);
-    return Scaffold(
-      body: _buildLoginPage(context, uContrl),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: _buildLoginPage(context, uContrl),
+      ),
     );
   }
 
@@ -58,8 +61,8 @@ class LoginPage extends ConsumerWidget {
         children: [
           SizedBox(height: 70),
           CustomForm(
-            "이메일",
-            "이메일을 입력해주세요",
+            "아이디",
+            "아이디를 입력해주세요",
             funValidator: validateUsername(),
             controllerInput: _username,
           ),

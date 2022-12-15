@@ -11,29 +11,32 @@ class BoardListCommentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BoardAppBarV2(titlename: "댓글", context: context),
-      body: Column(
-        children: [
-          const CommentHead(),
-          Expanded(
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              dragStartBehavior: DragStartBehavior.down,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: BoardAppBarV2(titlename: "댓글", context: context),
+        body: Column(
+          children: [
+            const CommentHead(),
+            Expanded(
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                dragStartBehavior: DragStartBehavior.down,
+                children: [
+                  ...List.generate(
+                    CommentList.length,
+                    (index) => CommentBody(comments: CommentList[index], text: ""),
+                  ),
+                ],
+              ),
+            ),
+            Stack(
               children: [
-                ...List.generate(
-                  CommentList.length,
-                  (index) => CommentBody(comments: CommentList[index], text: ""),
-                ),
+                SubmitContainer(),
               ],
             ),
-          ),
-          Stack(
-            children: [
-              SubmitContainer(),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

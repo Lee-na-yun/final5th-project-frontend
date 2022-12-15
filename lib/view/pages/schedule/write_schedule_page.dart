@@ -517,7 +517,7 @@ class _WriteScheduleState extends State<WriteSchedule> {
 
   Widget _buildInsertButton() {
     return Container(
-      height: MediaQuery.of(context).size.height / 3,
+      height: MediaQuery.of(context).size.height / 6,
       child: Center(
         child: ElevatedButton(
           onPressed: () {

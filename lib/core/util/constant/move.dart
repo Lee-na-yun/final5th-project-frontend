@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_room_page.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_test_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_test_room_list_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/friend_home_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/notice_page.dart';
 
@@ -31,7 +31,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
   return {
     Move.joinPage: (context) => JoinPage(),
     Move.loginPage: (context) => LoginPage(),
-    Move.homePage: (context) => MainPage(),
+    Move.homePage: (context) => const MainPage(),
     Move.writePage: (context) => WriteSchedule(context: context),
     Move.findPassword: (context) => FindPasswordPage(),
     Move.myPage: (context) => const MyPageMainPage(),

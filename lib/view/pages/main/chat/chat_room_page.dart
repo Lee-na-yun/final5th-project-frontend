@@ -19,34 +19,37 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(55),
-        child: LineAppBar("상대방이름", null),
-      ),
-      body: Container(
-        decoration: BoxDecoration(color: Colors.white),
-        child: Scaffold(
-          //backgroundColor: Colors.white,
-          body: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2),
-                    child: Column(
-                      children: [
-                        OtherChat(time: "오전 10:25", name: "홍길동", text: "야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ이것봐바!"),
-                        SizedBox(height: 6),
-                        MyChat(text: "오 나 필요한건데 ㄳㄳ", time: "오후 17:38"),
-                        ...List.generate(chats.length, (index) => chats[index]),
-                      ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(55),
+          child: LineAppBar("상대방이름", null),
+        ),
+        body: Container(
+          decoration: BoxDecoration(color: Colors.white),
+          child: Scaffold(
+            //backgroundColor: Colors.white,
+            body: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2),
+                      child: Column(
+                        children: [
+                          OtherChat(time: "오전 10:25", name: "홍길동", text: "야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ이것봐바!"),
+                          SizedBox(height: 6),
+                          MyChat(text: "오 나 필요한건데 ㄳㄳ", time: "오후 17:38"),
+                          ...List.generate(chats.length, (index) => chats[index]),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              _buildSubmitContainer(),
-            ],
+                _buildSubmitContainer(),
+              ],
+            ),
           ),
         ),
       ),

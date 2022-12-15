@@ -49,12 +49,8 @@ class UserController {
 
   Future<void> join({required String username, required String password, required String email}) async {
     // 1. DTO 변환
-    JoinReqDto joinReqDto = JoinReqDto(
-        userName: username,
-        userPassword: password,
-        userEmail: email,
-        userRealname: username,
-        userPhonenumber: password);
+    JoinReqDto joinReqDto =
+        JoinReqDto(userName: username, userPassword: password, userEmail: email, userRealname: username, userPhonenumber: password);
 
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchJoin(joinReqDto);
@@ -67,7 +63,7 @@ class UserController {
     } else {
       //젠장,, 아래의 cupertino다이얼로그는 안 뜸
       //showCupertinoDialog(context: mContext!, builder: (context) => MyAlertDialog(msg: "tlqkf"));
-      showDialog(context: mContext!, builder: (context) => MyAlertDialog(msg: "닉네임을 확인해 주세요"));
+      showDialog(context: mContext!, builder: (context) => MyAlertDialog(msg: "이메일 또는 비밀번호를 확인해 주세요"));
       // ScaffoldMessenger.of(mContext!).showSnackBar(
       //   const SnackBar(content: Text("회원가입 실패")),
       // );
