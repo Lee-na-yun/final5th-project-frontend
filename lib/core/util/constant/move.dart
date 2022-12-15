@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_room_page.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_test_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_test_room_list_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/friend_home_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/notice_page.dart';
 

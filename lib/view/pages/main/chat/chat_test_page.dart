@@ -1,68 +1,118 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_test_add_room_page.dart';
 
-class RoomListPageTest extends StatelessWidget {
-  // 引数からユーザー情報を受け取れるようにする
-  // 사용자의 정보를 받아 온다ㅁ내ㅑ
+// flutter_chat_uiを使うためのパッケージをインポート
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
-  RoomListPageTest();
+//import 'package:provider/provider.dart';
+// ランダムなIDを採番してくれるパッケージ
+import 'package:uuid/uuid.dart';
+
+class ChatPage extends StatefulWidget {
+  const ChatPage(this.name, {Key? key}) : super(key: key);
+
+  final String name;
+  @override
+  _ChatPageState createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  List<types.Message> _messages = [];
+  String randomId = Uuid().v4();
+  final _user = const types.User(id: '06c33e8b-e835-4736-80f4-63f44b66666c', firstName: '성운');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-              // Stream 非同期処理の結果を元にWidgetを作る
-              //비동기 처리 결과를 바탕으로 Widget 만들기
-              child: StreamBuilder<QuerySnapshot>(
-            // 投稿メッセージ一覧の取得 / 게시 메시지 목록 얻기
-            stream: FirebaseFirestore.instance.collection('chat_room').orderBy('createdAt').snapshots(),
-            builder: (context, snapshot) {
-              // データが取得できた場合 / 데이터를 검색할 수 있는 경우 데이터 있으면
-              if (snapshot.hasData) {
-                final List<DocumentSnapshot> documents = snapshot.data!.docs;
-                return ListView(
-                  children: documents.map((document) {
-                    return Card(
-                      child: ListTile(
-                        title: Text(document['name']),
-                        trailing: IconButton(
-                          icon: Icon(Icons.input),
-                          onPressed: () async {
-                            // チャットページへ画面遷移 /채팅 페이지로 이동
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return Text("fef"); //ChatPage(document['name']);
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                );
-              }
-              // データが読込中の場合 / 데이터 읽을 때
-              return Center(
-                child: Text('읽는 중……'), //読込中
-              );
-            },
-          )),
-        ],
+      appBar: AppBar(
+        title: Text('${widget.name}'),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () async {
-          //Navigator.popAndPushNamed(context, Move.chatRoomPageTest);
-          await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return AddRoomListTest();
-          }));
-        },
+      body: Chat(
+        theme: const DefaultChatTheme(
+          inputBackgroundColor: primary,
+          sendButtonIcon: Icon(Icons.send),
+          sendingIcon: Icon(Icons.update_outlined),
+        ),
+        showUserNames: true,
+        // メッセージの配列 / 메세지 배열
+        messages: _messages,
+        onPreviewDataFetched: _handlePreviewDataFetched,
+        onSendPressed: _handleSendPressed,
+        user: _user,
       ),
     );
+  }
+
+  void initState() {
+    _getMessages();
+    super.initState();
+  }
+
+  // firestoreからメッセージの内容をとってきて_messageにセット
+  // 파이어 스토어에 담겨져 있는 메세지를 가져옴, User uid 로 가져오는 듯함
+  void _getMessages() async {
+    final getData =
+        await FirebaseFirestore.instance.collection('chat_room').doc(widget.name).collection('contents').get();
+
+    final message = getData.docs
+        .map((d) => types.TextMessage(
+            author: types.User(
+              id: d.data()['uid'],
+              firstName: d.data()['name'],
+            ),
+            createdAt: d.data()['createdAt'],
+            id: d.data()['id'],
+            text: d.data()['text']))
+        .toList();
+
+    setState(() {
+      _messages = [...message];
+    });
+  }
+
+  // メッセージ内容をfirestoreにセット
+  // 파이어 베이스로 메시지 내용을 보냄
+  void _addMessage(types.TextMessage message) async {
+    setState(() {
+      _messages.insert(0, message);
+    });
+    await FirebaseFirestore.instance.collection('chat_room').doc(widget.name).collection('contents').add(
+      {
+        'uid': message.author.id,
+        'name': message.author.firstName,
+        'createdAt': message.createdAt,
+        'id': message.id,
+        'text': message.text,
+      },
+    );
+  }
+
+  // リンク添付時にリンクプレビューを表示する
+  // 링크 첨부시 미리보기 생성
+  void _handlePreviewDataFetched(
+    types.TextMessage message,
+    types.PreviewData previewData,
+  ) {
+    final index = _messages.indexWhere((element) => element.id == message.id);
+    final updatedMessage = _messages[index].copyWith();
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      setState(() {
+        _messages[index] = updatedMessage;
+      });
+    });
+  }
+
+  // メッセージ送信時の処理 / 메세지 전송함
+  void _handleSendPressed(types.PartialText message) {
+    final textMessage = types.TextMessage(
+      author: _user,
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      id: randomId,
+      text: message.text,
+    );
+
+    _addMessage(textMessage);
   }
 }
