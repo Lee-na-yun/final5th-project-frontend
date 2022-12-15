@@ -21,6 +21,7 @@ class CustomForm extends StatelessWidget {
         ),
         SizedBox(height: 4),
         TextFormField(
+            autovalidateMode: AutovalidateMode.always,
             controller: controllerInput,
             validator: funValidator,
             decoration: InputDecoration(

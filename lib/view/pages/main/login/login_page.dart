@@ -21,9 +21,9 @@ class LoginPage extends ConsumerWidget {
   LoginPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef _ref) {
-    _ref.read(authProvider.notifier).autoLogin();
-    UserController uContrl = _ref.read(userController);
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(authProvider.notifier).autoLogin();
+    UserController uContrl = ref.read(userController);
     return Scaffold(
       body: _buildLoginPage(context, uContrl),
     );

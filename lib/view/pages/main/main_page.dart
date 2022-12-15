@@ -71,33 +71,7 @@ class _MainPageState extends State<MainPage> {
                   _selectedIndex = index;
                 });
         },
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icon_bottom_home.svg", width: 20),
-            activeIcon: SvgPicture.asset("assets/icon_bottom_home_on.svg", width: 20),
-            label: "홈",
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icon_bottom_chat.svg", width: 20),
-            activeIcon: SvgPicture.asset("assets/icon_bottom_chat_on.svg", width: 20),
-            label: "채팅",
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icon_bottom_plus.svg", width: 22),
-            activeIcon: SvgPicture.asset("assets/icon_bottom_plus_on.svg", width: 22),
-            label: "글쓰기",
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icon_bottom_search.svg", width: 20),
-            activeIcon: SvgPicture.asset("assets/icon_bottom_search_on.svg", width: 20),
-            label: "검색",
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/icon_bottom_my.svg", width: 20),
-            activeIcon: SvgPicture.asset("assets/icon_bottom_my_on.svg", width: 20),
-            label: "MY",
-          ),
-        ],
+        items: _buildBottomNavigationBarItems(),
       ),
     );
   }
@@ -108,33 +82,7 @@ class _MainPageState extends State<MainPage> {
       context: context,
       builder: (context) {
         return SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-            //위 패딩은 모달창의 터치 가능한 영역 내부 패딩
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-              color: Colors.white,
-            ),
-            child: Container(
-              padding: EdgeInsets.only(top: 18),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    width: 50,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: kmidGreyColor(),
-                    ),
-                    //margin: EdgeInsets.only(bottom: 20),
-                  ),
-                  Text(" "),
-                  Row(),
-                  _buildMinToDoWrite(validateContent()),
-                ],
-              ),
-            ),
-          ),
+          child: _buildShowModalBottomSheetTODO(context),
         );
       },
     );
@@ -169,7 +117,7 @@ class _MainPageState extends State<MainPage> {
                             focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
                             enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
                             focusColor: Color(0xff9999A3)),
-                        onTap: () => _handleSubmitted, //얘는 값을 비워주기 위해서
+                        onSaved: (value) {}, //얘는 값을 비워주기 위해서
                       ),
                     ),
                   ),
@@ -185,6 +133,7 @@ class _MainPageState extends State<MainPage> {
                         if (_formKey.currentState!.validate()) {
                           _handleSubmitted(_textController.text);
                           Navigator.pop(context);
+                          _textController.text = ""; // 얘로 폼필드 비워줘야함
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -213,6 +162,7 @@ class _MainPageState extends State<MainPage> {
   void _handleSubmitted(text) {
     print(text);
     setState(() {
+      //ToDO 리스트에 주입하는 코드 서비스 로직ㄴㄷ
       globalToDoItems.add(ToDo(
         content: text,
         time: DateFormat("a K:m").format(new DateTime.now()),
@@ -221,5 +171,65 @@ class _MainPageState extends State<MainPage> {
         done: false,
       ));
     });
+  }
+
+  Container _buildShowModalBottomSheetTODO(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      //위 패딩은 모달창의 터치 가능한 영역 내부 패딩
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+        color: Colors.white,
+      ),
+      child: Container(
+        padding: EdgeInsets.only(top: 18),
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: 50,
+              height: 4,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: kmidGreyColor(),
+              ),
+              //margin: EdgeInsets.only(bottom: 20),
+            ),
+            Text(" "),
+            Row(),
+            _buildMinToDoWrite(validateContent()),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<BottomNavigationBarItem> _buildBottomNavigationBarItems() {
+    return [
+      BottomNavigationBarItem(
+        icon: SvgPicture.asset("assets/icon_bottom_home.svg", width: 20),
+        activeIcon: SvgPicture.asset("assets/icon_bottom_home_on.svg", width: 20),
+        label: "홈",
+      ),
+      BottomNavigationBarItem(
+        icon: SvgPicture.asset("assets/icon_bottom_chat.svg", width: 20),
+        activeIcon: SvgPicture.asset("assets/icon_bottom_chat_on.svg", width: 20),
+        label: "채팅",
+      ),
+      BottomNavigationBarItem(
+        icon: SvgPicture.asset("assets/icon_bottom_plus.svg", width: 22),
+        activeIcon: SvgPicture.asset("assets/icon_bottom_plus_on.svg", width: 22),
+        label: "글쓰기",
+      ),
+      BottomNavigationBarItem(
+        icon: SvgPicture.asset("assets/icon_bottom_search.svg", width: 20),
+        activeIcon: SvgPicture.asset("assets/icon_bottom_search_on.svg", width: 20),
+        label: "검색",
+      ),
+      BottomNavigationBarItem(
+        icon: SvgPicture.asset("assets/icon_bottom_my.svg", width: 20),
+        activeIcon: SvgPicture.asset("assets/icon_bottom_my_on.svg", width: 20),
+        label: "MY",
+      ),
+    ];
   }
 }

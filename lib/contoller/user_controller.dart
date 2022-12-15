@@ -61,9 +61,7 @@ class UserController {
 
     // 3. 비지니스 로직 처리
     if (responseDto.httpStatus == "CREATED") {
-      showDialog(
-          context: mContext!,
-          builder: (context) => MyAlertDialog(msg: "축하합니다 가입이 정상적으로 처리 되었습니다${responseDto.data.toString()}"));
+      ScaffoldMessenger.of(mContext!).showSnackBar(const SnackBar(content: Text("회원가입 성공")));
       Navigator.popAndPushNamed(mContext!, Move.loginPage);
       // 4. 응답된 데이터를 ViewModel에 반영해야 한다면 통신 성공시에 추가하기
     } else {
@@ -82,7 +80,6 @@ class UserController {
 
     // 2. 통신 요청
     ResponseDto responseDto = await (userService.fetchLogin(loginReqDto));
-    Logger().d("로그인, 나 와?");
 
     //3. 비지니스 로직 처리
     if (responseDto.httpStatus == "CREATED") {

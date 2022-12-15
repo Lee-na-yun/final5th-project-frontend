@@ -22,16 +22,15 @@ class AuthProvider extends StateNotifier<SessionUser> {
   AuthProvider(super.state, this._ref);
 
   Future<void> autoLogin() async {
-    Logger().d("나 있어ㅑ???");
     String? jwtToken = await secureStorage.read(key: "jwtToken");
     if (jwtToken != null) {
+      Logger().d(jwtToken);
       Response response = await HttpConnector().get("/jwtToken", jwtToken: jwtToken);
       ResponseDto responseDto = toResponseDto(response);
-
+      Logger().d(responseDto.data);
       if (responseDto.httpStatus == "OK") {
         Logger().d("자동 로그인 성공!!");
         User user = User.fromJson(responseDto.data);
-        Logger().d("user : " + user.userName!);
         state = SessionUser(user, jwtToken, true);
 
         Navigator.pushNamedAndRemoveUntil(mContext!, Move.homePage, (route) => false);
