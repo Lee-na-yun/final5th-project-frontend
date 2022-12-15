@@ -5,7 +5,7 @@ Function validateUsername() {
   //GetUtils.isEmail()
   return (String? value) {
     if (value!.isEmpty) {
-      return "유저네임에 들어갈 수 없습니다.";
+      return "입력해 주십시오";
     } else if (!isAlphanumeric(value)) {
       return "유저네임에 한글이나 특수 문자가 들어갈 수 없습니다.";
     } else if (value.length > 12) {

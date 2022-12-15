@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/test/users.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/chat_line_app_bar.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/chat_list.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/my_chat.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/other_chat.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/line_app_bar.dart';
@@ -39,10 +36,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                     padding: const EdgeInsets.symmetric(vertical: 2),
                     child: Column(
                       children: [
-                        OtherChat(
-                            time: "오전 10:25",
-                            name: "홍길동",
-                            text: "야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ이것봐바!"),
+                        OtherChat(time: "오전 10:25", name: "홍길동", text: "야ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ이것봐바!"),
                         SizedBox(height: 6),
                         MyChat(text: "오 나 필요한건데 ㄳㄳ", time: "오후 17:38"),
                         ...List.generate(chats.length, (index) => chats[index]),
@@ -123,8 +117,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 ),
                 child: Text(
                   "전송",
-                  style: textTheme(color: Colors.white, weight: FontWeight.w600)
-                      .headline3,
+                  style: textTheme(color: Colors.white, weight: FontWeight.w600).headline3,
                 ),
               ),
             ),
@@ -141,10 +134,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       chats.add(
         MyChat(
           text: text,
-          time: DateFormat("a K:m")
-              .format(new DateTime.now())
-              .replaceAll("AM", "오전")
-              .replaceAll("PM", "오후"),
+          time: DateFormat("a K:m").format(new DateTime.now()).replaceAll("AM", "오전").replaceAll("PM", "오후"),
         ),
       );
     });

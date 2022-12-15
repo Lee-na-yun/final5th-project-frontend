@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/core/util/constant/move.dart';
 import 'package:riverpod_firestore_steam1/models/test/follow.dart';
 import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/notice_page.dart';
@@ -88,7 +89,6 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
                                         ),
                                       ),
                                     ),
-
                                   ),
                                 ),
                               )
@@ -146,7 +146,6 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8, top: 4),
                     child: SvgPicture.asset("assets/icon_arrow_bottom_w.svg", width: 14),
-
                   ),
                 ],
               )
@@ -169,10 +168,9 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, "/notice");
+                  Navigator.pushNamed(context, Move.noticePage);
                 },
-                child: KStackIcon(
-                    iconData: CupertinoIcons.bell, notificationCount: '9'),
+                child: KStackIcon(iconData: CupertinoIcons.bell, notificationCount: '9'),
               ),
               SizedBox(width: 10),
               Builder(builder: (context) {
