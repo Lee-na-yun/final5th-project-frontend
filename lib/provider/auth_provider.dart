@@ -31,7 +31,7 @@ class AuthProvider extends StateNotifier<SessionUser> {
 
       Response response = await HttpConnector().get("/jwtToken", jwtToken: jwtToken);
       ResponseDto responseDto = toResponseDto(response);
-      Logger().d(responseDto.data);
+      Logger().d("인스턴스 toResponseDto 로 ${responseDto.data}");
       if (responseDto.httpStatus == "OK") {
         Logger().d("자동 로그인 성공!!");
         User user = User.fromJson(responseDto.data);

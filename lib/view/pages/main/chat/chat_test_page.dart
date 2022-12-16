@@ -4,15 +4,23 @@ import 'package:flutter/material.dart';
 // flutter_chat_uiを使うためのパッケージをインポート
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+import 'package:riverpod_firestore_steam1/core/util/response_util.dart';
+import 'package:riverpod_firestore_steam1/dto/response_dto.dart';
+import 'package:riverpod_firestore_steam1/models/session_user.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/model/main_page_view_model.dart';
 
 //import 'package:provider/provider.dart';
 // ランダムなIDを採番してくれるパッケージ
 import 'package:uuid/uuid.dart';
 
-class ChatPage extends StatefulWidget {
-  const ChatPage(this.name, {Key? key}) : super(key: key);
+import '../../../../models/user/user.dart';
 
+class ChatPage extends StatefulWidget {
+  const ChatPage(this.name, {required this.sessionUser, Key? key}) : super(key: key);
   final String name;
+  final SessionUser sessionUser;
   @override
   _ChatPageState createState() => _ChatPageState();
 }
@@ -20,10 +28,15 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   List<types.Message> _messages = [];
   String randomId = Uuid().v4();
-  final _user = const types.User(id: '06c33e8b-e835-4736-80f4-63f44b66666c', firstName: '성운');
+  //User userInfo = User.fromJson(widget.sessionUser.user);
+  final _user = const types.User(id: '2', firstName: '성운');
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("출력 되는 것을 보자${widget.sessionUser.user.userName}");
+    // String a = "abgd";
+    //final username = const types.User(id: '2', firstName: '${a}');
+    //const user = types.User(id: '2', firstName: 'username');
     return Scaffold(
       appBar: AppBar(
         title: Text('${widget.name}'),
@@ -38,7 +51,9 @@ class _ChatPageState extends State<ChatPage> {
         // メッセージの配列 / 메세지 배열
         messages: _messages,
         onPreviewDataFetched: _handlePreviewDataFetched,
-        onSendPressed: _handleSendPressed,
+        onSendPressed: (value) {
+          _handleSendPressed(value, widget.sessionUser.user.userName);
+        },
         user: _user,
       ),
     );
@@ -105,9 +120,9 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   // メッセージ送信時の処理 / 메세지 전송함
-  void _handleSendPressed(types.PartialText message) {
+  void _handleSendPressed(types.PartialText message, name) {
     final textMessage = types.TextMessage(
-      author: _user,
+      author: name,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: randomId,
       text: message.text,

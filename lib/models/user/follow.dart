@@ -1,16 +1,12 @@
-import 'dart:ffi';
-
 import 'package:intl/intl.dart';
-import 'package:riverpod_firestore_steam1/models/test/follow.dart';
-
 import 'user.dart';
 
 class Follow {
-  final Long followId;
-  final Long userId;
-  final Long followingUserId;
-  final DateTime createdAt;
-  final User user;
+  final followId;
+  final userId;
+  final followingUserId;
+  final createdAt;
+  final user;
 
   Follow(this.followId, this.userId, this.followingUserId, this.createdAt, this.user);
 

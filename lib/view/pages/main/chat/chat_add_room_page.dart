@@ -1,31 +1,30 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/components/chat_app_bar.dart';
 
-class AddRoomListTest extends StatefulWidget {
-  AddRoomListTest();
+class ChatAddRoomPage extends StatefulWidget {
+  const ChatAddRoomPage({Key? key}) : super(key: key);
 
   @override
-  _AddPostPageState createState() => _AddPostPageState();
+  State<ChatAddRoomPage> createState() => _ChatAddRoomPageState();
 }
 
-class _AddPostPageState extends State<AddRoomListTest> {
-  String roomName = '';
+class _ChatAddRoomPageState extends State<ChatAddRoomPage> {
+  String roomName = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('채팅 방 만들기'), //ルーム作成
-      ),
+      appBar: ChatAppBar(),
       body: Center(
         child: Container(
           padding: EdgeInsets.all(32),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               TextFormField(
-                decoration: InputDecoration(labelText: '채팅방 이름을 작성해 주세요'), //チャットルーム名
+                decoration: InputDecoration(labelText: '채팅방 이름을 작성해 주세요'),
                 keyboardType: TextInputType.multiline,
                 maxLength: 30,
                 maxLines: 1,
@@ -35,9 +34,7 @@ class _AddPostPageState extends State<AddRoomListTest> {
                   });
                 },
               ),
-              const SizedBox(
-                height: 8,
-              ),
+              const SizedBox(height: 8),
               Container(
                 width: double.infinity,
                 child: ElevatedButton(

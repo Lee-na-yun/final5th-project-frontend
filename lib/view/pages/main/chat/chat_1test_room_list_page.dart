@@ -1,19 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_firestore_steam1/models/session_user.dart';
-import 'package:riverpod_firestore_steam1/provider/auth_provider.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_test_add_room_page.dart';
 
 import 'chat_test_page.dart';
 
-class RoomListPageTest extends ConsumerWidget {
+class RoomListPageTest1 extends StatelessWidget {
   // 引数からユーザー情報を受け取れるようにする
-  // 사용자의 정보를 받아 온다
-  //RoomListPageTest();
+  // 사용자의 정보를 받아 온다ㅁ내ㅑ
+  RoomListPageTest1();
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    SessionUser _sessionUser = ref.read(authProvider);
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
@@ -32,6 +28,19 @@ class RoomListPageTest extends ConsumerWidget {
                     return Card(
                       child: ListTile(
                         title: Text(document['name']),
+                        trailing: IconButton(
+                          icon: Icon(Icons.input),
+                          onPressed: () async {
+                            // チャットページへ画面遷移 /채팅 페이지로 이동
+                            await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return Text("ee"); //ChatPage(document['name']); //ChatPage(document['name']);
+                                },
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     );
                   }).toList(),

@@ -5,7 +5,7 @@ import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_room_page.da
 
 class ChatList extends StatelessWidget {
   const ChatList({Key? key, required this.user}) : super(key: key);
-  final User user;
+  final dynamic user;
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +43,7 @@ class ChatList extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
                     user.sender,
-                    style: textTheme(
-                            color: kPrimaryColor(), weight: FontWeight.bold)
-                        .headline3,
+                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
                   ),
                 ),
                 subtitle: Padding(
@@ -66,9 +64,7 @@ class ChatList extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 14),
                   child: Text(
                     user.sendDate,
-                    style: textTheme(
-                            color: kchacholGreyColor(), weight: FontWeight.w600)
-                        .bodyText2,
+                    style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).bodyText2,
                   ),
                 )
               ],

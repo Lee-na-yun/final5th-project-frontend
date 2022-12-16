@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 import '../core/http_connector.dart';
@@ -42,7 +41,6 @@ class UserService {
 
     if (responseDto.httpStatus == "CREATED") {
       User user = User.fromJson(responseDto.data);
-      print(user.userName);
       responseDto.data = user;
     }
     return responseDto; // ResponseDto 응답
