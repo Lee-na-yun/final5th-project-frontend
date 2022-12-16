@@ -6,8 +6,8 @@ import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_followin
 import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_profile_page.dart';
 
 class MypageProfile extends StatelessWidget {
-  const MypageProfile({Key? key}) : super(key: key);
-
+  const MypageProfile({Key? key, this.userInfo}) : super(key: key);
+  final userInfo;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,7 +33,7 @@ class MypageProfile extends StatelessWidget {
                   padding: EdgeInsets.all(0),
                   width: 160,
                   child: Text(
-                    "이나윤" + "님",
+                    "${userInfo.user.userName}" + "님",
                     style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
                   ),
                 ),

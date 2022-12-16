@@ -6,6 +6,8 @@ import 'package:logger/logger.dart';
 import 'package:riverpod_firestore_steam1/contoller/write_controller.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/core/util/validator_util.dart';
+import 'package:riverpod_firestore_steam1/models/session_user.dart';
+import 'package:riverpod_firestore_steam1/provider/auth_provider.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/model/main_page_view_model.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/model/write_view_model.dart';
 import '../../../core/util/constant/move.dart';
@@ -39,6 +41,7 @@ class MainPageState extends ConsumerState<MainPage> {
   @override
   Widget build(BuildContext context) {
     ref.read(writeController);
+    SessionUser _userInfo = ref.read(authProvider);
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
@@ -47,7 +50,7 @@ class MainPageState extends ConsumerState<MainPage> {
           ChatPage(),
           Center(child: Text("작성")),
           SearchPage(),
-          MyPageMainPage(),
+          MyPageMainPage(userInfo: _userInfo),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
