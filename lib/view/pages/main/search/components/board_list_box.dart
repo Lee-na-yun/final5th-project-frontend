@@ -56,6 +56,7 @@ class BoardListBox extends StatelessWidget {
 
   Row _buildProfile() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           width: 32,
@@ -72,7 +73,7 @@ class BoardListBox extends StatelessWidget {
         Text(
           board.name,
           style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
-              .headline2,
+              .headline3,
         ),
       ],
     );

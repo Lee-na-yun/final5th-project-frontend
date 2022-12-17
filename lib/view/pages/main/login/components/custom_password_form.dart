@@ -19,7 +19,8 @@ class CustomPasswordForm extends StatelessWidget {
       children: [
         Text(
           "${text}",
-          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700).bodyText1,
+          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700)
+              .bodyText1,
         ),
         SizedBox(height: 4),
         TextFormField(
@@ -29,13 +30,15 @@ class CustomPasswordForm extends StatelessWidget {
               hintText: "비밀번호를 입력해주세요",
               contentPadding: EdgeInsets.only(top: 12, bottom: 12, left: 10),
               isDense: true,
-              border: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
                   color: kmidGreyColor(),
                 ),
               ),
-              hintStyle: textTheme(color: kmidGreyColor(), weight: FontWeight.bold).headline2),
+              hintStyle:
+                  textTheme(color: kmidGreyColor(), weight: FontWeight.bold)
+                      .headline3),
           obscureText: true,
         ),
       ],

@@ -35,7 +35,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
     return Scaffold(
       appBar: HomeAppBar("${userInfo.user.userName}", context: context),
-
       body: _homeBody(),
       endDrawer: _drawer(context, uContrl),
       endDrawerEnableOpenDragGesture: false,
@@ -77,7 +76,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       pinned: false,
-      expandedHeight: 440.0,
+      expandedHeight: 480.0,
       flexibleSpace: FlexibleSpaceBar(
         expandedTitleScale: 1,
         titlePadding: EdgeInsets.only(left: 0),
@@ -124,13 +123,16 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                           Navigator.of(context).pop();
                         },
                         padding: EdgeInsets.zero,
-                        icon: SvgPicture.asset("assets/icon_close.svg", width: 12, height: 12),
+                        icon: SvgPicture.asset("assets/icon_close.svg",
+                            width: 12, height: 12),
                       ),
                     ),
                   ),
                   Text(
                     "설정",
-                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
+                    style: textTheme(
+                            color: kPrimaryColor(), weight: FontWeight.bold)
+                        .headline2,
                   )
                 ],
               )),
@@ -150,17 +152,25 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           _buildMenuList(text: "비밀번호 변경", fontColor: kPrimaryColor()),
           _buildMenuList(text: "고객센터", fontColor: kPrimaryColor()),
           _buildMenuList(text: "버전", fontColor: kPrimaryColor()),
-          _buildMenuList(text: "로그아웃", fontColor: kchacholGreyColor(), uContrl: uContrl),
+          _buildMenuList(
+              text: "로그아웃", fontColor: kchacholGreyColor(), uContrl: uContrl),
         ],
       ),
     );
   }
 
-  ListTile _buildMenuList({required String text, Color? fontColor, FontWeight? fontWeight, uContrl}) {
+  ListTile _buildMenuList(
+      {required String text,
+      Color? fontColor,
+      FontWeight? fontWeight,
+      uContrl}) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 20),
-      title: Text(text, style: textTheme(color: fontColor, weight: fontWeight).headline3),
-      trailing: text != "로그아웃" ? SvgPicture.asset("assets/icon_arrow_next.svg", width: 8) : null,
+      title: Text(text,
+          style: textTheme(color: fontColor, weight: fontWeight).headline3),
+      trailing: text != "로그아웃"
+          ? SvgPicture.asset("assets/icon_arrow_next.svg", width: 8)
+          : null,
       onTap: () {
         _ifPasswordMenu(text);
         _ifLogoutMenu(text, uContrl);
@@ -248,10 +258,10 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                         style: globalToDoItems[index].done == true
                             ? TextStyle(
                                 decoration: TextDecoration.lineThrough,
-                                fontSize: 16,
+                                fontSize: 14,
                                 height: 1.2,
                                 color: kchacholGreyColor())
-                            : textTheme().headline3,
+                            : textTheme().bodyText1,
                       ),
                     ],
                   ),

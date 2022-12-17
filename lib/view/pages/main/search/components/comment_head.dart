@@ -28,7 +28,7 @@ class CommentHead extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Image.asset(
-        "assets/woman1.png",
+        commentmyImg,
         width: 30,
         height: 30,
         fit: BoxFit.cover,
@@ -42,14 +42,16 @@ class CommentHead extends StatelessWidget {
       children: [
         Text(
           commentTitle,
-          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).bodyText1,
+          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+              .bodyText1,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         SizedBox(height: 6),
         Text(
           commentContent,
-          style: textTheme(color: kPrimaryColor(), weight: FontWeight.w200).bodyText1,
+          style: textTheme(color: kPrimaryColor(), weight: FontWeight.w200)
+              .bodyText1,
           maxLines: 5,
           overflow: TextOverflow.ellipsis,
         ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/models/test/board.dart';
@@ -9,6 +10,7 @@ class BoardListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var index;
     return Scaffold(
       appBar: BoardAppBarV2(titlename: "TODOFRIENDS", context: context),
       body: ListView(

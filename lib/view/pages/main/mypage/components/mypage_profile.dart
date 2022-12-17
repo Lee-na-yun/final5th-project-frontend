@@ -23,7 +23,7 @@ class MypageProfile extends StatelessWidget {
                     height: 40,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/woman1.png"),
+                        image: AssetImage("assets/Funny-Bunny.png"),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -34,7 +34,9 @@ class MypageProfile extends StatelessWidget {
                   width: 160,
                   child: Text(
                     "${userInfo.user.userName}" + "님",
-                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
+                    style: textTheme(
+                            color: kPrimaryColor(), weight: FontWeight.bold)
+                        .headline2,
                   ),
                 ),
                 subtitle: Container(
@@ -55,10 +57,14 @@ class MypageProfile extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MyPageProfilePage()),
+                    MaterialPageRoute(
+                        builder: (context) => MyPageProfilePage()),
                   );
                 },
-                child: Text("프로필 수정", style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).bodyText1),
+                child: Text("프로필 수정",
+                    style: textTheme(
+                            color: kchacholGreyColor(), weight: FontWeight.w600)
+                        .bodyText1),
                 style: OutlinedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   shape: RoundedRectangleBorder(
@@ -98,7 +104,8 @@ class MypageProfile extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyPageFollowingPage()),
+                        MaterialPageRoute(
+                            builder: (context) => MyPageFollowingPage()),
                       );
                     },
                     child: Column(
@@ -110,7 +117,10 @@ class MypageProfile extends StatelessWidget {
                         SizedBox(height: 2),
                         Text(
                           "$count",
-                          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                          style: textTheme(
+                                  color: kPrimaryColor(),
+                                  weight: FontWeight.bold)
+                              .headline3,
                         ),
                       ],
                     ),
@@ -124,7 +134,8 @@ class MypageProfile extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyPageFollowPage()),
+                        MaterialPageRoute(
+                            builder: (context) => MyPageFollowPage()),
                       );
                     },
                     child: Column(
@@ -136,7 +147,10 @@ class MypageProfile extends StatelessWidget {
                         SizedBox(height: 2),
                         Text(
                           "$count2",
-                          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                          style: textTheme(
+                                  color: kPrimaryColor(),
+                                  weight: FontWeight.bold)
+                              .headline3,
                         ),
                       ],
                     ),

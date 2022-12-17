@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:riverpod_firestore_steam1/firebase_options.dart';
 import 'package:riverpod_firestore_steam1/models/session_user.dart';
@@ -60,12 +61,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: theme(),
-      navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
-      initialRoute: Move.loginPage,
-      routes: getRouters(),
+    return ScreenUtilInit(
+      designSize: Size(360, 690),
+      builder: (context, child) => MaterialApp(
+        theme: theme(),
+        navigatorKey: navigatorKey,
+        debugShowCheckedModeBanner: false,
+        initialRoute: Move.homePage,
+        routes: getRouters(),
+      ),
     );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/test/event.dart';
+
 import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/inkwell_icon_button_widget.dart';
+
+import '../../../../../models/event.dart';
 
 class UserLength {
   int userLength = users.length;
@@ -17,7 +19,8 @@ class UserLength {
 }
 
 class CalendarListBox extends StatelessWidget {
-  CalendarListBox({Key? key, required this.event, required this.eventIndex}) : super(key: key);
+  CalendarListBox({Key? key, required this.event, required this.eventIndex})
+      : super(key: key);
   final Event event;
   final int eventIndex;
   final List<Event> fuckList = eventList;
@@ -26,56 +29,79 @@ class CalendarListBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(event.startTime, style: textTheme(color: kPrimaryColor()).headline3),
-          SizedBox(width: 10),
-          Expanded(
-            child: Stack(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                  decoration: event.category == "일반"
-                      ? BoxDecoration(
-                          color: Color.fromRGBO(110, 52, 218, 0.1),
-                          borderRadius: BorderRadius.circular(10),
-                        )
-                      : event.category == "업무"
-                          ? BoxDecoration(
-                              color: Color.fromRGBO(113, 220, 252, 0.1),
-                              borderRadius: BorderRadius.circular(10),
-                            )
-                          : BoxDecoration(
-                              color: Color.fromRGBO(225, 225, 29, 0.1),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildCategory(),
-                      SizedBox(height: 4),
-                      _buildTitleText(),
-                      _buildMemo(event.memo),
-                      SizedBox(height: 6),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+      child: _buildDayList(context),
+    );
+  }
+
+  Row _buildDayList(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(event.startTime,
+            style: textTheme(color: kPrimaryColor()).headline3),
+        SizedBox(width: 10),
+        Expanded(
+          child: Stack(
+            children: [
+              Container(
+                padding:
+                    EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 2),
+                decoration: event.category == "일반"
+                    ? BoxDecoration(
+                        color: Color.fromRGBO(110, 52, 218, 0.1),
+                        borderRadius: BorderRadius.circular(10),
+                      )
+                    : event.category == "업무"
+                        ? BoxDecoration(
+                            color: Color.fromRGBO(113, 220, 252, 0.1),
+                            borderRadius: BorderRadius.circular(10),
+                          )
+                        : BoxDecoration(
+                            color: Color.fromRGBO(225, 225, 29, 0.1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildCategory(),
+                    SizedBox(height: 4),
+                    _buildTitleText(),
+                    _buildMemo(event.memo),
+                    SizedBox(height: 6),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        _rowIconAndTextTime(),
+                        SizedBox(width: 8),
+                        _rowIconAndTextLocation(),
+                        SizedBox(width: 10),
+                      ],
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.065,
+                      child: Row(
                         children: [
-                          _rowIconAndTextTime(),
-                          SizedBox(width: 8),
-                          _rowIconAndTextLocation(),
-                          SizedBox(width: 10),
+                          Expanded(
+                            child: ClipRRect(
+                              child: Stack(
+                                children: List.generate(
+                                    UserLength().index(),
+                                    (index) => _buildStackProfileImage(
+                                        index, users.length)),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -93,13 +119,14 @@ class CalendarListBox extends StatelessWidget {
             margin: EdgeInsets.only(top: 6),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(26),
                 color: klightGreyColor(),
               ),
               alignment: Alignment.center,
-              width: 24,
-              height: 24,
-              child: Text("+$num", style: textTheme(weight: FontWeight.bold).bodyText2),
+              width: 26,
+              height: 26,
+              child: Text("+$num",
+                  style: textTheme(weight: FontWeight.bold).bodyText2),
             ),
             padding: EdgeInsets.symmetric(horizontal: _margin),
           );
@@ -115,6 +142,8 @@ class CalendarListBox extends StatelessWidget {
 
     List test = memoLen;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (var memoIndex in test)
           Text(
@@ -134,7 +163,8 @@ class CalendarListBox extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(FontAwesomeIcons.locationDot, size: 10, color: kchacholGreyColor()),
+          Icon(FontAwesomeIcons.locationDot,
+              size: 10, color: kchacholGreyColor()),
           SizedBox(width: 4),
           Text(
             event.location,
@@ -205,7 +235,8 @@ class CalendarListBox extends StatelessWidget {
                   color: Color(0xffFFE681),
                   borderRadius: BorderRadius.circular(8),
                 ),
-      child: Text(event.category, style: textTheme(color: Colors.white).bodyText1),
+      child:
+          Text(event.category, style: textTheme(color: Colors.white).bodyText1),
     );
   }
 }

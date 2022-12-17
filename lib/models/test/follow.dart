@@ -1,3 +1,5 @@
+import 'package:flutter_svg/flutter_svg.dart';
+
 class Follow {
   String userImg;
   String name;
@@ -13,73 +15,73 @@ class Follow {
 // 샘플 데이터
 List<Follow> Follows = [
   Follow(
-    userImg: 'assets/man1.png',
-    name: '홍길동',
-    intro: '반갑습니다, 함께 TODO해요!',
-  ),
-  Follow(
-    userImg: 'assets/man2.png',
-    name: '임꺽정',
-    intro: '반갑습니다, 함께 TODO해요!',
-  ),
-  Follow(
-    userImg: 'assets/aliens.png',
-    name: '장보고',
-    intro: '반갑습니다, 함께 TODO해요!',
-  ),
-  Follow(
-    userImg: 'assets/pig.png',
+    userImg: "assets/No-comments.png",
     name: '이나윤',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: 'assets/woman1.png',
-    name: '장성운',
+    userImg: "assets/No-comments-1.png",
+    name: '최주호',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: 'assets/dog.png',
+    userImg: "assets/No-comments-2.png",
     name: '박서현',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: 'assets/man1.png',
+    userImg: "assets/No-comments-3.png",
     name: '황지현',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: 'assets/man2.png',
-    name: '홍길동',
+    userImg: "assets/No-comments-4.png",
+    name: '장동건',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: 'assets/aliens.png',
-    name: '장보고',
+    userImg: "assets/No-comments-5.svg",
+    name: 'ssar',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: 'assets/pig.png',
-    name: '이나윤',
-    intro: '반갑습니다, 함께 TODO해요!',
-  ),
-  Follow(
-    userImg: 'assets/woman1.png',
+    userImg: "assets/No-comments-6.png",
     name: '장성운',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: 'assets/dog.png',
-    name: '박서현',
+    userImg: "assets/No-comments-7.png",
+    name: '공유',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: 'assets/man1.png',
-    name: '황지현',
+    userImg: "assets/No-comments-8.png",
+    name: '손예진',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: 'assets/man2.png',
-    name: '홍길동',
+    userImg: "assets/No-comments-9.png",
+    name: '이정재',
+    intro: '반갑습니다, 함께 TODO해요!',
+  ),
+  Follow(
+    userImg: "assets/Funny-Bunny.png",
+    name: '이민정',
+    intro: '반갑습니다, 함께 TODO해요!',
+  ),
+  Follow(
+    userImg: "assets/Funny-Bunny-1.png",
+    name: '박서준',
+    intro: '반갑습니다, 함께 TODO해요!',
+  ),
+  Follow(
+    userImg: "assets/Funny-Bunny-2.png",
+    name: 'LALA',
+    intro: '반갑습니다, 함께 TODO해요!',
+  ),
+  Follow(
+    userImg: "assets/Funny-Bunny-3.png",
+    name: 'COS',
     intro: '반갑습니다, 함께 TODO해요!',
   ),
 ];

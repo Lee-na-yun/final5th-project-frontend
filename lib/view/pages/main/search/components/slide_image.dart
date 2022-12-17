@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../../../../models/test/board.dart';
 
 class SlideImage extends StatefulWidget {
   @override
@@ -10,10 +13,12 @@ class SlideImage extends StatefulWidget {
 
 class _SlideImageState extends State<SlideImage> {
   int activeIndex = 0;
+  //final Board board;
+  late int index;
   final sImages = [
-    "assets/man1.png",
-    "assets/man2.png",
-    "assets/woman1.png",
+    "assets/slide_9.jpg",
+    "assets/slide_7.jpg",
+    "assets/slide_1.jpg",
   ];
 
   @override
@@ -30,13 +35,15 @@ class _SlideImageState extends State<SlideImage> {
               viewportFraction: 1,
               enlargeCenterPage: true,
               //enlargeStrategy: CenterPageEnlargeStrategy.height,
-              onPageChanged: (index, reason) => setState(() => activeIndex = index),
+              onPageChanged: (index, reason) =>
+                  setState(() => activeIndex = index),
             ),
-            itemCount: sImages.length,
+            itemCount: 3,
             itemBuilder: (context, index, realIndex) {
-              final sImage = sImages[index];
+              //final sImage = sImages[index];
+              //return buildImage(sImage, index);
 
-              return buildImage(sImage, index);
+              return buildImage(0);
             },
           ),
           const SizedBox(height: 14),
@@ -46,7 +53,7 @@ class _SlideImageState extends State<SlideImage> {
     );
   }
 
-  Widget buildImage(String sImage, int index) {
+  Widget buildImage(int index) {
     return FractionallySizedBox(
       widthFactor: 0.92,
       child: Container(
@@ -55,7 +62,7 @@ class _SlideImageState extends State<SlideImage> {
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(14)),
           child: Image.asset(
-            sImage,
+            sImages[index],
             fit: BoxFit.cover,
           ),
         ),
