@@ -4,8 +4,9 @@ import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_room_page.dart';
 
 class ChatList extends StatelessWidget {
-  const ChatList({Key? key, required this.user}) : super(key: key);
+  const ChatList({Key? key, required this.user, required this.chatroom}) : super(key: key);
   final dynamic user;
+  final dynamic chatroom;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class ChatList extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ChatRoomPage(),
+            builder: (context) => ChatRoomPage(user: user, chatroom: chatroom),
           ),
         );
       },
@@ -42,7 +43,7 @@ class ChatList extends StatelessWidget {
                 title: Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
-                    user.sender,
+                    chatroom['name'], //user.sender,
                     style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
                   ),
                 ),
@@ -63,7 +64,7 @@ class ChatList extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 14),
                   child: Text(
-                    user.sendDate,
+                    chatroom['createdAt'], //user.sendDate,
                     style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).bodyText2,
                   ),
                 )

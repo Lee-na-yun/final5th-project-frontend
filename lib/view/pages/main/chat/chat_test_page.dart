@@ -71,14 +71,17 @@ class _ChatPageState extends State<ChatPage> {
         await FirebaseFirestore.instance.collection('chat_room').doc(widget.name).collection('contents').get();
 
     final message = getData.docs
-        .map((d) => types.TextMessage(
+        .map(
+          (d) => types.TextMessage(
             author: types.User(
               id: d.data()['uid'],
               firstName: d.data()['name'],
             ),
             createdAt: d.data()['createdAt'],
             id: d.data()['id'],
-            text: d.data()['text']))
+            text: d.data()['text'],
+          ),
+        )
         .toList();
 
     setState(() {
