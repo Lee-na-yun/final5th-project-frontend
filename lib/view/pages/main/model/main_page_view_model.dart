@@ -24,12 +24,10 @@ class MainPageViewModel extends StateNotifier<MainPageModel> {
   MainPageViewModel(super.state, this._ref);
 
   Future<void> initViewModel() async {
-    SessionUser sessionUser = _ref.read(authProvider);
-    Logger().d("자동 로그인 되고나서 watch로 userId로 찾아지는 정보 찾기${sessionUser.user.userName}");
-    //ResponseDto responseDto = await userService.fetchUserInfo(sessionUser.user.userId, sessionUser.jwtToken);
-    // if (responseDto.httpStatus == "OK") {
-    //   state = MainPageModel(responseDto.data);
-    // }
-    // ㅎ
+    SessionUser sessionUser = _ref.watch(authProvider);
+    ResponseDto responseDto = await userService.fetchUserInfo(sessionUser.user.userId, sessionUser.jwtToken);
+    if (responseDto.httpStatus == "OK") {
+      state = MainPageModel(responseDto.data);
+    }
   }
 }
