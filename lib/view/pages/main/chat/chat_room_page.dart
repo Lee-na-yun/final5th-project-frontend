@@ -41,9 +41,10 @@ class TextMessage {
 }
 
 class ChatRoomPage extends StatefulWidget {
-  const ChatRoomPage({Key? key, this.user, this.chatroom}) : super(key: key);
+  const ChatRoomPage({Key? key, this.user, this.chatroom, this.userInfo}) : super(key: key);
   final chatroom;
   final user;
+  final userInfo;
   @override
   State<ChatRoomPage> createState() => _ChatRoomPageState();
 }
@@ -55,10 +56,11 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   final TextEditingController _editingMessage = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Logger().d("유저정보를 확인${widget.userInfo.user.userName}");
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        appBar: PreferredSize(preferredSize: Size.fromHeight(55), child: LineAppBar("상대방이름", null)),
+        appBar: PreferredSize(preferredSize: Size.fromHeight(55), child: LineAppBar(widget.chatroom['name'], null)),
         body: Container(
           child: Scaffold(
             body: Column(
@@ -85,7 +87,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                             Timestamp time = documents[index]['chatCreatedAt'];
                             DateTime parsedTimeDate = time.toDate();
                             Logger().d(parsedTimeDate);
-                            return documents[index]['chatUserId'] == 1
+                            return documents[index]['chatUserId'] == widget.userInfo.user.userId
                                 ? MyChat(
                                     text: documents[index]['chatMessageContent'],
                                     time: DateFormat("a hh:mm")
@@ -274,9 +276,9 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
 
   void _handleSubmitted(text) {
     final textMessage = TextMessage(
-      chatUserId: 1, //로그인 한 유저의 아이디( 이것은 프로바이더 RiverPod 숙지하면 사용할 수 있음 )
+      chatUserId: widget.userInfo.user.userId, //로그인 한 유저의 아이디( 이것은 프로바이더 RiverPod 숙지하면 사용할 수 있음 )
       chatMessageId: randomId,
-      chatUserName: "다른사람이다ㅁ",
+      chatUserName: widget.userInfo.user.userName,
       chatMessageContent: _editingMessage.text, //"작성된 메세지",
       chatCreatedAt: DateTime.now(),
     );

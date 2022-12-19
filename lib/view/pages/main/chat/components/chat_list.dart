@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/models/session_user.dart';
 import 'package:riverpod_firestore_steam1/models/test/users.dart';
+import 'package:riverpod_firestore_steam1/provider/auth_provider.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_room_page.dart';
 
-class ChatList extends StatelessWidget {
+class ChatList extends ConsumerWidget {
   const ChatList({Key? key, required this.user, required this.chatroom}) : super(key: key);
   final dynamic user;
   final dynamic chatroom;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser userInfo = ref.watch(authProvider);
     return InkWell(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ChatRoomPage(user: user, chatroom: chatroom),
+            builder: (context) => ChatRoomPage(user: user, chatroom: chatroom, userInfo: userInfo),
           ),
         );
       },

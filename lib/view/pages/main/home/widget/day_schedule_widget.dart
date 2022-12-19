@@ -69,7 +69,8 @@ class DaySchedule extends StatelessWidget {
                   Expanded(
                     child: ClipRRect(
                       child: Stack(
-                        children: List.generate(UserLength().index(), (index) => _buildStackProfileImage(index, users.length)),
+                        children: List.generate(
+                            UserLength().index(), (index) => _buildStackProfileImage(index, users.length)),
                       ),
                     ),
                   ),
@@ -83,12 +84,13 @@ class DaySchedule extends StatelessWidget {
   }
 
   Widget _buildMemo(memoLen) {
-    print("메모길이$memoLen");
+    /*print("메모길이$memoLen");
+
     print("스케줄$eventIndex");
 
     memoLen.forEach((mem) {
       print('나는 $mem을 좋아해');
-    });
+    });*/
 
     List test = memoLen;
     return Column(
@@ -219,7 +221,10 @@ class DaySchedule extends StatelessWidget {
       child: Row(
         children: [
           Flexible(flex: 1, child: Icon(icon, size: 10, color: kchacholGreyColor())),
-          Flexible(flex: 6, child: Text(text, style: textTheme(color: kchacholGreyColor()).bodyText2, maxLines: 1, overflow: TextOverflow.clip)),
+          Flexible(
+              flex: 6,
+              child: Text(text,
+                  style: textTheme(color: kchacholGreyColor()).bodyText2, maxLines: 1, overflow: TextOverflow.clip)),
         ],
       ),
     );

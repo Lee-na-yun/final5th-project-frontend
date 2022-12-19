@@ -34,7 +34,7 @@ class HomePageTop extends StatelessWidget {
                     return SizedBox(width: 10);
                   },
                   itemBuilder: (context, index) {
-                    Logger().d("시발 ${globalScheduleItems.length}");
+                    Logger().d("스케줄 길이 ${globalScheduleItems.length}");
                     List.generate(
                       globalScheduleItems.length,
                       (index) => DaySchedule(
