@@ -6,20 +6,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/contoller/user_controller.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/test/users.dart';
+import 'package:riverpod_firestore_steam1/models/event.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/home_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/home_page_top.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/update_password_page.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/model/main_page_view_model.dart';
 
 import '../../../../models/test/todo.dart';
 
 List<ToDo> globalToDoItems = List.of(ToDoList);
+List<Event> globalScheduleItems = List.of(eventList);
 
 class MyHomePage extends ConsumerStatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
-  final List<User> userList = List.of(users);
-
+  MyHomePage({Key? key, this.userInfo}) : super(key: key);
+  final userInfo;
   @override
   ConsumerState createState() => _MyHomePageState();
 }
@@ -31,10 +30,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   Widget build(BuildContext context) {
     final uContrl = ref.read(userController);
     //User 와 더불어서 만들어지는 데이터가 수시로 변하기 때문에
-    final userInfo = ref.watch(mainPageViewModel);
 
     return Scaffold(
-      appBar: HomeAppBar("${userInfo.user.userName}", context: context),
+      appBar: HomeAppBar("${widget.userInfo.user.userName}", context: context),
       body: _homeBody(),
       endDrawer: _drawer(context, uContrl),
       endDrawerEnableOpenDragGesture: false,
@@ -123,16 +121,13 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                           Navigator.of(context).pop();
                         },
                         padding: EdgeInsets.zero,
-                        icon: SvgPicture.asset("assets/icon_close.svg",
-                            width: 12, height: 12),
+                        icon: SvgPicture.asset("assets/icon_close.svg", width: 12, height: 12),
                       ),
                     ),
                   ),
                   Text(
                     "설정",
-                    style: textTheme(
-                            color: kPrimaryColor(), weight: FontWeight.bold)
-                        .headline2,
+                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
                   )
                 ],
               )),
@@ -152,25 +147,17 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           _buildMenuList(text: "비밀번호 변경", fontColor: kPrimaryColor()),
           _buildMenuList(text: "고객센터", fontColor: kPrimaryColor()),
           _buildMenuList(text: "버전", fontColor: kPrimaryColor()),
-          _buildMenuList(
-              text: "로그아웃", fontColor: kchacholGreyColor(), uContrl: uContrl),
+          _buildMenuList(text: "로그아웃", fontColor: kchacholGreyColor(), uContrl: uContrl),
         ],
       ),
     );
   }
 
-  ListTile _buildMenuList(
-      {required String text,
-      Color? fontColor,
-      FontWeight? fontWeight,
-      uContrl}) {
+  ListTile _buildMenuList({required String text, Color? fontColor, FontWeight? fontWeight, uContrl}) {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 20),
-      title: Text(text,
-          style: textTheme(color: fontColor, weight: fontWeight).headline3),
-      trailing: text != "로그아웃"
-          ? SvgPicture.asset("assets/icon_arrow_next.svg", width: 8)
-          : null,
+      title: Text(text, style: textTheme(color: fontColor, weight: fontWeight).headline3),
+      trailing: text != "로그아웃" ? SvgPicture.asset("assets/icon_arrow_next.svg", width: 8) : null,
       onTap: () {
         _ifPasswordMenu(text);
         _ifLogoutMenu(text, uContrl);
@@ -256,11 +243,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                       Text(
                         globalToDoItems[index].content,
                         style: globalToDoItems[index].done == true
-                            ? TextStyle(
-                                decoration: TextDecoration.lineThrough,
-                                fontSize: 14,
-                                height: 1.2,
-                                color: kchacholGreyColor())
+                            ? TextStyle(decoration: TextDecoration.lineThrough, fontSize: 14, height: 1.2, color: kchacholGreyColor())
                             : textTheme().bodyText1,
                       ),
                     ],

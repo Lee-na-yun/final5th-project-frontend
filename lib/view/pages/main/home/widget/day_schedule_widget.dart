@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/inkwell_icon_button_widget.dart';
+
 import '../../../../../core/theme.dart';
 import '../../../../../models/event.dart';
-import '../../../../../models/test/todo.dart';
 import '../../../../../models/test/users.dart';
 
 class UserLength {
@@ -20,11 +19,9 @@ class UserLength {
 }
 
 class DaySchedule extends StatelessWidget {
-  DaySchedule({Key? key, required this.event, required this.eventIndex})
-      : super(key: key);
+  DaySchedule({Key? key, required this.event, required this.eventIndex}) : super(key: key);
   final Event event;
   final int eventIndex;
-  final int lentgh = ToDoList.length;
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +69,7 @@ class DaySchedule extends StatelessWidget {
                   Expanded(
                     child: ClipRRect(
                       child: Stack(
-                        children: List.generate(
-                            UserLength().index(),
-                            (index) =>
-                                _buildStackProfileImage(index, users.length)),
+                        children: List.generate(UserLength().index(), (index) => _buildStackProfileImage(index, users.length)),
                       ),
                     ),
                   ),
@@ -121,8 +115,7 @@ class DaySchedule extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(FontAwesomeIcons.locationDot,
-              size: 10, color: kchacholGreyColor()),
+          Icon(FontAwesomeIcons.locationDot, size: 10, color: kchacholGreyColor()),
           SizedBox(width: 4),
           Text(
             event.location,
@@ -153,7 +146,7 @@ class DaySchedule extends StatelessWidget {
             overflow: TextOverflow.clip,
           ),
           Text(
-            " ~ " + event.endTime,
+            event.endTime == "" ? "" : " ~ " + event.endTime,
             style: textTheme(color: kchacholGreyColor()).bodyText1,
             maxLines: 1,
             overflow: TextOverflow.clip,
@@ -214,8 +207,7 @@ class DaySchedule extends StatelessWidget {
               alignment: Alignment.center,
               width: 26,
               height: 26,
-              child: Text("+$num",
-                  style: textTheme(weight: FontWeight.bold).bodyText2),
+              child: Text("+$num", style: textTheme(weight: FontWeight.bold).bodyText2),
             ),
             padding: EdgeInsets.symmetric(horizontal: _margin),
           );
@@ -226,14 +218,8 @@ class DaySchedule extends StatelessWidget {
       padding: EdgeInsets.only(left: 14),
       child: Row(
         children: [
-          Flexible(
-              flex: 1, child: Icon(icon, size: 10, color: kchacholGreyColor())),
-          Flexible(
-              flex: 6,
-              child: Text(text,
-                  style: textTheme(color: kchacholGreyColor()).bodyText2,
-                  maxLines: 1,
-                  overflow: TextOverflow.clip)),
+          Flexible(flex: 1, child: Icon(icon, size: 10, color: kchacholGreyColor())),
+          Flexible(flex: 6, child: Text(text, style: textTheme(color: kchacholGreyColor()).bodyText2, maxLines: 1, overflow: TextOverflow.clip)),
         ],
       ),
     );
@@ -271,8 +257,7 @@ class DaySchedule extends StatelessWidget {
                         color: Color(0xffFFE681),
                         borderRadius: BorderRadius.circular(8),
                       ),
-            child: Text(event.category,
-                style: textTheme(color: Colors.white).bodyText1),
+            child: Text(event.category, style: textTheme(color: Colors.white).bodyText1),
           ),
         ],
       ),

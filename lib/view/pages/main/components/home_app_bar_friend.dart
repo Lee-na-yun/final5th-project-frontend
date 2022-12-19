@@ -3,13 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/test/follow.dart';
 import 'package:riverpod_firestore_steam1/models/test/users.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/home/notice_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/friends_radio.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/widgets/k_stack_icon.dart';
-
-import '../home/update_password_page.dart';
 
 class HomeAppBarFriend extends AppBar implements PreferredSizeWidget {
   var index;
@@ -113,7 +108,7 @@ class HomeAppBarFriend extends AppBar implements PreferredSizeWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "안녕, ",
+                    "",
                     style: GoogleFonts.notoSans(
                       textStyle: TextStyle(
                         fontSize: 16,
@@ -136,7 +131,7 @@ class HomeAppBarFriend extends AppBar implements PreferredSizeWidget {
                     ),
                   ),
                   Text(
-                    "님:)",
+                    "님의 스케줄",
                     style: GoogleFonts.notoSans(
                       textStyle: TextStyle(
                         fontSize: 16,

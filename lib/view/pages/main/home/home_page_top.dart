@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/day_date_widget.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/day_schedule_widget.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/inkwell_icon_button_widget.dart';
 
-import '../../../../models/event.dart';
+import 'my_home_page.dart';
 
 class HomePageTop extends StatelessWidget {
   const HomePageTop({Key? key}) : super(key: key);
@@ -28,20 +29,21 @@ class HomePageTop extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: eventList.length,
+                  itemCount: globalScheduleItems.length,
                   separatorBuilder: (context, index) {
                     return SizedBox(width: 10);
                   },
                   itemBuilder: (context, index) {
+                    Logger().d("시발 ${globalScheduleItems.length}");
                     List.generate(
-                      eventList.length,
+                      globalScheduleItems.length,
                       (index) => DaySchedule(
-                        event: eventList[index],
+                        event: globalScheduleItems[index],
                         eventIndex: index,
                       ),
                     );
                     return DaySchedule(
-                      event: eventList[index],
+                      event: globalScheduleItems[index],
                       eventIndex: index,
                     );
                   },
@@ -75,8 +77,7 @@ class HomePageTop extends StatelessWidget {
         onTap: () {
           print("클릭 됨 11월 버튼");
         },
-        child:
-            Text("12월", style: textTheme(weight: FontWeight.bold).headline1));
+        child: Text("12월", style: textTheme(weight: FontWeight.bold).headline1));
   }
 }
 

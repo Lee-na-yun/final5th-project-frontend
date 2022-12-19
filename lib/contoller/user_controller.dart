@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/dto/response_dto.dart';
 import 'package:riverpod_firestore_steam1/dto/user/auth_req_dto.dart';
 import 'package:riverpod_firestore_steam1/models/session_user.dart';
 import 'package:riverpod_firestore_steam1/provider/auth_provider.dart';
 import 'package:riverpod_firestore_steam1/service/user_service.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/my_alert_dialog.dart';
+
 import '../core/util/constant/move.dart';
 
 /**
@@ -47,32 +46,44 @@ class UserController {
   //   Navigator.popAndPushNamed(mContext!, Move.joinPage);
   // }
 
-  Future<void> join({required String username, required String password, required String email}) async {
+  Future<void> join(
+      {required String username,
+      required String password,
+      required String email}) async {
     // 1. DTO 변환
-    JoinReqDto joinReqDto =
-        JoinReqDto(userName: username, userPassword: password, userEmail: email, userRealname: username, userPhonenumber: password);
+    JoinReqDto joinReqDto = JoinReqDto(
+        userName: username,
+        userPassword: password,
+        userEmail: email,
+        userRealname: username,
+        userPhonenumber: password);
 
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchJoin(joinReqDto);
 
     // 3. 비지니스 로직 처리
     if (responseDto.httpStatus == "CREATED") {
-      ScaffoldMessenger.of(mContext!).showSnackBar(const SnackBar(content: Text("회원가입 성공")));
+      ScaffoldMessenger.of(mContext!)
+          .showSnackBar(const SnackBar(content: Text("회원가입 성공")));
       Navigator.popAndPushNamed(mContext!, Move.loginPage);
       // 4. 응답된 데이터를 ViewModel에 반영해야 한다면 통신 성공시에 추가하기
     } else {
       //젠장,, 아래의 cupertino다이얼로그는 안 뜸
       //showCupertinoDialog(context: mContext!, builder: (context) => MyAlertDialog(msg: "tlqkf"));
-      showDialog(context: mContext!, builder: (context) => MyAlertDialog(msg: "이메일 또는 비밀번호를 확인해 주세요"));
+      showDialog(
+          context: mContext!,
+          builder: (context) => MyAlertDialog(msg: "닉네임을 다시 입력해 주세요"));
       // ScaffoldMessenger.of(mContext!).showSnackBar(
       //   const SnackBar(content: Text("회원가입 실패")),
       // );
     }
   }
 
-  Future<void> login({required String username, required String password}) async {
+  Future<void> login(
+      {required String username, required String password}) async {
     // 1. DTO 변환
-    LoginReqDto loginReqDto = LoginReqDto(userName: username, userPassword: password);
+    LoginReqDto loginReqDto =
+        LoginReqDto(userName: username, userPassword: password);
 
     // 2. 통신 요청
     ResponseDto responseDto = await (userService.fetchLogin(loginReqDto));
@@ -82,9 +93,13 @@ class UserController {
       String? jwtToken = await secureStorage.read(key: "jwtToken");
       SessionUser sessionUser = SessionUser(responseDto.data, jwtToken, true);
       _ref.read(authProvider.notifier).authentication(sessionUser);
-      Navigator.of(mContext!).pushNamedAndRemoveUntil(Move.homePage, (route) => false);
+      Navigator.of(mContext!)
+          .pushNamedAndRemoveUntil(Move.homePage, (route) => false);
     } else {
-      showDialog(context: mContext!, builder: (context) => MyAlertDialog(msg: "로그인 실패, 아이디 혹은 패스워드 확인해 주세요"));
+      showDialog(
+          context: mContext!,
+          builder: (context) =>
+              MyAlertDialog(msg: "로그인 실패, 아이디 혹은 패스워드 확인해 주세요"));
       // ScaffoldMessenger.of(mContext!).showSnackBar(
       //   const SnackBar(content: Text("로그인 실패")),
       // );
@@ -93,7 +108,8 @@ class UserController {
 
   Future<void> logout() async {
     _ref.read(authProvider.notifier).inValidate();
-    await Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(Move.loginPage, (route) => false);
+    await Navigator.of(navigatorKey.currentContext!)
+        .pushNamedAndRemoveUntil(Move.loginPage, (route) => false);
   }
 
   void moveUserInfoPage() {
