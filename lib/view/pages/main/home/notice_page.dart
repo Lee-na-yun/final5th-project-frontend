@@ -4,10 +4,10 @@ import 'package:riverpod_firestore_steam1/view/pages/main/components/line_app_ba
 
 class NoticePage extends StatelessWidget {
   NoticePage({Key? key}) : super(key: key);
-  String friendImg = "assets/pig.png";
-  String friendName = "홍길동";
+  String friendImg = "assets/No-comments-3.png";
+  String friendName = "장성운";
   String friendTodo = '"프로토타입 제작하기 및..."';
-  String todoImg = "assets/board_1.png";
+  String todoImg = "assets/slide_1.jpg";
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +180,7 @@ class NoticePage extends StatelessWidget {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage("${todoImg}"),
-                        fit: BoxFit.contain,
+                        fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(6),
                     ),

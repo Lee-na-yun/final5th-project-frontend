@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'dart:ffi';
+
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
+
 import '../core/http_connector.dart';
 import '../core/util/response_util.dart';
 import '../dto/response_dto.dart';
@@ -42,14 +43,13 @@ class UserService {
 
     if (responseDto.httpStatus == "CREATED") {
       User user = User.fromJson(responseDto.data);
-      print(user.userName);
       responseDto.data = user;
     }
     return responseDto; // ResponseDto 응답
   }
 
   Future<ResponseDto> fetchUserInfo(int id, String jwtToken) async {
-    Response response = await httpConnector.get("/s/api/user/$id/userrealname", jwtToken: jwtToken);
+    Response response = await httpConnector.get("/user/$id/userrealname111", jwtToken: jwtToken);
     Logger().d("로그인하고 나서 ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
 

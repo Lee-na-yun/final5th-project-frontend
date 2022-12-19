@@ -50,8 +50,8 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
   }
 
   Widget _buildSetTime() {
-    String startT = DateFormat("a K:m").format(startTime).replaceAll("AM", "오전").replaceAll("PM", "오후");
-    String endT = DateFormat("a K:m").format(endTime).replaceAll("AM", "오전").replaceAll("PM", "오후");
+    String startT = DateFormat("a hh:mm").format(startTime).replaceAll("AM", "오전").replaceAll("PM", "오후");
+    String endT = DateFormat("a hh:mm").format(endTime).replaceAll("AM", "오전").replaceAll("PM", "오후");
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Container(
@@ -81,8 +81,7 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
                     ),
                     // In this example, the time value is formatted manually. You can use intl package to
                     // format the value based on the user's locale settings.
-                    child: Text(DateFormat("a K:m").format(startTime).replaceAll("AM", "오전").replaceAll("PM", "오후"),
-                        style: textTheme().headline2),
+                    child: Text(DateFormat("a hh:mm").format(startTime).replaceAll("AM", "오전").replaceAll("PM", "오후"), style: textTheme().headline2),
                   ),
                   Text("~", style: textTheme(color: kchacholGreyColor()).headline1),
                   CupertinoButton(

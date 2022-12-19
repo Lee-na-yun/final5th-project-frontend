@@ -3,7 +3,8 @@ import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/models/test/comment.dart';
 
 class CommentBody extends StatelessWidget {
-  CommentBody({Key? key, required this.comments, required this.text}) : super(key: key);
+  CommentBody({Key? key, required this.comments, required this.text})
+      : super(key: key);
   final Comments comments;
   final TextEditingController _textController = TextEditingController();
   final String text;
@@ -43,7 +44,8 @@ class CommentBody extends StatelessWidget {
         children: [
           Text(
             "${comments.friendName}",
-            style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).bodyText1,
+            style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+                .bodyText1,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -56,7 +58,9 @@ class CommentBody extends StatelessWidget {
                 children: [
                   Text(
                     "${comments.comment}",
-                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.w200).bodyText1,
+                    style: textTheme(
+                            color: kPrimaryColor(), weight: FontWeight.w200)
+                        .bodyText1,
                     maxLines: 5,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -76,7 +80,8 @@ class CommentBody extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(6),
-          child: Image.asset(CommentmyImg, width: 18, height: 18, fit: BoxFit.cover),
+          child: Image.asset(commentmyImg,
+              width: 18, height: 18, fit: BoxFit.cover),
         ),
         SizedBox(width: 8),
         Expanded(

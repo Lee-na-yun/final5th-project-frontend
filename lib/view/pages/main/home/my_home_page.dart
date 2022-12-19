@@ -6,20 +6,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/contoller/user_controller.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/test/users.dart';
+import 'package:riverpod_firestore_steam1/models/event.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/home_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/home_page_top.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/update_password_page.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/model/main_page_view_model.dart';
 
 import '../../../../models/test/todo.dart';
 
 List<ToDo> globalToDoItems = List.of(ToDoList);
+List<Event> globalScheduleItems = List.of(eventList);
 
 class MyHomePage extends ConsumerStatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
-  final List<User> userList = List.of(users);
-
+  MyHomePage({Key? key, this.userInfo}) : super(key: key);
+  final userInfo;
   @override
   ConsumerState createState() => _MyHomePageState();
 }
@@ -31,11 +30,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   Widget build(BuildContext context) {
     final uContrl = ref.read(userController);
     //User 와 더불어서 만들어지는 데이터가 수시로 변하기 때문에
-    final userInfo = ref.watch(mainPageViewModel);
 
     return Scaffold(
-      appBar: HomeAppBar("${userInfo.user.userName}", context: context),
-
+      appBar: HomeAppBar("${widget.userInfo.user.userName}", context: context),
       body: _homeBody(),
       endDrawer: _drawer(context, uContrl),
       endDrawerEnableOpenDragGesture: false,
@@ -77,7 +74,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       pinned: false,
-      expandedHeight: 440.0,
+      expandedHeight: 480.0,
       flexibleSpace: FlexibleSpaceBar(
         expandedTitleScale: 1,
         titlePadding: EdgeInsets.only(left: 0),
@@ -246,12 +243,8 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                       Text(
                         globalToDoItems[index].content,
                         style: globalToDoItems[index].done == true
-                            ? TextStyle(
-                                decoration: TextDecoration.lineThrough,
-                                fontSize: 16,
-                                height: 1.2,
-                                color: kchacholGreyColor())
-                            : textTheme().headline3,
+                            ? TextStyle(decoration: TextDecoration.lineThrough, fontSize: 14, height: 1.2, color: kchacholGreyColor())
+                            : textTheme().bodyText1,
                       ),
                     ],
                   ),

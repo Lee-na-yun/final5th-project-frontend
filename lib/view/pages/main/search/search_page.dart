@@ -1,38 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/components/line_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/board_list_page.dart';
 
 class SearchPage extends StatelessWidget {
   SearchPage({Key? key}) : super(key: key);
 
-  final myImages = [
-    "assets/man1.png",
-    "assets/man2.png",
-    "assets/woman1.png",
-    "assets/pig.png",
-    "assets/dog.png",
-    "assets/aliens.png",
-    "assets/man1.png",
-    "assets/man2.png",
-    "assets/woman1.png",
-    "assets/pig.png",
-    "assets/dog.png",
-    "assets/aliens.png",
-    "assets/man1.png",
-    "assets/man2.png",
-    "assets/woman1.png",
-    "assets/pig.png",
-    "assets/dog.png",
-    "assets/aliens.png",
-    "assets/man1.png",
-    "assets/man2.png",
-    "assets/woman1.png",
-    "assets/pig.png",
-    "assets/dog.png",
-    "assets/aliens.png",
-  ];
+  // final myImages = [
+  //   NetworkImage("https://source.unsplash.com/random"),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +31,10 @@ class SearchPage extends StatelessWidget {
               crossAxisSpacing: 4,
               mainAxisSpacing: 4,
             ),
-            itemCount: myImages.length,
+            itemCount: 48,
             itemBuilder: (BuildContext context, int index) {
               return IconButton(
+                padding: EdgeInsets.zero,
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -65,14 +43,23 @@ class SearchPage extends StatelessWidget {
                 },
                 icon: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
-                  child: Image.asset(
-                    "${myImages[index]}",
-                    width: double.infinity,
-                    height: double.infinity,
+                  child: Image(
+                    image: NetworkImage(
+                        "https://source.unsplash.com/random?sig=$index/200x200"),
                     fit: BoxFit.cover,
+                    width: 200,
+                    height: 200,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      color: kchacholGreyColor(),
+                      child: const Icon(
+                        Icons.error_outline_rounded,
+                        color: primary,
+                        size: 40,
+                      ),
+                    ),
                   ),
                 ),
-                padding: EdgeInsets.zero,
+                //padding: EdgeInsets.zero,
               );
             },
           ),
@@ -103,13 +90,17 @@ class SearchPage extends StatelessWidget {
                       filled: true,
                       fillColor: klightGreyColor(),
                       hintText: "닉네임,키워드로 검색하세요",
-                      contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
+                      contentPadding:
+                          EdgeInsets.only(top: 10, bottom: 10, left: 20),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       isDense: true,
-                      hintStyle: textTheme(color: kchacholGreyColor(), weight: FontWeight.bold).headline3,
+                      hintStyle: textTheme(
+                              color: kchacholGreyColor(),
+                              weight: FontWeight.bold)
+                          .headline3,
                     ),
                     keyboardType: TextInputType.text),
               ),

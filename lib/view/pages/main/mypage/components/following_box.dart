@@ -31,7 +31,9 @@ class FollowingBox extends StatelessWidget {
             children: [
               Text(
                 follow.name,
-                style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                style:
+                    textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+                        .headline3,
               ),
               Container(
                 width: 180,
@@ -55,7 +57,8 @@ class FollowingBox extends StatelessWidget {
       height: 40,
       decoration: BoxDecoration(
         //color: kmidGreyColor(),
-        image: DecorationImage(image: AssetImage(follow.userImg), fit: BoxFit.cover),
+        image: DecorationImage(
+            image: AssetImage(follow.userImg), fit: BoxFit.cover),
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
     );

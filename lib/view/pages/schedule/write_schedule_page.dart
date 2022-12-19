@@ -2,15 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/components/default_button.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/line_app_bar.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/home/my_home_page.dart';
+
 import '../../../core/theme.dart';
 import '../../../models/event.dart';
-import '../../../models/test/todo.dart';
 import '../../../models/test/users.dart';
-import '../main/components/address_component_test.dart';
 import 'components/calendar_date_picker.dart';
 
 class WriteSchedule extends StatefulWidget {
@@ -23,8 +21,10 @@ class WriteSchedule extends StatefulWidget {
 
 class _WriteScheduleState extends State<WriteSchedule> {
   final TextEditingController _textController = TextEditingController();
+  final TextEditingController _scheduleController = TextEditingController();
   TextEditingController _AddressController = TextEditingController();
   final List<User> userList = List.of(users);
+  final List<Event> fuckList = eventList;
 
   int selectedId = 0;
   List<String> hintText = ["반복 안함", "매일", "매주", "매월", "매년"];
@@ -136,7 +136,7 @@ class _WriteScheduleState extends State<WriteSchedule> {
                 //SizedBox(width: 5),
                 SvgPicture.asset(
                   "assets/icon_repeat.svg",
-                  width: 10,
+                  width: 12,
                 ),
                 SizedBox(width: 20),
                 Container(
@@ -261,7 +261,7 @@ class _WriteScheduleState extends State<WriteSchedule> {
             //SizedBox(width: 5),
             SvgPicture.asset(
               "assets/icon_location.svg",
-              width: 10,
+              width: 12,
             ),
             SizedBox(width: 14),
             Container(
@@ -337,7 +337,7 @@ class _WriteScheduleState extends State<WriteSchedule> {
 
   TextField _buildScheduleTitle(text) {
     return TextField(
-      controller: _textController,
+      controller: _scheduleController,
       style: textTheme(color: kchacholGreyColor()).headline2,
       maxLines: null, //이걸 NULL 로 해주고
       maxLength: 100,
@@ -357,14 +357,18 @@ class _WriteScheduleState extends State<WriteSchedule> {
   void _handleSubmitted(text) {
     _textController.clear();
     print(text);
-
-    ToDo(
-      content: text,
-      time: DateFormat("a K:m").format(new DateTime.now()),
-      date: 08,
-      day: "Mon",
-      done: false,
-    );
+    setState(() {
+      globalScheduleItems.add(Event(
+        category: "일반",
+        color: Color(0xff6E34DA),
+        content: _scheduleController.text,
+        startTime: "09:00",
+        endTime: "",
+        location: "청와대",
+        memo: ["- 안그래요?ㅎㅎㅎ"],
+        profileImg: "",
+      ));
+    });
   }
 
   PreferredSize _buildSearchAppBar(BuildContext context) {
@@ -411,7 +415,7 @@ class _WriteScheduleState extends State<WriteSchedule> {
             Positioned(
               top: 8,
               left: 4,
-              child: SvgPicture.asset("assets/icon_pen.svg", width: 11),
+              child: SvgPicture.asset("assets/icon_pen.svg", width: 13),
             ),
             TextField(
               controller: _textController,
@@ -456,7 +460,7 @@ class _WriteScheduleState extends State<WriteSchedule> {
             //SizedBox(width: 5),
             SvgPicture.asset(
               "assets/icon_invite.svg",
-              width: 10,
+              width: 12,
             ),
             SizedBox(width: 14),
             Container(
@@ -521,6 +525,7 @@ class _WriteScheduleState extends State<WriteSchedule> {
       child: Center(
         child: ElevatedButton(
           onPressed: () {
+            _handleSubmitted("go");
             Navigator.popAndPushNamed(context, "/home");
           },
           style: ElevatedButton.styleFrom(

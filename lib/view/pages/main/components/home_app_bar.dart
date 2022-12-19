@@ -4,13 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/core/util/constant/move.dart';
-import 'package:riverpod_firestore_steam1/models/test/follow.dart';
 import 'package:riverpod_firestore_steam1/models/test/users.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/home/notice_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/widget/friends_radio.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/widgets/k_stack_icon.dart';
-
-import '../home/update_password_page.dart';
 
 class HomeAppBar extends AppBar implements PreferredSizeWidget {
   var index;
@@ -170,7 +166,7 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
                 onTap: () {
                   Navigator.pushNamed(context, Move.noticePage);
                 },
-                child: KStackIcon(iconData: CupertinoIcons.bell, notificationCount: '9'),
+                child: KStackIcon(iconData: CupertinoIcons.bell, notificationCount: '3'),
               ),
               SizedBox(width: 10),
               Builder(builder: (context) {
@@ -197,7 +193,7 @@ class HomeAppBar extends AppBar implements PreferredSizeWidget {
   // Widget? get leading => Text("dd");
   //
   // @override
-  // //final Size preferredSize; // This didnot work for me.
+  // //final Size preferredSize; // This didnot work for me.3
   // Size get preferredSize => Size.fromHeight(55); //This should work.
   @override
   ShapeBorder? get shape => RoundedRectangleBorder(

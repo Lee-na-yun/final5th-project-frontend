@@ -1,19 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:riverpod_firestore_steam1/dto/chat/chat_req_dto.dart';
 import 'package:riverpod_firestore_steam1/dto/response_dto.dart';
 import 'package:riverpod_firestore_steam1/dto/write/todo_req_dto.dart';
-import 'package:riverpod_firestore_steam1/models/schedule/todo_api_repository.dart';
 import 'package:riverpod_firestore_steam1/service/write_service.dart';
-import 'package:riverpod_firestore_steam1/service/write_service.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/model/write_view_model.dart';
 
-import '../models/chat/chat_firestore_repository.dart';
-import '../models/schedule/todo.dart';
 import '../models/session_user.dart';
 import '../provider/auth_provider.dart';
-import '../service/write_service.dart';
 
 final writeController = Provider<WriteController>((ref) {
   return WriteController(ref);
@@ -27,7 +18,7 @@ class WriteController {
 
   Future<void> insert({required String todoTitle, required bool isFinished, required dynamic? userId}) async {
     // 1. DTO 변환
-    TodoReqDto todoReqDto = TodoReqDto(todoTitle: todoTitle, isFinished: isFinished, userId: userId);
+    TodoReqDto todoReqDto = TodoReqDto(todoTitle: todoTitle, isFinished: isFinished);
 
     // 2. 통신 요청
     ResponseDto responseDto = await writeService.fetchInsert(todoReqDto, _ref.read(authProvider));

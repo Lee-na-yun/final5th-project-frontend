@@ -47,10 +47,8 @@ class _AddPostPageState extends State<AddRoomListTest> {
 
                     await FirebaseFirestore.instance.collection('chat_room').doc(roomName).set({
                       'name': roomName,
-                      'createdAt': DateFormat("y MMM d a h:mm").format(date).replaceAll("AM", "오전").replaceAll(
-                          "PM",
-                          "오"
-                              "후"),
+                      'createdAt':
+                          DateFormat("y MMM d a hh:mm").format(date).replaceAll("AM", "오전").replaceAll("PM", "오후"),
                     });
                     Navigator.of(context).pop();
                   },

@@ -130,15 +130,24 @@ class _ProfileTabState extends State<ProfileTabV2>
               crossAxisSpacing: 4,
               mainAxisSpacing: 4,
             ),
-            itemCount: myImages.length,
+            itemCount: 40,
             itemBuilder: (context, index) {
               return ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  "${myImages[index]}",
-                  width: 104,
-                  height: 104,
+                child: Image(
+                  image: NetworkImage(
+                      "https://source.unsplash.com/random?sig=$index/200x200"),
                   fit: BoxFit.cover,
+                  width: 200,
+                  height: 200,
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    color: kchacholGreyColor(),
+                    child: const Icon(
+                      Icons.error_outline_rounded,
+                      color: primary,
+                      size: 40,
+                    ),
+                  ),
                 ),
               );
             },
@@ -148,22 +157,23 @@ class _ProfileTabState extends State<ProfileTabV2>
           physics: BouncingScrollPhysics(),
           dragStartBehavior: DragStartBehavior.down,
           children: [
-            _TimelineList(),
-            _TimelineList(),
-            _TimelineList(),
-            _TimelineList(),
-            _TimelineList(),
-            _TimelineList(),
-            _TimelineList(),
-            _TimelineList(),
-            _TimelineList(),
+            _TimelineList("18", "일요일", "파이널 프로젝트 마무리!"),
+            _TimelineList("19", "월요일", "하브루타 노트 작성하기"),
+            _TimelineList("20", "화요일", "블로그 정리하기"),
+            _TimelineList("21", "수요일", "플러터 라이브러리 공부 및 블로그 정리"),
+            _TimelineList("22", "목요일", "PPT 제작"),
+            _TimelineList("23", "금요일", "TODOFRIENDS 앱 영상 촬영하기"),
+            _TimelineList("24", "토요일", "팀원들이랑 일정 공유하기"),
+            _TimelineList("25", "일요일", "강아지 산책하기"),
+            _TimelineList("26", "월요일", "파이널 프로젝트 마무리!"),
+            _TimelineList("27", "화요일", "노션 정리"),
           ],
         ),
       ],
     );
   }
 
-  Container _TimelineList() {
+  Container _TimelineList(String date, String day, String content) {
     return Container(
       padding: EdgeInsets.only(left: 20, right: 20, bottom: 4),
       child: Row(
@@ -175,13 +185,13 @@ class _ProfileTabState extends State<ProfileTabV2>
             child: Column(
               children: [
                 Text(
-                  "02",
+                  date,
                   style:
                       textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
                           .headline2,
                 ),
                 Text(
-                  "월요일",
+                  day,
                   style: textTheme(color: kchacholGreyColor()).bodyText2,
                 ),
               ],
@@ -206,7 +216,7 @@ class _ProfileTabState extends State<ProfileTabV2>
                   ),
                   SizedBox(width: 10),
                   Text(
-                    "플러터 디자인 하기",
+                    content,
                     style: textTheme(
                             color: kPrimaryColor(), weight: FontWeight.w500)
                         .bodyText1,

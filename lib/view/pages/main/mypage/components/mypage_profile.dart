@@ -6,8 +6,8 @@ import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_followin
 import 'package:riverpod_firestore_steam1/view/pages/main/mypage/mypage_profile_page.dart';
 
 class MypageProfile extends StatelessWidget {
-  const MypageProfile({Key? key}) : super(key: key);
-
+  const MypageProfile({Key? key, this.userInfo}) : super(key: key);
+  final userInfo;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +23,7 @@ class MypageProfile extends StatelessWidget {
                     height: 40,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/woman1.png"),
+                        image: AssetImage("assets/Funny-Bunny.png"),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -33,8 +33,10 @@ class MypageProfile extends StatelessWidget {
                   padding: EdgeInsets.all(0),
                   width: 160,
                   child: Text(
-                    "이나윤" + "님",
-                    style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline2,
+                    "${userInfo.user.userName}" + "님",
+                    style: textTheme(
+                            color: kPrimaryColor(), weight: FontWeight.bold)
+                        .headline2,
                   ),
                 ),
                 subtitle: Container(
@@ -55,10 +57,14 @@ class MypageProfile extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MyPageProfilePage()),
+                    MaterialPageRoute(
+                        builder: (context) => MyPageProfilePage()),
                   );
                 },
-                child: Text("프로필 수정", style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w600).bodyText1),
+                child: Text("프로필 수정",
+                    style: textTheme(
+                            color: kchacholGreyColor(), weight: FontWeight.w600)
+                        .bodyText1),
                 style: OutlinedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   shape: RoundedRectangleBorder(
@@ -98,7 +104,8 @@ class MypageProfile extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyPageFollowingPage()),
+                        MaterialPageRoute(
+                            builder: (context) => MyPageFollowingPage()),
                       );
                     },
                     child: Column(
@@ -110,7 +117,10 @@ class MypageProfile extends StatelessWidget {
                         SizedBox(height: 2),
                         Text(
                           "$count",
-                          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                          style: textTheme(
+                                  color: kPrimaryColor(),
+                                  weight: FontWeight.bold)
+                              .headline3,
                         ),
                       ],
                     ),
@@ -124,7 +134,8 @@ class MypageProfile extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyPageFollowPage()),
+                        MaterialPageRoute(
+                            builder: (context) => MyPageFollowPage()),
                       );
                     },
                     child: Column(
@@ -136,7 +147,10 @@ class MypageProfile extends StatelessWidget {
                         SizedBox(height: 2),
                         Text(
                           "$count2",
-                          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
+                          style: textTheme(
+                                  color: kPrimaryColor(),
+                                  weight: FontWeight.bold)
+                              .headline3,
                         ),
                       ],
                     ),

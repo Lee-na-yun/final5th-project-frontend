@@ -2,24 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:riverpod_firestore_steam1/contoller/write_controller.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/core/util/validator_util.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/model/main_page_view_model.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/model/write_view_model.dart';
-import '../../../core/util/constant/move.dart';
-import '../../../models/schedule/todo.dart';
-import '../../../models/test/todo.dart';
-import 'components/default_button.dart';
-import 'login/components/line_button.dart';
-import 'mypage/mypage_main_page.dart';
+import 'package:riverpod_firestore_steam1/models/session_user.dart';
+import 'package:riverpod_firestore_steam1/provider/auth_provider.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/chat_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/my_home_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/model/main_page_view_model.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main/model/write_view_model.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/search/search_page.dart';
 
-import 'chat/chat_page.dart';
-import 'home/my_home_page.dart';
+import '../../../models/schedule/todo.dart';
+import '../../../models/test/todo.dart';
+import 'login/components/line_button.dart';
 import 'mypage/mypage_main_page.dart';
 
 class MainPage extends ConsumerStatefulWidget {
@@ -39,15 +34,16 @@ class MainPageState extends ConsumerState<MainPage> {
   @override
   Widget build(BuildContext context) {
     ref.read(writeController);
+    SessionUser _userInfo = ref.read(authProvider);
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
         children: [
-          MyHomePage(),
+          MyHomePage(userInfo: _userInfo),
           ChatPage(),
           Center(child: Text("작성")),
           SearchPage(),
-          MyPageMainPage(),
+          MyPageMainPage(userInfo: _userInfo),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
@@ -115,7 +111,8 @@ class MainPageState extends ConsumerState<MainPage> {
                     padding: EdgeInsets.only(right: 8),
                     child: ConstrainedBox(
                       //입력 만큼 height 늘어나려면 얘로 감싸고 1
-                      constraints: const BoxConstraints(maxHeight: 350), //얘를 주면 됨 2
+                      constraints:
+                          const BoxConstraints(maxHeight: 400), //얘를 주면 됨 2
                       child: TextFormField(
                         //validator: vali,
                         controller: _textController,
@@ -124,9 +121,16 @@ class MainPageState extends ConsumerState<MainPage> {
                         maxLength: 50,
                         decoration: const InputDecoration(
                             hintText: "할 일 작성",
-                            hintStyle: TextStyle(color: Color(0xff9999A3), fontSize: 16, fontWeight: FontWeight.w600),
-                            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
-                            enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xff9999A3))),
+                            hintStyle: TextStyle(
+                                color: Color(0xff9999A3),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xff9999A3))),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xff9999A3))),
                             focusColor: Color(0xff9999A3)),
                         onSaved: (value) {}, //얘는 값을 비워주기 위해서
                       ),
@@ -157,7 +161,7 @@ class MainPageState extends ConsumerState<MainPage> {
                       ),
                       child: Text(
                         "입력",
-                        style: textTheme().headline3,
+                        style: textTheme().bodyText1,
                       ),
                     ))
               ],
@@ -186,14 +190,17 @@ class MainPageState extends ConsumerState<MainPage> {
     });
   }
 
-  Container _buildShowModalBottomSheetTODO(BuildContext context, WidgetRef _ref) {
+  Container _buildShowModalBottomSheetTODO(
+      BuildContext context, WidgetRef _ref) {
     final tm = _ref.watch(todoListViewModel);
     final tc = _ref.read(writeController);
     return Container(
-      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       //위 패딩은 모달창의 터치 가능한 영역 내부 패딩
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30), topRight: Radius.circular(30)),
         color: Colors.white,
       ),
       child: Container(
@@ -222,22 +229,26 @@ class MainPageState extends ConsumerState<MainPage> {
     return [
       BottomNavigationBarItem(
         icon: SvgPicture.asset("assets/icon_bottom_home.svg", width: 20),
-        activeIcon: SvgPicture.asset("assets/icon_bottom_home_on.svg", width: 20),
+        activeIcon:
+            SvgPicture.asset("assets/icon_bottom_home_on.svg", width: 20),
         label: "홈",
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset("assets/icon_bottom_chat.svg", width: 20),
-        activeIcon: SvgPicture.asset("assets/icon_bottom_chat_on.svg", width: 20),
+        activeIcon:
+            SvgPicture.asset("assets/icon_bottom_chat_on.svg", width: 20),
         label: "채팅",
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset("assets/icon_bottom_plus.svg", width: 22),
-        activeIcon: SvgPicture.asset("assets/icon_bottom_plus_on.svg", width: 22),
+        activeIcon:
+            SvgPicture.asset("assets/icon_bottom_plus_on.svg", width: 22),
         label: "글쓰기",
       ),
       BottomNavigationBarItem(
         icon: SvgPicture.asset("assets/icon_bottom_search.svg", width: 20),
-        activeIcon: SvgPicture.asset("assets/icon_bottom_search_on.svg", width: 20),
+        activeIcon:
+            SvgPicture.asset("assets/icon_bottom_search_on.svg", width: 20),
         label: "검색",
       ),
       BottomNavigationBarItem(

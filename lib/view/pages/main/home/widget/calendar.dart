@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/test/event.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../../../../../models/event.dart';
 
 CalendarFormat _calendarFormat = CalendarFormat.month;
 
