@@ -4,18 +4,14 @@ class User {
   String profileImg;
   String sendDate;
 
-  User(
-      {required this.sender,
-      required this.message,
-      required this.profileImg,
-      required this.sendDate});
+  User({required this.sender, required this.message, required this.profileImg, required this.sendDate});
 }
 
 // 샘플 데이터
 List<User> users = [
   User(
     sender: '이나윤',
-    message: '플러터 데이터 뿌리기 너무 어려워ㅠㅠ',
+    message: '플러터 공부 합시다',
     profileImg: 'assets/Funny-Bunny.png',
     sendDate: '오전 9:02',
   ),
@@ -51,8 +47,7 @@ List<User> users = [
   ),
   User(
     sender: 'lala',
-    message:
-        "It's a really pretty and useful application! I should spread the word to my friends",
+    message: "It's a really pretty and useful application! I should spread the word to my friends",
     profileImg: 'assets/Funny-Bunny-6.png',
     sendDate: '오후 17:30',
   ),
