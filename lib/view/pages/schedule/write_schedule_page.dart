@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/line_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/home/my_home_page.dart';
@@ -355,19 +356,22 @@ class _WriteScheduleState extends State<WriteSchedule> {
   }
 
   void _handleSubmitted(text) {
-    _textController.clear();
+    DateTime now = DateTime.now();
+    String _parse = DateFormat("hh:mm").format(now);
+
     print(text);
     setState(() {
       globalScheduleItems.add(Event(
         category: "일반",
         color: Color(0xff6E34DA),
         content: _scheduleController.text,
-        startTime: "09:00",
+        startTime: _parse,
         endTime: "",
         location: "청와대",
-        memo: ["- 안그래요?ㅎㅎㅎ"],
+        memo: ["- ${_textController.text}"],
         profileImg: "",
       ));
+      _textController.clear();
     });
   }
 
