@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 
+import '../../../../../models/test/users.dart';
+
 class OtherChat extends StatelessWidget {
-  const OtherChat({Key? key, required this.time, required this.name, required this.text}) : super(key: key);
+  const OtherChat({Key? key, required this.time, required this.name, required this.text, required this.img})
+      : super(key: key);
   final String name;
   final String text;
   final String time;
+  final User img;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class OtherChat extends StatelessWidget {
               height: 36,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/woman1.png"),
+                  image: AssetImage(img.profileImg),
                   fit: BoxFit.cover,
                 ),
               ),

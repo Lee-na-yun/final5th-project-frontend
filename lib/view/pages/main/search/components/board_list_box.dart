@@ -31,7 +31,7 @@ class BoardListBox extends StatelessWidget {
           SizedBox(height: 8),
           Column(
             children: [
-              SlideImage(),
+              SlideImage(board: board),
             ],
           ),
           _buildFavoriteAndCommIcon(context),
@@ -47,9 +47,7 @@ class BoardListBox extends StatelessWidget {
         margin: EdgeInsets.all(3),
         width: 10,
         height: 10,
-        decoration: BoxDecoration(
-            color: currentIndex == index ? Colors.black : Colors.black26,
-            shape: BoxShape.circle),
+        decoration: BoxDecoration(color: currentIndex == index ? Colors.black : Colors.black26, shape: BoxShape.circle),
       );
     });
   }
@@ -65,15 +63,13 @@ class BoardListBox extends StatelessWidget {
             borderRadius: BorderRadius.all(
               Radius.circular(8),
             ),
-            image: DecorationImage(
-                image: AssetImage(board.userImg), fit: BoxFit.cover),
+            image: DecorationImage(image: AssetImage(board.userImg), fit: BoxFit.cover),
           ),
         ),
         SizedBox(width: 10),
         Text(
           board.name,
-          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
-              .headline3,
+          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
         ),
       ],
     );
@@ -85,14 +81,12 @@ class BoardListBox extends StatelessWidget {
       children: [
         Text(
           board.title,
-          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
-              .headline3,
+          style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline3,
         ),
         SizedBox(height: 4),
         Text(
           board.content,
-          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w200)
-              .bodyText1,
+          style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w200).bodyText1,
         )
       ],
     );
@@ -124,8 +118,7 @@ class BoardListBox extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => BoardListCommentPage()),
+                    MaterialPageRoute(builder: (context) => BoardListCommentPage()),
                   );
                 },
                 padding: EdgeInsets.zero,

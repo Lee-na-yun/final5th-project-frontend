@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/my_chat.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/chat/components/other_chat.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main/components/line_app_bar.dart';
@@ -96,6 +97,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                                         .replaceAll("PM", "오후"),
                                   )
                                 : OtherChat(
+                                    img: users[index],
                                     time: DateFormat("a hh:mm")
                                         .format(parsedTimeDate)
                                         .replaceAll("AM", "오전")

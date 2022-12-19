@@ -34,6 +34,16 @@ class _ChatAddRoomPageState extends State<ChatAddRoomPage> {
                   });
                 },
               ),
+              TextFormField(
+                decoration: InputDecoration(labelText: '채팅방 설명을 입력해 주세요'),
+                keyboardType: TextInputType.multiline,
+                maxLines: 1,
+                onChanged: (String value) {
+                  setState(() {
+                    roomName = value;
+                  });
+                },
+              ),
               const SizedBox(height: 8),
               Container(
                 width: double.infinity,

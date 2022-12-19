@@ -7,6 +7,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../../models/test/board.dart';
 
 class SlideImage extends StatefulWidget {
+  const SlideImage({Key? key, this.board}) : super(key: key);
+  final board;
   @override
   State<SlideImage> createState() => _SlideImageState();
 }
@@ -15,11 +17,7 @@ class _SlideImageState extends State<SlideImage> {
   int activeIndex = 0;
   //final Board board;
   late int index;
-  final sImages = [
-    "assets/slide_9.jpg",
-    "assets/slide_7.jpg",
-    "assets/slide_1.jpg",
-  ];
+  final List<Board> lists = List.of(Boards);
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +33,17 @@ class _SlideImageState extends State<SlideImage> {
               viewportFraction: 1,
               enlargeCenterPage: true,
               //enlargeStrategy: CenterPageEnlargeStrategy.height,
-              onPageChanged: (index, reason) =>
-                  setState(() => activeIndex = index),
+              onPageChanged: (index, reason) => setState(() => activeIndex = index),
             ),
             itemCount: 3,
-            itemBuilder: (context, index, realIndex) {
+            itemBuilder: (context, index, realIndex) => buildImage(index),
+
+            /* (context, index, realIndex) {
               //final sImage = sImages[index];
               //return buildImage(sImage, index);
 
-              return buildImage(0);
-            },
+              return buildImage(index);
+            },*/
           ),
           const SizedBox(height: 14),
           buildIndicator(),
@@ -62,7 +61,7 @@ class _SlideImageState extends State<SlideImage> {
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(14)),
           child: Image.asset(
-            sImages[index],
+            widget.board.boardImg[index],
             fit: BoxFit.cover,
           ),
         ),
@@ -73,7 +72,7 @@ class _SlideImageState extends State<SlideImage> {
   Widget buildIndicator() {
     return AnimatedSmoothIndicator(
       activeIndex: activeIndex,
-      count: sImages.length,
+      count: 3,
       effect: SlideEffect(
         dotWidth: 6,
         dotHeight: 6,

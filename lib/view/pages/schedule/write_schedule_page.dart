@@ -28,7 +28,7 @@ class _WriteScheduleState extends State<WriteSchedule> {
   final List<Event> fuckList = eventList;
 
   int selectedId = 0;
-  List<String> hintText = ["반복 안함", "매일", "매주", "매월", "매년"];
+  List<String> hintText = ["반복 안함", "매일", "매주", "매월"];
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +181,6 @@ class _WriteScheduleState extends State<WriteSchedule> {
                       _buildRepeatButton(1, "매일"),
                       _buildRepeatButton(2, "매주"),
                       _buildRepeatButton(3, "매월"),
-                      _buildRepeatButton(4, "매년"),
                     ],
                   ),
                 ),
