@@ -23,8 +23,6 @@ class AuthProvider extends StateNotifier<SessionUser> {
   AuthProvider(super.state, this._ref);
 
   Future<void> autoLogin() async {
-    final _model = _ref.read(mainPageViewModel);
-
     String? jwtToken = await secureStorage.read(key: "jwtToken");
     if (jwtToken != null) {
       Logger().d(jwtToken);

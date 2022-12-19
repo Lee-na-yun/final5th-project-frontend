@@ -25,7 +25,6 @@ class MainPageViewModel extends StateNotifier<MainPageModel> {
 
   Future<void> initViewModel() async {
     SessionUser sessionUser = _ref.read(authProvider);
-    Logger().d("유저 아이디 찾아지나? ${sessionUser.user.userId}");
     ResponseDto responseDto = await userService.fetchUserInfo(sessionUser.user.userId, sessionUser.jwtToken);
     if (responseDto.httpStatus == "OK") {
       state = MainPageModel(responseDto.data);
