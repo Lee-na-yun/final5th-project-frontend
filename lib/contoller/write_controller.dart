@@ -16,7 +16,7 @@ class WriteController {
 
   WriteController(this._ref);
 
-  Future<void> insert({required String todoTitle, required bool isFinished, required dynamic? userId}) async {
+  Future<void> insert({required String todoTitle, required bool isFinished}) async {
     // 1. DTO 변환
     TodoReqDto todoReqDto = TodoReqDto(todoTitle: todoTitle, isFinished: isFinished);
 
