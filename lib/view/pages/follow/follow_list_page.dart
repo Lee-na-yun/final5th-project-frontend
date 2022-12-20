@@ -60,7 +60,7 @@ class _FollowListPageState extends State<FollowListPage>
                 isDense: true,
                 hintStyle: textTheme(
                         color: kchacholGreyColor(), weight: FontWeight.bold)
-                    .headline3,
+                    .bodyText1,
               ),
               keyboardType: TextInputType.text),
           Positioned(

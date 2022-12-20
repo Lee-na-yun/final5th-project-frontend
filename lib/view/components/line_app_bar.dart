@@ -15,7 +15,7 @@ class LineAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: SvgPicture.asset("assets/icon_arrow_back.svg", width: 10),
+        icon: SvgPicture.asset("assets/icon_arrow_back.svg", width: 9),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -24,7 +24,8 @@ class LineAppBar extends StatelessWidget {
       titleSpacing: 0,
       title: Text(
         "${title}",
-        style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold).headline1,
+        style: textTheme(color: kPrimaryColor(), weight: FontWeight.bold)
+            .headline3,
       ),
       backgroundColor: Colors.transparent,
       // shape: Border(

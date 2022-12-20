@@ -34,7 +34,7 @@ class MyPageBody extends StatelessWidget {
                     "유저이름",
                     style: textTheme(
                             color: kPrimaryColor(), weight: FontWeight.bold)
-                        .headline2,
+                        .headline3,
                   ),
                 ),
                 subtitle: Container(
@@ -62,7 +62,7 @@ class MyPageBody extends StatelessWidget {
                 child: Text("프로필 수정",
                     style: textTheme(
                             color: kchacholGreyColor(), weight: FontWeight.w600)
-                        .bodyText1),
+                        .bodyText2),
                 style: OutlinedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                   shape: RoundedRectangleBorder(

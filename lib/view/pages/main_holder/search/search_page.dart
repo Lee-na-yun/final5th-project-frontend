@@ -74,13 +74,14 @@ class SearchPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 14),
         child: AppBar(
-          leading: IconButton(
+          /*leading: IconButton(
             icon: SvgPicture.asset("assets/icon_arrow_back.svg", width: 10),
             onPressed: () {
               Navigator.pop(context);
             },
             color: kPrimaryColor(),
-          ),
+          ),*/
+
           title: Stack(
             children: [
               Container(
@@ -100,7 +101,7 @@ class SearchPage extends StatelessWidget {
                       hintStyle: textTheme(
                               color: kchacholGreyColor(),
                               weight: FontWeight.bold)
-                          .headline3,
+                          .bodyText1,
                     ),
                     keyboardType: TextInputType.text),
               ),
