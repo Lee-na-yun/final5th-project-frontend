@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/models/test/follow.dart';
 import 'package:riverpod_firestore_steam1/view/pages/follow/components/follow_box.dart';
@@ -44,22 +45,34 @@ class _FollowListPageState extends State<FollowListPage>
   Padding _buildSearchBox() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-      child: TextFormField(
-          decoration: InputDecoration(
-              filled: true,
-              fillColor: klightGreyColor(),
-              hintText: "닉네임을 검색하세요",
-              contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10),
+      child: Stack(
+        children: [
+          TextFormField(
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: klightGreyColor(),
+                hintText: "닉네임을 검색하세요",
+                contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                isDense: true,
+                hintStyle: textTheme(
+                        color: kchacholGreyColor(), weight: FontWeight.bold)
+                    .headline3,
               ),
-              isDense: true,
-              hintStyle:
-                  textTheme(color: kchacholGreyColor(), weight: FontWeight.bold)
-                      .headline3,
-              suffixIcon: Image.asset("assets/magnifier_icon.png")),
-          keyboardType: TextInputType.text),
+              keyboardType: TextInputType.text),
+          Positioned(
+            right: 14,
+            top: 10,
+            child: SvgPicture.asset(
+              "assets/icon_glasses.svg",
+              width: 20,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

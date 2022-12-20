@@ -40,7 +40,7 @@ List<Follow> Follows = [
     intro: '반갑습니다, 함께 TODO해요!',
   ),
   Follow(
-    userImg: "assets/No-comments-5.svg",
+    userImg: "assets/No-comments-5.png",
     name: 'ssar',
     intro: '반갑습니다, 함께 TODO해요!',
   ),

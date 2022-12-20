@@ -148,7 +148,7 @@ class CalendarListBox extends StatelessWidget {
         for (var memoIndex in test)
           Text(
             memoIndex.toString(),
-            style: textTheme().headline3,
+            style: textTheme().bodyText1,
           ),
       ],
     );
@@ -211,7 +211,7 @@ class CalendarListBox extends StatelessWidget {
   Text _buildTitleText() {
     return Text(
       event.content,
-      style: textTheme(weight: FontWeight.bold).headline2,
+      style: textTheme(weight: FontWeight.bold).headline3,
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.left,

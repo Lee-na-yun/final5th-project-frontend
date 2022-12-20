@@ -17,7 +17,7 @@ class MyPage {
 // 샘플 데이터
 List<MyPage> MyPages = [
   MyPage(
-    myImg: 'assets/woman1.png',
+    myImg: 'assets/Funny-Bunny.png',
     name: '이나윤',
     intro: '반갑습니다, 함께 TODO해요!',
     followingCount: 150,
