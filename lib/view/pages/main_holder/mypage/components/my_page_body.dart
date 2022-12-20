@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/test/mypage.dart';
 import 'package:riverpod_firestore_steam1/view/pages/follow/follow_list_page.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main_holder/mypage/components/my_page_body.dart';
 import 'package:riverpod_firestore_steam1/view/pages/profile_update/profile_update_page.dart';
 
 class MyPageBody extends StatelessWidget {
-  const MyPageBody({Key? key, this.userInfo}) : super(key: key);
-  final userInfo;
+  const MyPageBody({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,7 +31,7 @@ class MyPageBody extends StatelessWidget {
                   padding: EdgeInsets.all(0),
                   width: 160,
                   child: Text(
-                    "${userInfo.user.userName}",
+                    "유저이름",
                     style: textTheme(
                             color: kPrimaryColor(), weight: FontWeight.bold)
                         .headline2,

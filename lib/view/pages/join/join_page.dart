@@ -52,25 +52,26 @@ class JoinPage extends ConsumerWidget {
       child: ListView(
         children: [
           SizedBox(height: 30),
-          _buildEmailForm(
-            emailVali,
-            _email,
-          ),
-          SizedBox(height: 24),
           CustomForm(
             "유저네임",
             "유저네임을 입력해주세요",
             funValidator: validateNickname(),
             controllerInput: _username,
           ),
+          SizedBox(height: 18),
+          _buildPasswordForm(pwVali, _password1, _password2),
+          SizedBox(height: 24),
+          _buildEmailForm(
+            emailVali,
+            _email,
+          ),
+          SizedBox(height: 24),
           CustomForm(
             "이름",
             "이름을 입력해주세요",
             funValidator: validateNickname(),
             controllerInput: _fullname,
           ),
-          SizedBox(height: 18),
-          _buildPasswordForm(pwVali, _password1, _password2),
           SizedBox(height: 40),
           CustomElevatedButton(
               text: "회원가입 완료",
@@ -96,7 +97,7 @@ class JoinPage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "아이디",
+          "이메일",
           style: textTheme(color: kchacholGreyColor(), weight: FontWeight.w700)
               .bodyText1,
         ),
@@ -114,7 +115,7 @@ class JoinPage extends ConsumerWidget {
                   controller: _controllerInput,
                   validator: emailValidate,
                   decoration: InputDecoration(
-                    hintText: "아이디를 입력해주세요",
+                    hintText: "이메일을 입력해주세요",
                     contentPadding:
                         EdgeInsets.only(top: 12, bottom: 12, left: 10),
                     isDense: true,

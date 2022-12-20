@@ -2,12 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/core/util/constant/move.dart';
 
 class ChatAppBar extends AppBar implements PreferredSizeWidget {
+  final mContext = navigatorKey.currentContext;
   ChatAppBar({super.key});
 
   @override
   bool get automaticallyImplyLeading => false;
+
+  @override
+  Widget? get leading => IconButton(
+        color: Colors.black,
+        onPressed: () {
+          Navigator.pop(mContext!);
+        },
+        icon: Icon(Icons.arrow_back),
+      );
 
   @override
   Color? get backgroundColor => Colors.white;

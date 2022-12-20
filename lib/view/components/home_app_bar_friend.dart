@@ -2,11 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/core/util/constant/move.dart';
 import 'package:riverpod_firestore_steam1/models/test/users.dart';
 import 'package:riverpod_firestore_steam1/view/pages/widget/friends_radio.dart';
 
 class HomeAppBarFriend extends AppBar implements PreferredSizeWidget {
+  final mContext = navigatorKey.currentContext;
   var index;
 
   HomeAppBarFriend(this.username, {super.key, required this.context});
@@ -19,90 +22,17 @@ class HomeAppBarFriend extends AppBar implements PreferredSizeWidget {
   bool get automaticallyImplyLeading => false;
 
   @override
-  // TODO: implement backgroundColor
-  Color? get backgroundColor => kchacholGreyColor();
+  Widget? get leading => IconButton(
+        color: Colors.white,
+        onPressed: () {
+          Navigator.pop(mContext!);
+        },
+        icon: Icon(Icons.arrow_back),
+      );
 
   @override
-  Widget? get title => Row(
-        children: [
-          InkWell(
-            onTap: () {
-              showModalBottomSheet(
-                  //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      padding: EdgeInsets.only(left: 20, right: 20),
-                      //위 패딩은 모달창의 터치 가능한 영역 내부 패딩
-                      //height: elevation,
-                      height: 320,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                        color: Colors.white,
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 18),
-                          child: Column(
-                            children: <Widget>[
-                              // SizedBox(
-                              //   height: 30,
-                              //   width: 50,
-                              //   child: Divider(
-                              //       height: 1,
-                              //       color: kchacholGreyColor(),
-                              //       thickness: 4),
-                              // ),
-                              Container(
-                                width: 50,
-                                height: 4,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  color: kmidGreyColor(),
-                                ),
-                                margin: EdgeInsets.only(bottom: 20),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  width: double.infinity,
-                                  child: SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height / 2,
-                                    //어거지로 리스트뷰 높이 맞춤...
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      padding: EdgeInsets.zero,
-                                      itemCount: userList.length,
-                                      itemBuilder: (context, index) =>
-                                          FriendsRadio(
-                                        userList.length,
-                                        user: User(
-                                          sender: userList[index].sender,
-                                          message: userList[index].message,
-                                          profileImg:
-                                              userList[index].profileImg,
-                                          sendDate: userList[index].sendDate,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  });
-            },
-            child: _homePage(username),
-          ),
-        ],
-      );
+  // TODO: implement backgroundColor
+  Color? get backgroundColor => primary;
 
   Widget _homePage(String? username) {
     return Container(
@@ -166,7 +96,9 @@ class HomeAppBarFriend extends AppBar implements PreferredSizeWidget {
   List<Widget>? get actions => [
         InkWell(
           onTap: () {
-            Navigator.pushNamed(context, "/chat");
+            Logger().d(
+                "fdsafdfsdafsadfdsafsdafsadfsdafsadfsafsadfsa----------------");
+            Navigator.pushReplacementNamed(context, Move.chatListPage);
           },
           child: Row(
             children: [

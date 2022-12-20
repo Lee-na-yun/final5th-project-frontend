@@ -7,8 +7,7 @@ import 'package:riverpod_firestore_steam1/view/pages/main_holder/mypage/componen
 import 'package:riverpod_firestore_steam1/view/pages/main_holder/mypage/components/profile_tab_v2.dart';
 
 class MyPage extends StatelessWidget {
-  const MyPage({Key? key, this.userInfo}) : super(key: key);
-  final userInfo;
+  const MyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class MyPage extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: 22),
-          MyPageBody(userInfo: userInfo),
+          MyPageBody(),
           SizedBox(height: 24),
           Expanded(child: ProfileTabV2()),
         ],

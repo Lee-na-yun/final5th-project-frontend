@@ -4,13 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_firestore_steam1/contoller/write_controller.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
-import 'package:riverpod_firestore_steam1/models/session_user.dart';
-import 'package:riverpod_firestore_steam1/provider/auth_provider.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main_holder/chat/chat_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main_holder/home/my_home_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main_holder/search/search_page.dart';
 
-import '../../../models/schedule/todo.dart';
 import '../../../models/test/todo.dart';
 import '../login/components/line_button.dart';
 import 'mypage/my_page.dart';

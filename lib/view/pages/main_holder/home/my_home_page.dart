@@ -17,8 +17,8 @@ List<ToDo> globalToDoItems = List.of(ToDoList);
 List<Event> globalScheduleItems = List.of(eventList);
 
 class MyHomePage extends ConsumerStatefulWidget {
-  MyHomePage({Key? key, this.userInfo}) : super(key: key);
-  final userInfo;
+  MyHomePage({Key? key}) : super(key: key);
+
   @override
   ConsumerState createState() => _MyHomePageState();
 }
@@ -32,7 +32,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     //User 와 더불어서 만들어지는 데이터가 수시로 변하기 때문에
 
     return Scaffold(
-      appBar: HomeAppBar("${widget.userInfo.user.userName}", context: context),
+      appBar: HomeAppBar("유저이름", context: context),
       body: _homeBody(),
       endDrawer: _drawer(context, uContrl),
       endDrawerEnableOpenDragGesture: false,

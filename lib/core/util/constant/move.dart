@@ -21,9 +21,10 @@ class Move {
   static String joinPage = "/join";
   static String myPage = "/myPage";
   static String writePage = "/write";
-  static String chatPage = "/chat";
+  static String chatListPage = "/chat";
+  static String chatRoomPage = "/chatRoom";
   static String noticePage = "/notice";
-  static String chatRoomPageTest = "/roomtest";
+  //static String chatRoomPageTest = "/roomtest";
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -36,8 +37,9 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.findPassword: (context) => FindPasswordPage(),
     Move.myPage: (context) => MyPage(),
     Move.friendPage: (context) => FriendHomePage(),
-    Move.chatPage: (context) => ChatRoomPage(),
+    Move.chatRoomPage: (context) => ChatRoomPage(),
+    Move.chatListPage: (context) => ChatPage(),
     Move.noticePage: (context) => NoticePage(),
-    Move.chatRoomPageTest: (context) => RoomListPageTest(),
+    //Move.chatRoomPageTest: (context) => RoomListPageTest(),
   };
 }

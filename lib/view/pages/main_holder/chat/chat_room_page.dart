@@ -58,7 +58,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   final TextEditingController _editingMessage = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Logger().d("유저정보를 확인${widget.userInfo.user.userName}");
+    Logger().d("유저정보를 확인${widget.userInfo.user.username}");
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -93,7 +93,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                             DateTime parsedTimeDate = time.toDate();
                             Logger().d(parsedTimeDate);
                             return documents[index]['chatUserId'] ==
-                                    widget.userInfo.user.userId
+                                    widget.userInfo.user.id
                                 ? MyChat(
                                     text: documents[index]
                                         ['chatMessageContent'],
@@ -292,10 +292,10 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
 
   void _handleSubmitted(text) {
     final textMessage = TextMessage(
-      chatUserId: widget.userInfo.user
-          .userId, //로그인 한 유저의 아이디( 이것은 프로바이더 RiverPod 숙지하면 사용할 수 있음 )
+      chatUserId: widget
+          .userInfo.user.id, //로그인 한 유저의 아이디( 이것은 프로바이더 RiverPod 숙지하면 사용할 수 있음 )
       chatMessageId: randomId,
-      chatUserName: widget.userInfo.user.userName,
+      chatUserName: widget.userInfo.user.username,
       chatMessageContent: _editingMessage.text, //"작성된 메세지",
       chatCreatedAt: DateTime.now(),
     );
