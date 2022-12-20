@@ -1,10 +1,9 @@
 class TodoReqDto {
-  final String todoTitle;
-  final bool isFinished;
+  final String title;
 
-  TodoReqDto({required this.todoTitle, required this.isFinished});
+  TodoReqDto({required this.title});
 
   Map<String, dynamic> toJson() {
-    return {"todoTitle": todoTitle, "isFinished": isFinished};
+    return {"title": title};
   }
 }

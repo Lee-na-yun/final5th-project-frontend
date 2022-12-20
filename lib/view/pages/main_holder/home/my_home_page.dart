@@ -4,11 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:riverpod_firestore_steam1/contoller/user_controller.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/models/event.dart';
+import 'package:riverpod_firestore_steam1/models/schedule/schedule_home.dart';
 import 'package:riverpod_firestore_steam1/view/components/home_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main_holder/home/components/home_page_top.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main_holder/home/my_home_page_view_model.dart';
 import 'package:riverpod_firestore_steam1/view/pages/update_password/update_password_page.dart';
 
 import '../../../../models/test/todo.dart';
@@ -25,6 +28,7 @@ class MyHomePage extends ConsumerStatefulWidget {
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
   bool? _isChecked = false;
+  List<Todo> pageTodos = [];
 
   @override
   Widget build(BuildContext context) {
@@ -56,16 +60,27 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     );
   }
 
-  SliverFixedExtentList _buildToDoLists() {
-    return SliverFixedExtentList(
-      itemExtent: 58.0,
-      delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-        return Container(
-          alignment: Alignment.center,
-          child: _ToDoList(index),
-        );
-      }, childCount: globalToDoItems.length),
-    );
+  Widget _buildToDoLists() {
+    MyHomePageModel model = ref.watch(myHomePageViewModel);
+    ScheduleHome? scheduleHome = model.scheduleHome;
+
+    if (scheduleHome == null) {
+      return SliverToBoxAdapter(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      List<Todo> todos = scheduleHome.todos;
+      pageTodos = todos;
+      return SliverFixedExtentList(
+        itemExtent: 58.0,
+        delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+          return Container(
+            alignment: Alignment.center,
+            child: _ToDoList(todos[index], pageTodos[index]),
+          );
+        }, childCount: todos.length),
+      );
+    }
   }
 
   SliverAppBar _buildHomeTop() {
@@ -190,9 +205,8 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     text == "로그아웃" ? uContrl.logout() : null;
   }
 
-  Widget _ToDoList(int index) {
+  Widget _ToDoList(Todo todo, Todo pageTodo) {
     return Slidable(
-      key: Key(globalToDoItems[index].content),
       endActionPane: ActionPane(
         extentRatio: 0.25,
         motion: const ScrollMotion(),
@@ -204,8 +218,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
         children: [
           SlidableAction(
             onPressed: (context) {
+              Logger().d("클릭됨 1111");
               setState(() {
-                _removeToDoItem(context, index);
+                //_removeToDoItem(context, todo.id);
               });
             },
             foregroundColor: primary,
@@ -242,18 +257,18 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          value: globalToDoItems[index].done,
+                          value: pageTodo.isFinished,
                           onChanged: (value) {
                             setState(() {
-                              globalToDoItems[index].done = value;
+                              pageTodo.isFinished = !pageTodo.isFinished;
                             });
                           },
                         ),
                       ),
                       //SizedBox(width: 14),
                       Text(
-                        globalToDoItems[index].content,
-                        style: globalToDoItems[index].done == true
+                        todo.title,
+                        style: todo.isFinished == true
                             ? TextStyle(
                                 decoration: TextDecoration.lineThrough,
                                 fontSize: 14,
@@ -271,9 +286,4 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       ),
     );
   }
-}
-
-void _removeToDoItem(BuildContext context, int index) {
-  print("클릭됨");
-  globalToDoItems.remove(globalToDoItems[index]);
 }

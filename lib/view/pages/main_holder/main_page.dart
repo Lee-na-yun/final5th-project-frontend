@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:riverpod_firestore_steam1/contoller/write_controller.dart';
+import 'package:riverpod_firestore_steam1/contoller/note_controller.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main_holder/chat/chat_page.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main_holder/home/my_home_page.dart';
@@ -137,7 +137,10 @@ class MainPageState extends ConsumerState<MainPage> {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          Navigator.pop(context);
+                          ref
+                              .read(noteController)
+                              .insert(title: _textController.text.trim());
+
                           _textController.text = ""; // 얘로 폼필드 비워줘야함
                         }
                       },
@@ -164,19 +167,19 @@ class MainPageState extends ConsumerState<MainPage> {
     );
   }
 
-  void _handleSubmitted(text, WriteController wC) {
-    print(text);
-    setState(() {
-      //ToDO 리스트에 주입하는 코드 서비스 로직ㄴㄷ
-      globalToDoItems.add(ToDo(
-        content: text,
-        time: DateFormat("a K:m").format(new DateTime.now()),
-        date: 08,
-        day: "Mon",
-        done: false,
-      ));
-    });
-  }
+  // void _handleSubmitted(text, WriteController wC) {
+  //   print(text);
+  //   setState(() {
+  //     //ToDO 리스트에 주입하는 코드 서비스 로직ㄴㄷ
+  //     globalToDoItems.add(ToDo(
+  //       content: text,
+  //       time: DateFormat("a K:m").format(new DateTime.now()),
+  //       date: 08,
+  //       day: "Mon",
+  //       done: false,
+  //     ));
+  //   });
+  // }
 
   Container _buildShowModalBottomSheetTODO(
       BuildContext context, WidgetRef _ref) {

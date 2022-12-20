@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:riverpod_firestore_steam1/core/util/parsing_util.dart';
+import 'package:riverpod_firestore_steam1/models/schedule/schedule_home.dart';
 import 'package:riverpod_firestore_steam1/view/pages/widget/inkwell_icon_button_widget.dart';
 
 import '../../../core/theme.dart';
@@ -19,10 +21,8 @@ class UserLength {
 }
 
 class DaySchedule extends StatelessWidget {
-  DaySchedule({Key? key, required this.event, required this.eventIndex})
-      : super(key: key);
-  final Event event;
-  final int eventIndex;
+  DaySchedule({Key? key, required this.schedule}) : super(key: key);
+  final Schedule schedule;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +32,12 @@ class DaySchedule extends StatelessWidget {
       //height: MediaQuery.of(context).size.height / 2.0,
       //height: 232.0,
       padding: EdgeInsets.only(left: 16, right: 14, top: 16),
-      decoration: event.category == "일반"
+      decoration: schedule.category.name == "일반"
           ? BoxDecoration(
               color: Color.fromRGBO(110, 52, 218, 0.1),
               borderRadius: BorderRadius.circular(10),
             )
-          : event.category == "업무"
+          : schedule.category.name == "업무"
               ? BoxDecoration(
                   color: Color.fromRGBO(113, 220, 252, 0.1),
                   borderRadius: BorderRadius.circular(10),
@@ -53,7 +53,7 @@ class DaySchedule extends StatelessWidget {
           SizedBox(height: 12),
           _scheduletitle(),
           SizedBox(height: 4),
-          _buildMemo(event.memo),
+          _buildMemo(schedule.note),
           SizedBox(height: 8),
           Column(
             children: [
@@ -86,7 +86,7 @@ class DaySchedule extends StatelessWidget {
     );
   }
 
-  Widget _buildMemo(memoLen) {
+  Widget _buildMemo(String note) {
     /*print("메모길이$memoLen");
 
     print("스케줄$eventIndex");
@@ -95,19 +95,11 @@ class DaySchedule extends StatelessWidget {
       print('나는 $mem을 좋아해');
     });*/
 
-    List test = memoLen;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (var memoIndex in test)
-          Text(
-            memoIndex.toString(),
-            style: textTheme().bodyText1,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-          ),
-      ],
+    return Text(
+      note,
+      style: textTheme().bodyText1,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
     );
   }
 
@@ -124,7 +116,7 @@ class DaySchedule extends StatelessWidget {
               size: 10, color: kchacholGreyColor()),
           SizedBox(width: 4),
           Text(
-            event.location,
+            schedule.address.substring(0, 7) + "...",
             style: textTheme(color: kchacholGreyColor()).bodyText1,
             maxLines: 1,
             overflow: TextOverflow.clip,
@@ -146,13 +138,15 @@ class DaySchedule extends StatelessWidget {
           Icon(FontAwesomeIcons.clock, size: 10, color: kchacholGreyColor()),
           SizedBox(width: 4),
           Text(
-            event.startTime,
+            parseTime(schedule.startAt),
             style: textTheme(color: kchacholGreyColor()).bodyText1,
             maxLines: 1,
             overflow: TextOverflow.clip,
           ),
           Text(
-            event.endTime == "" ? "" : " ~ " + event.endTime,
+            "${schedule.finishAt}" == ""
+                ? ""
+                : " ~ " + parseTime(schedule.finishAt),
             style: textTheme(color: kchacholGreyColor()).bodyText1,
             maxLines: 1,
             overflow: TextOverflow.clip,
@@ -240,9 +234,9 @@ class DaySchedule extends StatelessWidget {
 
   Widget _scheduletitle() {
     return Text(
-      event.content,
+      schedule.title,
       style: textTheme(weight: FontWeight.bold).headline3,
-      maxLines: 2,
+      maxLines: 1,
       overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.left,
     );
@@ -256,12 +250,12 @@ class DaySchedule extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.only(left: 11, top: 3, right: 11, bottom: 4),
-            decoration: event.category == "일반"
+            decoration: schedule.category.name == "일반"
                 ? BoxDecoration(
                     color: primary,
                     borderRadius: BorderRadius.circular(8),
                   )
-                : event.category == "업무"
+                : schedule.category.name == "업무"
                     ? BoxDecoration(
                         color: Color(0xffAFEBFD),
                         borderRadius: BorderRadius.circular(8),
@@ -270,7 +264,7 @@ class DaySchedule extends StatelessWidget {
                         color: Color(0xffFFE681),
                         borderRadius: BorderRadius.circular(8),
                       ),
-            child: Text(event.category,
+            child: Text(schedule.category.name,
                 style: textTheme(color: Colors.white).bodyText1),
           ),
         ],

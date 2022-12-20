@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:riverpod_firestore_steam1/core/theme.dart';
+import 'package:riverpod_firestore_steam1/models/schedule/schedule_home.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main_holder/home/my_home_page_view_model.dart';
 import 'package:riverpod_firestore_steam1/view/pages/widget/day_date_widget.dart';
 import 'package:riverpod_firestore_steam1/view/pages/widget/day_schedule_widget.dart';
 import 'package:riverpod_firestore_steam1/view/pages/widget/inkwell_icon_button_widget.dart';
 
 import '../my_home_page.dart';
 
-class HomePageTop extends StatelessWidget {
+class HomePageTop extends ConsumerWidget {
   const HomePageTop({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    MyHomePageModel myHomePageModel = ref.watch(myHomePageViewModel);
     return Column(
       children: [
         _buildTopfirstline(),
@@ -24,36 +28,39 @@ class HomePageTop extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.27,
-                child: ListView.separated(
-                  padding: EdgeInsets.only(left: 20),
-                  physics: BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: globalScheduleItems.length,
-                  separatorBuilder: (context, index) {
-                    return SizedBox(width: 10);
-                  },
-                  itemBuilder: (context, index) {
-                    //Logger().d("스케줄 길이 ${globalScheduleItems.length}");
-                    List.generate(
-                      globalScheduleItems.length,
-                      (index) => DaySchedule(
-                        event: globalScheduleItems[index],
-                        eventIndex: index,
-                      ),
-                    );
-                    return DaySchedule(
-                      event: globalScheduleItems[index],
-                      eventIndex: index,
-                    );
-                  },
-                ),
+                child: _buildSchedules(myHomePageModel.scheduleHome),
               ),
             ],
           ),
         ),
       ],
     );
+  }
+
+  Widget _buildSchedules(ScheduleHome? scheduleHome) {
+    if (scheduleHome != null) {
+      List<Schedule> schedules = scheduleHome.schedules;
+      Logger().d("_buildSchedules 실행됨");
+      return ListView.separated(
+        padding: EdgeInsets.only(left: 20),
+        physics: BouncingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: schedules.length,
+        separatorBuilder: (context, index) {
+          return SizedBox(width: 10);
+        },
+        itemBuilder: (context, index) {
+          Logger().d("스케줄 길이 ${schedules.length}");
+
+          return DaySchedule(
+            schedule: schedules[index],
+          );
+        },
+      );
+    } else {
+      return CircularProgressIndicator();
+    }
   }
 
   Widget _buildTopfirstline() {
