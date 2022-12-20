@@ -9,7 +9,7 @@ DateTime startTime = DateTime.now();
 DateTime endTime = DateTime.now();
 
 class DateAndDayPickerInRow extends StatefulWidget {
-  const DateAndDayPickerInRow({super.key});
+  DateAndDayPickerInRow({super.key});
 
   @override
   State<DateAndDayPickerInRow> createState() => _DateAndDayPickerInRow();
@@ -51,8 +51,14 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
   }
 
   Widget _buildSetTime() {
-    String startT = DateFormat("a hh:mm").format(startTime).replaceAll("AM", "오전").replaceAll("PM", "오후");
-    String endT = DateFormat("a hh:mm").format(endTime).replaceAll("AM", "오전").replaceAll("PM", "오후");
+    String startT = DateFormat("a hh:mm")
+        .format(startTime)
+        .replaceAll("AM", "오전")
+        .replaceAll("PM", "오후");
+    String endT = DateFormat("a hh:mm")
+        .format(endTime)
+        .replaceAll("AM", "오전")
+        .replaceAll("PM", "오후");
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, left: 4),
       child: Container(
@@ -93,10 +99,19 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
                     ),
                     // In this example, the time value is formatted manually. You can use intl package to
                     // format the value based on the user's locale settings.
-                    child: Text(DateFormat("a hh:mm").format(startTime).replaceAll("AM", "오전").replaceAll("PM", "오후"),
-                        style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).headline3),
+                    child: Text(
+                        DateFormat("a hh:mm")
+                            .format(startTime)
+                            .replaceAll("AM", "오전")
+                            .replaceAll("PM", "오후"),
+                        style: textTheme(
+                                color: kPrimaryColor(), weight: FontWeight.w500)
+                            .headline3),
                   ),
-                  Text("~", style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).headline3),
+                  Text("~",
+                      style: textTheme(
+                              color: kPrimaryColor(), weight: FontWeight.w500)
+                          .headline3),
                   CupertinoButton(
                     // Display a CupertinoDatePicker in time picker mode.
                     onPressed: () => _showDialog(
@@ -135,7 +150,8 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
       padding: const EdgeInsets.only(bottom: 12, left: 4),
       child: Container(
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(border: Border(bottom: BorderSide(color: klightGreyColor()))),
+        decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: klightGreyColor()))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -164,9 +180,15 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
                     ),
                     // In this example, the date value is formatted manually. You can use intl package
                     // to format the value based on user's locale settings.
-                    child: Text(DateFormat.yMMMd().format(startDate), style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).headline3),
+                    child: Text(DateFormat.yMMMd().format(startDate),
+                        style: textTheme(
+                                color: kPrimaryColor(), weight: FontWeight.w500)
+                            .headline3),
                   ),
-                  Text("~", style: textTheme(color: kPrimaryColor(), weight: FontWeight.w500).headline3),
+                  Text("~",
+                      style: textTheme(
+                              color: kPrimaryColor(), weight: FontWeight.w500)
+                          .headline3),
                   CupertinoButton(
                     // Display a CupertinoDatePicker in date picker mode.
                     onPressed: () => _showDialog(
@@ -194,7 +216,8 @@ class _DateAndDayPickerInRow extends State<DateAndDayPickerInRow> {
     );
   }
 
-  Widget _compareDateTime(String endString, String startString, DateTime endDate, DateTime startDate) {
+  Widget _compareDateTime(String endString, String startString,
+      DateTime endDate, DateTime startDate) {
     // String startD = DateFormat.yMMMd().format(startDate);
     // String endD = DateFormat.yMMMd().format(endDate);
     // 사용하는 위젯 메서드 내에서 상위와 같이  DateTime 을 String으로 바꾸어서

@@ -6,8 +6,9 @@ final httpConnector = Provider<HttpConnector>((ref) {
   return HttpConnector();
 });
 
+const host = "http://192.168.0.132:8080";
+
 class HttpConnector {
-  final host = "http://192.168.0.132:8080";
   //final headers = {"Content-Type": "application/json; charset=utf-8"};
   late Map<String, String> headers = {
     "Content-Type": "application/json; charset=utf-8"

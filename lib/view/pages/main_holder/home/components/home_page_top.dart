@@ -54,7 +54,7 @@ class HomePageTop extends ConsumerWidget {
           Logger().d("스케줄 길이 ${schedules.length}");
 
           return DaySchedule(
-            schedule: schedules[index],
+            schedule: schedules[schedules.length - 1 - index],
           );
         },
       );

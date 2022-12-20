@@ -1,29 +1,41 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
+import 'package:riverpod_firestore_steam1/dto/schedule_req_dto.dart';
+import 'package:riverpod_firestore_steam1/provider/auth_provider.dart';
+import 'package:riverpod_firestore_steam1/service/schedule_service.dart';
 import 'package:riverpod_firestore_steam1/view/components/line_app_bar.dart';
 import 'package:riverpod_firestore_steam1/view/pages/main_holder/home/my_home_page.dart';
+import 'package:riverpod_firestore_steam1/view/pages/main_holder/home/my_home_page_view_model.dart';
 
 import '../../../core/theme.dart';
 import '../../../models/event.dart';
 import '../../../models/test/users.dart';
 import 'components/calendar_date_picker.dart';
 
-class ScheduleWrite extends StatefulWidget {
+class ScheduleWrite extends ConsumerStatefulWidget {
   ScheduleWrite({Key? key, required this.context}) : super(key: key);
   final BuildContext context;
 
   @override
-  State<ScheduleWrite> createState() => _ScheduleWriteState();
+  ConsumerState<ScheduleWrite> createState() => _ScheduleWriteState();
 }
 
-class _ScheduleWriteState extends State<ScheduleWrite> {
-  final TextEditingController _textController = TextEditingController();
-  final TextEditingController _scheduleController = TextEditingController();
-  TextEditingController _AddressController = TextEditingController();
+class _ScheduleWriteState extends ConsumerState<ScheduleWrite> {
+  final TextEditingController title = TextEditingController();
+  final TextEditingController note = TextEditingController();
+  final TextEditingController address = TextEditingController();
+  String categoryName = "일반";
+  DateTime? startAt;
+  DateTime? finishAt;
+
+  dynamic imgFilePath;
+
   final List<User> userList = List.of(users);
   final List<Event> fuckList = eventList;
 
@@ -51,9 +63,21 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
                   Row(
                     children: [
                       _buildCategory("카테고리"),
-                      _buildCategory("일반"),
-                      _buildCategory("업무"),
-                      _buildCategory("친구"),
+                      InkWell(
+                          onTap: () {
+                            categoryName = "일반";
+                          },
+                          child: _buildCategory("일반")),
+                      InkWell(
+                          onTap: () {
+                            categoryName = "업무";
+                          },
+                          child: _buildCategory("업무")),
+                      InkWell(
+                          onTap: () {
+                            categoryName = "친구";
+                          },
+                          child: _buildCategory("친구")),
                     ],
                   ),
                   SizedBox(height: 14),
@@ -309,7 +333,7 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
                                       weight: FontWeight.w600)
                                   .headline3),
                           readOnly: true,
-                          controller: _AddressController,
+                          controller: address,
                           style: textTheme(color: primary).headline3,
                         ),
                       ),
@@ -318,7 +342,6 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
                       height: 35,
                       child: ElevatedButton(
                         onPressed: () {
-                          _handleSubmitted(_textController.text);
                           HapticFeedback.mediumImpact();
                           _addressAPI();
                         },
@@ -355,12 +378,12 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
         builder: (context) => RemediKopo(),
       ),
     );
-    _AddressController.text = '${model.address!} ${model.buildingName!}';
+    address.text = '${model.address!} ${model.buildingName!}';
   }
 
   TextField _buildScheduleTitle(text) {
     return TextField(
-      controller: _scheduleController,
+      controller: title,
       style: textTheme(color: kchacholGreyColor()).headline2,
       maxLines: null, //이걸 NULL 로 해주고
       maxLength: 100,
@@ -376,29 +399,28 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
         focusColor: Color(0xff9999A3),
         contentPadding: EdgeInsets.only(left: 8),
       ),
-      onSubmitted: _handleSubmitted,
     );
   }
 
-  void _handleSubmitted(text) {
-    DateTime now = DateTime.now();
-    String _parse = DateFormat("hh:mm").format(now);
+  // void _handleSubmitted(text) {
+  //   DateTime now = DateTime.now();
+  //   String _parse = DateFormat("hh:mm").format(now);
 
-    print(text);
-    setState(() {
-      globalScheduleItems.add(Event(
-        category: "일반",
-        color: Color(0xff6E34DA),
-        content: _scheduleController.text,
-        startTime: _parse,
-        endTime: "",
-        location: "청와대",
-        memo: ["- ${_textController.text}"],
-        profileImg: "",
-      ));
-      _textController.clear();
-    });
-  }
+  //   print(text);
+  //   setState(() {
+  //     globalScheduleItems.add(Event(
+  //       category: "일반",
+  //       color: Color(0xff6E34DA),
+  //       content: _scheduleController.text,
+  //       startTime: _parse,
+  //       endTime: "",
+  //       location: "청와대",
+  //       memo: ["- ${_textController.text}"],
+  //       profileImg: "",
+  //     ));
+  //     _textController.clear();
+  //   });
+  // }
 
   PreferredSize _buildSearchAppBar(BuildContext context) {
     return PreferredSize(
@@ -449,7 +471,7 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
               child: SvgPicture.asset("assets/icon_pen.svg", width: 13),
             ),
             TextField(
-              controller: _textController,
+              controller: note,
               style: textTheme(color: kchacholGreyColor()).headline2,
               maxLines: null, //이걸 NULL 로 해주고
               maxLength: 80,
@@ -469,7 +491,6 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
                 focusColor: Color(0xff9999A3),
                 contentPadding: EdgeInsets.only(left: 34, bottom: 16),
               ),
-              onSubmitted: _handleSubmitted,
             ),
             // Positioned(
             //   right: 0,
@@ -529,7 +550,17 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
                     Container(
                       height: 35,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          XFile? selectImage = await ImagePicker().pickImage(
+                            //이미지를 선택
+                            source: ImageSource.gallery, //위치는 갤러리
+                            maxHeight: 75,
+                            maxWidth: 75,
+                            imageQuality: 30, // 이미지 크기 압축을 위해 퀄리티를 30으로 낮춤.
+                          );
+                          if (selectImage != null) {
+                            imgFilePath = selectImage.path;
+                          }
                           //_handleSubmitted(_textController.text);
                           HapticFeedback.mediumImpact();
                         },
@@ -543,7 +574,7 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
                           elevation: 0.0,
                         ),
                         child: Text(
-                          "친구 검색",
+                          "사진 등록",
                           style: textTheme(weight: FontWeight.w600).bodyText1,
                         ),
                       ),
@@ -563,9 +594,20 @@ class _ScheduleWriteState extends State<ScheduleWrite> {
       height: MediaQuery.of(context).size.height / 6,
       child: Center(
         child: ElevatedButton(
-          onPressed: () {
-            _handleSubmitted("go");
-            Navigator.popAndPushNamed(context, "/home");
+          onPressed: () async {
+            ScheduleReqDto dto = ScheduleReqDto(
+                title: title.text,
+                note: note.text,
+                address: address.text,
+                categoryName: categoryName,
+                startAt: DateTime.now(),
+                finishAt: DateTime.now());
+            await ScheduleService().fetchScheduleInsert(
+                dto, imgFilePath, ref.read(authProvider).jwtToken);
+
+            ref.read(myHomePageViewModel.notifier).notifyViewModel();
+            // 여기서 작성
+            Navigator.pop(context);
           },
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
