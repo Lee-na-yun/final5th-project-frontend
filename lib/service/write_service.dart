@@ -19,16 +19,19 @@ class WriteService {
     return _instance;
   }
 
-  Future<ResponseDto> fetchInsert(TodoReqDto todoReqDto, SessionUser sessionUser) async {
+  Future<ResponseDto> fetchInsert(
+      TodoReqDto todoReqDto, SessionUser sessionUser) async {
     String requestBody = jsonEncode(todoReqDto.toJson());
     Logger().d("투두 작성 ${requestBody}");
-    Response response = await httpConnector.post("/s/api/user/${sessionUser.user.userId}/todo", requestBody, jwtToken: sessionUser.jwtToken);
+    Response response = await httpConnector.post(
+        "/s/api/user/${sessionUser.user.userId}/todo", requestBody,
+        jwtToken: sessionUser.jwtToken);
     Logger().d(response.body);
 
     // 5. ResponseDto 만들기
     ResponseDto responseDto = toResponseDto(response);
 
-    if (responseDto.httpStatus == "CREATED") {
+    if (responseDto.code == 1) {
       User user = User.fromJson(responseDto.data);
       responseDto.data = user;
     }

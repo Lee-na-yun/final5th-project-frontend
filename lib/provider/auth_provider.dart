@@ -9,7 +9,6 @@ import 'package:riverpod_firestore_steam1/core/util/response_util.dart';
 import 'package:riverpod_firestore_steam1/dto/response_dto.dart';
 import 'package:riverpod_firestore_steam1/models/session_user.dart';
 import 'package:riverpod_firestore_steam1/models/user/user.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/model/main_page_view_model.dart';
 
 const secureStorage = FlutterSecureStorage();
 
@@ -27,21 +26,23 @@ class AuthProvider extends StateNotifier<SessionUser> {
     if (jwtToken != null) {
       Logger().d(jwtToken);
 
-      Response response = await HttpConnector().get("/jwtToken", jwtToken: jwtToken);
+      Response response =
+          await HttpConnector().get("/jwtToken", jwtToken: jwtToken);
       ResponseDto responseDto = toResponseDto(response);
       Logger().d("인스턴스 toResponseDto 로 ${responseDto.data}");
-      if (responseDto.httpStatus == "OK") {
+      if (responseDto.code == 1) {
         Logger().d("자동 로그인 성공!!");
         User user = User.fromJson(responseDto.data);
         state = SessionUser(user, jwtToken, true);
 
-        Navigator.pushNamedAndRemoveUntil(mContext!, Move.homePage, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            mContext!, Move.homePage, (route) => false);
       }
     }
   }
 
-  Future<void> authentication(SessionUser? sessionUser) async {
-    state = sessionUser!;
+  Future<void> authentication(SessionUser sessionUser) async {
+    state = sessionUser;
     await secureStorage.write(key: "jwtToken", value: sessionUser.jwtToken);
   }
 

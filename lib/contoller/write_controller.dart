@@ -16,18 +16,21 @@ class WriteController {
 
   WriteController(this._ref);
 
-  Future<void> insert({required String todoTitle, required bool isFinished}) async {
+  Future<void> insert(
+      {required String todoTitle, required bool isFinished}) async {
     // 1. DTO 변환
-    TodoReqDto todoReqDto = TodoReqDto(todoTitle: todoTitle, isFinished: isFinished);
+    TodoReqDto todoReqDto =
+        TodoReqDto(todoTitle: todoTitle, isFinished: isFinished);
 
     // 2. 통신 요청
-    ResponseDto responseDto = await writeService.fetchInsert(todoReqDto, _ref.read(authProvider));
+    ResponseDto responseDto =
+        await writeService.fetchInsert(todoReqDto, _ref.read(authProvider));
 
     //Todo responseDto = await _ref.read(todoApiRepository).insert(todo);
     //_ref.read(todoListViewModel.notifier).addTodo(responseDto);
 
     // 3. 비지니스 로직 처리
-    if (responseDto.httpStatus == "CREATED") {
+    if (responseDto.code == 1) {
       String? jwtToken = await secureStorage.read(key: "jwtToken");
       SessionUser sessionUser = SessionUser(responseDto.data, jwtToken, true);
       _ref.read(authProvider.notifier).authentication(sessionUser);

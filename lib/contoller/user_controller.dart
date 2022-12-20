@@ -6,7 +6,7 @@ import 'package:riverpod_firestore_steam1/dto/user/auth_req_dto.dart';
 import 'package:riverpod_firestore_steam1/models/session_user.dart';
 import 'package:riverpod_firestore_steam1/provider/auth_provider.dart';
 import 'package:riverpod_firestore_steam1/service/user_service.dart';
-import 'package:riverpod_firestore_steam1/view/pages/main/components/my_alert_dialog.dart';
+import 'package:riverpod_firestore_steam1/view/components/my_alert_dialog.dart';
 
 import '../core/util/constant/move.dart';
 
@@ -49,20 +49,20 @@ class UserController {
   Future<void> join(
       {required String username,
       required String password,
-      required String email}) async {
+      required String email,
+      required String fullname}) async {
     // 1. DTO 변환
     JoinReqDto joinReqDto = JoinReqDto(
-        userName: username,
-        userPassword: password,
-        userEmail: email,
-        userRealname: username,
-        userPhonenumber: password);
+        username: username,
+        password: password,
+        email: email,
+        fullname: fullname);
 
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchJoin(joinReqDto);
 
     // 3. 비지니스 로직 처리
-    if (responseDto.httpStatus == "CREATED") {
+    if (responseDto.code == 1) {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(const SnackBar(content: Text("회원가입 성공")));
       Navigator.popAndPushNamed(mContext!, Move.loginPage);
@@ -83,16 +83,14 @@ class UserController {
       {required String username, required String password}) async {
     // 1. DTO 변환
     LoginReqDto loginReqDto =
-        LoginReqDto(userName: username, userPassword: password);
+        LoginReqDto(username: username, password: password);
 
     // 2. 통신 요청
-    ResponseDto responseDto = await (userService.fetchLogin(loginReqDto));
+    ResponseDto responseDto = await userService.fetchLogin(loginReqDto);
 
     //3. 비지니스 로직 처리
-    if (responseDto.httpStatus == "CREATED") {
-      String? jwtToken = await secureStorage.read(key: "jwtToken");
-      SessionUser sessionUser = SessionUser(responseDto.data, jwtToken, true);
-      _ref.read(authProvider.notifier).authentication(sessionUser);
+    if (responseDto.code == 1) {
+      _ref.read(authProvider.notifier).authentication(responseDto.data);
       Navigator.of(mContext!)
           .pushNamedAndRemoveUntil(Move.homePage, (route) => false);
     } else {
